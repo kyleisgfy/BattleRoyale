@@ -13,6 +13,9 @@ import SpriteKit
 var broadcastLineOneLabel:SKLabelNode = SKLabelNode()
 var broadcastLineTwoLabel:SKLabelNode = SKLabelNode()
 var broadcastLineThreeLabel:SKLabelNode = SKLabelNode()
+var broadcastLineFourLabel:SKLabelNode = SKLabelNode()
+var broadcastLineFiveLabel:SKLabelNode = SKLabelNode()
+
 
 
 
@@ -56,5 +59,6 @@ func createIcons () {
     currentEventNode.lineWidth = 0
     currentEventNode.fillColor = .clear
     currentEventNode.strokeColor = .clear
+    
 
 }

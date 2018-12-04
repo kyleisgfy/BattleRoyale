@@ -29,10 +29,45 @@ class GameScene: SKScene {
        
         
         
+        if let BroadcastOne:SKLabelNode = self.childNode(withName: "broadcastLineOneLabel") as? SKLabelNode {
+            broadcastLineOneLabel = BroadcastOne
+            print ("Broadcast line one label inicialized")
+            broadcastLineOneLabel.text = ""
+        } else {
+            print ("Broadcast line one label Failed")
+        }
         
+        if let BroadcastTwo:SKLabelNode = self.childNode(withName: "broadcastLineTwoLabel") as? SKLabelNode {
+            broadcastLineTwoLabel = BroadcastTwo
+            print ("Broadcast line two inicialized")
+            broadcastLineTwoLabel.text = ""
+        } else {
+            print ("Broadcast line two label Failed")
+        }
         
+        if let BroadcastThree:SKLabelNode = self.childNode(withName: "broadcastLineThreeLabel") as? SKLabelNode {
+            broadcastLineThreeLabel = BroadcastThree
+            print ("Broadcast line three label inicialized")
+            broadcastLineThreeLabel.text = ""
+        } else {
+            print ("Broadcast line three label Failed")
+        }
         
+        if let BroadcastFour:SKLabelNode = self.childNode(withName: "broadcastLineFourLabel") as? SKLabelNode {
+            broadcastLineFourLabel = BroadcastFour
+            print ("Broadcast line four label inicialized")
+            broadcastLineFourLabel.text = ""
+        } else {
+            print ("Broadcast line four label Failed")
+        }
         
+        if let BroadcastFive:SKLabelNode = self.childNode(withName: "broadcastLineFiveLabel") as? SKLabelNode {
+            broadcastLineFiveLabel = BroadcastFive
+            print ("Broadcast line five inicialized")
+            broadcastLineFiveLabel.text = ""
+        } else {
+            print ("Broadcast line five label Failed")
+        }
         
         
          self.lastUpdateTime = 0

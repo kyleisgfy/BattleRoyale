@@ -16,6 +16,9 @@
 		B1BB70F421B25059001F7293 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B1BB70F221B25059001F7293 /* Main.storyboard */; };
 		B1BB710021B25059001F7293 /* Battle_Royale_2Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1BB70FF21B25059001F7293 /* Battle_Royale_2Tests.swift */; };
 		B1BB710B21B25059001F7293 /* Battle_Royale_2UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1BB710A21B25059001F7293 /* Battle_Royale_2UITests.swift */; };
+		B1BB711921B656CA001F7293 /* Icons.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1BB711821B656CA001F7293 /* Icons.swift */; };
+		B1BB711B21B6609A001F7293 /* Timer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1BB711A21B6609A001F7293 /* Timer.swift */; };
+		B1BB711D21B6665D001F7293 /* Characters.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1BB711C21B6665D001F7293 /* Characters.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -52,6 +55,9 @@
 		B1BB710621B25059001F7293 /* Battle Royale 2UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Battle Royale 2UITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B1BB710A21B25059001F7293 /* Battle_Royale_2UITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Battle_Royale_2UITests.swift; sourceTree = "<group>"; };
 		B1BB710C21B25059001F7293 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B1BB711821B656CA001F7293 /* Icons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Icons.swift; sourceTree = "<group>"; };
+		B1BB711A21B6609A001F7293 /* Timer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Timer.swift; sourceTree = "<group>"; };
+		B1BB711C21B6665D001F7293 /* Characters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Characters.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -106,6 +112,9 @@
 				B1BB70E821B25057001F7293 /* GameScene.sks */,
 				B1BB70EA21B25057001F7293 /* Actions.sks */,
 				B1BB70EC21B25057001F7293 /* GameScene.swift */,
+				B1BB711821B656CA001F7293 /* Icons.swift */,
+				B1BB711A21B6609A001F7293 /* Timer.swift */,
+				B1BB711C21B6665D001F7293 /* Characters.swift */,
 				B1BB70EE21B25057001F7293 /* ViewController.swift */,
 				B1BB70F021B25059001F7293 /* Assets.xcassets */,
 				B1BB70F221B25059001F7293 /* Main.storyboard */,
@@ -266,7 +275,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				B1BB70EF21B25057001F7293 /* ViewController.swift in Sources */,
+				B1BB711D21B6665D001F7293 /* Characters.swift in Sources */,
 				B1BB70ED21B25057001F7293 /* GameScene.swift in Sources */,
+				B1BB711921B656CA001F7293 /* Icons.swift in Sources */,
+				B1BB711B21B6609A001F7293 /* Timer.swift in Sources */,
 				B1BB70E721B25057001F7293 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

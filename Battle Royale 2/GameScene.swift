@@ -28,6 +28,8 @@ class GameScene: SKScene {
     var broadcastLineFourLabel:SKLabelNode = SKLabelNode()
     var broadcastLineFiveLabel:SKLabelNode = SKLabelNode()
     
+    var x: CGFloat = 0.0
+    var y: CGFloat = 0.0
     
     var eventNumber = 1
     var phaseNumber = 0
@@ -240,6 +242,9 @@ class GameScene: SKScene {
             poisonGasNode.lineWidth += 40
         } else if phaseNumber == 3 && eventNumber == 2 {
             poisonGasNode2.lineWidth += 20
+            poisonGasNode2.position.x = poisonGasNode2.position.x + x
+            poisonGasNode2.position.y = poisonGasNode2.position.y + y
+            
         } else {
             
         }
@@ -299,9 +304,14 @@ class GameScene: SKScene {
             if eventNumber == 1 {
                 poisonGasNode.position = eventOneNode.position
             } else if eventNumber == 2 {
-                poisonGasNode2.position = eventTwoNode.position
+                poisonGasNode2.position = eventOneNode.position
+                x = ((poisonGasNode2.position.x - eventTwoNode.position.x) / -19)
+                y = ((poisonGasNode2.position.y - eventTwoNode.position.y) / -19)
+//                print (x)
+//                print (y)
             } else {
             }
+            
             
         case 3:
             print ("\(eventNumber).\(phaseNumber)")

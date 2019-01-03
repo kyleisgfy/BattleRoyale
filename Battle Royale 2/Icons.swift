@@ -41,24 +41,30 @@ var background = SKSpriteNode()
 var backgroundGasNode = SKSpriteNode(imageNamed: "backgroundImageGas")
 var backgroundGasCropNode = SKCropNode()
 
+var backgroundGreenPath = CGMutablePath()
+var backgroundGreenNode = SKShapeNode()
 
 func createIcons () {
     background = SKSpriteNode(imageNamed: "backgroundImage")
     background.position = CGPoint.zero
-    background.size.width = 1024
-    background.size.height = 768
+    background.size.width = 1242
+    background.size.height = 720
     background.zPosition = 0
+    background.position.x = 0
+    background.position.y = 0
     
     teamIconPath.addArc(center: CGPoint.zero,
-                           radius: 100,
+                           radius: 15,
                            startAngle: 0,
                            endAngle: CGFloat.pi * 2,
                            clockwise: true)
     teamIconNode = SKShapeNode(path:    teamIconPath)
     teamIconNode.lineWidth = 0
-    teamIconNode.fillColor = .clear
+    teamIconNode.fillColor = .red
     teamIconNode.strokeColor = .clear
     teamIconNode.zPosition = 2
+    teamIconNode.position.x = 0
+    teamIconNode.position.y = 0
     
     eventOnePath.addArc(center: CGPoint.zero,
                         radius: eventRadius,
@@ -104,6 +110,18 @@ func createIcons () {
     eventFourNode.strokeColor = .clear
     eventFourNode.zPosition = 1
     
+    backgroundGreenPath.addArc(center: CGPoint.zero,
+                         radius: (1024),
+                         startAngle: 0,
+                         endAngle: CGFloat.pi * 2,
+                         clockwise: true)
+    backgroundGreenNode = SKShapeNode(path:    backgroundGreenPath)
+    backgroundGreenNode.lineWidth = 0
+    backgroundGreenNode.fillColor = .green
+    backgroundGreenNode.strokeColor = .green
+    backgroundGreenNode.alpha = 0.2
+    backgroundGreenNode.zPosition = 1
+    
     poisonGasPath.addArc(center: CGPoint.zero,
                          radius: (poisonGasRadius),
                          startAngle: 0,
@@ -130,7 +148,7 @@ func createIcons () {
     
 //    backgroundGasCropNode.position = CGPoint(x: 0, y: 0)
 //    backgroundGasCropNode.zPosition = 1
-//    backgroundGasCropNode.addChild(backgroundGasNode)
+//    backgroundGasCropNode.addChild(backgroundGreenNode)
 //    backgroundGasCropNode.maskNode = poisonGasNode
     
 

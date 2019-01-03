@@ -43,7 +43,8 @@ class GameScene: SKScene {
         self.addChild(eventFourNode)
         self.addChild(teamIconNode)
         self.addChild(poisonGasNode)
-        self.addChild(poisonGasNode2)
+//        self.addChild(poisonGasNode2)
+//        self.addChild(backgroundGreenNode)
 //        self.addChild(backgroundGasCropNode)
         
         runGameTimer()
@@ -158,11 +159,19 @@ class GameScene: SKScene {
         let keycode = event.keyCode
         
         switch keycode {
-        case 36:
-            if time.restrictionTimer.isValid == true {
-                print ("cannot increase time")
-            } else {
+        case 126: //up arrow
+            teamIconNode.position.y = teamIconNode.position.y + 30
+        case 125: //down arrow
+            teamIconNode.position.y = teamIconNode.position.y - 30
+        case 124: //right arrow
+            teamIconNode.position.x = teamIconNode.position.x + 30
+        case 123: //left arrow
+            teamIconNode.position.x = teamIconNode.position.x - 30
+        case 34: //plus key
+            if phaseNumber == 1 {
                 time.phaseTimerInSeconds += 5
+            } else {
+                print ("cannot increase time")
             }
             
         default:
@@ -241,12 +250,24 @@ class GameScene: SKScene {
         if phaseNumber == 3 && eventNumber == 1 {
             poisonGasNode.lineWidth += 40
         } else if phaseNumber == 3 && eventNumber == 2 {
-            poisonGasNode2.lineWidth += 20
-            poisonGasNode2.position.x = poisonGasNode2.position.x + x
-            poisonGasNode2.position.y = poisonGasNode2.position.y + y
+            eventOneNode.alpha = 0.2
+            eventOneNode.strokeColor = .green
+            eventOneNode.lineWidth += 12
+            eventOneNode.position.x = eventOneNode.position.x + x
+            eventOneNode.position.y = eventOneNode.position.y + y
             
-        } else {
-            
+        } else if phaseNumber == 3 && eventNumber == 3 {
+            eventTwoNode.alpha = 0.2
+            eventTwoNode.strokeColor = .green
+            eventTwoNode.lineWidth += 4
+            eventTwoNode.position.x = eventTwoNode.position.x + x
+            eventTwoNode.position.y = eventTwoNode.position.y + y
+        } else if phaseNumber == 3 && eventNumber == 4 {
+            eventThreeNode.alpha = 0.2
+            eventThreeNode.strokeColor = .green
+            eventThreeNode.lineWidth += 2
+            eventThreeNode.position.x = eventThreeNode.position.x + x
+            eventThreeNode.position.y = eventThreeNode.position.y + y
         }
         
     }
@@ -257,9 +278,11 @@ class GameScene: SKScene {
         time.phaseTimer.invalidate()
         if phaseNumber == 1 || phaseNumber == 2 || phaseNumber == 0 {
             phaseNumber += 1
+            print ("\(eventNumber).\(phaseNumber)")
         } else if phaseNumber == 3 {
             phaseNumber = 1
             eventNumber += 1
+            print ("\(eventNumber).\(phaseNumber)")
         } else {
             print ("phase number is out of scope to change phase number.")
         }
@@ -272,11 +295,9 @@ class GameScene: SKScene {
     func runPhase() {
         switch phaseNumber {
         case 0:
-            print ("\(eventNumber).\(phaseNumber)")
             time.phaseTimerInSeconds = 5
             runPhaseTimer()
         case 1:
-            print ("\(eventNumber).\(phaseNumber)")
             if eventNumber == 1 {
                 time.phaseTimerInSeconds = 5
                 eventOneNode.strokeColor = .blue
@@ -297,24 +318,24 @@ class GameScene: SKScene {
             }
             runPhaseTimer()
         case 2:
-            print ("\(eventNumber).\(phaseNumber)")
             time.phaseTimerInSeconds = 5
             runRestrictionTimer()
             runPhaseTimer()
             if eventNumber == 1 {
                 poisonGasNode.position = eventOneNode.position
             } else if eventNumber == 2 {
-                poisonGasNode2.position = eventOneNode.position
-                x = ((poisonGasNode2.position.x - eventTwoNode.position.x) / -19)
-                y = ((poisonGasNode2.position.y - eventTwoNode.position.y) / -19)
-//                print (x)
-//                print (y)
-            } else {
+                x = ((eventOneNode.position.x - eventTwoNode.position.x) / -27)
+                y = ((eventOneNode.position.y - eventTwoNode.position.y) / -27)
+            } else if eventNumber == 3 {
+                x = ((eventTwoNode.position.x - eventThreeNode.position.x) / -27)
+                y = ((eventTwoNode.position.y - eventThreeNode.position.y) / -27)
+            } else if eventNumber == 4 {
+                x = ((eventThreeNode.position.x - eventFourNode.position.x) / -27)
+                y = ((eventThreeNode.position.y - eventFourNode.position.y) / -27)
             }
             
             
         case 3:
-            print ("\(eventNumber).\(phaseNumber)")
             time.phaseTimerInSeconds = 27
             runPhaseTimer()
         default:

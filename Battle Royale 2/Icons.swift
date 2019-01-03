@@ -100,7 +100,7 @@ func createIcons () {
     eventThreeNode.zPosition = 1
     
     eventFourPath.addArc(center: CGPoint.zero,
-                        radius: (eventRadius/6),
+                        radius: (eventRadius/8),
                         startAngle: 0,
                         endAngle: CGFloat.pi * 2,
                         clockwise: true)

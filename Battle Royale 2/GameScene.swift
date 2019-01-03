@@ -33,6 +33,9 @@ class GameScene: SKScene {
     
     var eventNumber = 1
     var phaseNumber = 0
+    var freeTime = 5
+    var restrictInTime = 5
+    var restrictTime = 20
     
     override func sceneDidLoad() {
         createIcons()
@@ -160,13 +163,13 @@ class GameScene: SKScene {
         
         switch keycode {
         case 126: //up arrow
-            teamIconNode.position.y = teamIconNode.position.y + 30
+            teamIconNode.position.y = teamIconNode.position.y + 28.8
         case 125: //down arrow
-            teamIconNode.position.y = teamIconNode.position.y - 30
+            teamIconNode.position.y = teamIconNode.position.y - 28.8
         case 124: //right arrow
-            teamIconNode.position.x = teamIconNode.position.x + 30
+            teamIconNode.position.x = teamIconNode.position.x + 28.8
         case 123: //left arrow
-            teamIconNode.position.x = teamIconNode.position.x - 30
+            teamIconNode.position.x = teamIconNode.position.x - 28.8
         case 34: //plus key
             if phaseNumber == 1 {
                 time.phaseTimerInSeconds += 5
@@ -248,24 +251,24 @@ class GameScene: SKScene {
     
     func restrictTheScreen() {
         if phaseNumber == 3 && eventNumber == 1 {
-            poisonGasNode.lineWidth += 40
+            poisonGasNode.lineWidth += 2 * ((poisonGasRadius - eventRadius) / CGFloat(restrictTime))
         } else if phaseNumber == 3 && eventNumber == 2 {
             eventOneNode.alpha = 0.2
             eventOneNode.strokeColor = .green
-            eventOneNode.lineWidth += 12
+            eventOneNode.lineWidth += (eventRadius / CGFloat(restrictTime))
             eventOneNode.position.x = eventOneNode.position.x + x
             eventOneNode.position.y = eventOneNode.position.y + y
             
         } else if phaseNumber == 3 && eventNumber == 3 {
             eventTwoNode.alpha = 0.2
             eventTwoNode.strokeColor = .green
-            eventTwoNode.lineWidth += 4
+            eventTwoNode.lineWidth += (eventRadius / 2) / CGFloat(restrictTime)
             eventTwoNode.position.x = eventTwoNode.position.x + x
             eventTwoNode.position.y = eventTwoNode.position.y + y
         } else if phaseNumber == 3 && eventNumber == 4 {
             eventThreeNode.alpha = 0.2
             eventThreeNode.strokeColor = .green
-            eventThreeNode.lineWidth += 2
+            eventThreeNode.lineWidth += (eventRadius / 4) / CGFloat(restrictTime)
             eventThreeNode.position.x = eventThreeNode.position.x + x
             eventThreeNode.position.y = eventThreeNode.position.y + y
         }
@@ -324,19 +327,19 @@ class GameScene: SKScene {
             if eventNumber == 1 {
                 poisonGasNode.position = eventOneNode.position
             } else if eventNumber == 2 {
-                x = ((eventOneNode.position.x - eventTwoNode.position.x) / -27)
-                y = ((eventOneNode.position.y - eventTwoNode.position.y) / -27)
+                x = ((eventOneNode.position.x - eventTwoNode.position.x) / CGFloat((-1 * restrictTime)))
+                y = ((eventOneNode.position.y - eventTwoNode.position.y) / CGFloat((-1 * restrictTime)))
             } else if eventNumber == 3 {
-                x = ((eventTwoNode.position.x - eventThreeNode.position.x) / -27)
-                y = ((eventTwoNode.position.y - eventThreeNode.position.y) / -27)
+                x = ((eventTwoNode.position.x - eventThreeNode.position.x) / CGFloat((-1 * restrictTime)))
+                y = ((eventTwoNode.position.y - eventThreeNode.position.y) / CGFloat((-1 * restrictTime)))
             } else if eventNumber == 4 {
-                x = ((eventThreeNode.position.x - eventFourNode.position.x) / -27)
-                y = ((eventThreeNode.position.y - eventFourNode.position.y) / -27)
+                x = ((eventThreeNode.position.x - eventFourNode.position.x) / CGFloat((-1 * restrictTime)))
+                y = ((eventThreeNode.position.y - eventFourNode.position.y) / CGFloat((-1 * restrictTime)))
             }
             
             
         case 3:
-            time.phaseTimerInSeconds = 27
+            time.phaseTimerInSeconds = restrictTime
             runPhaseTimer()
         default:
             print ("Phase number is out of scope to move forward.")

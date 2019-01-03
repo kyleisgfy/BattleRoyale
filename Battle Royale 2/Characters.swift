@@ -115,7 +115,9 @@ class Characters: NSObject {
         "89",//89
         "90",//90
     ]
-    
+//    func test() {
+//        print ("kill rando")
+//    }
 //    func updatePlayersLeft () {
 //        game.playersLeftLabel.text = "\(playersLeft)"
 ////        print(playersLeft)
@@ -166,7 +168,7 @@ class Characters: NSObject {
 //            print ("No more players to kill")
 //        }
 //    }
-    
+//    
 //    func randomBroadcast() {
 //        
 //        let roll = Int.random(in: 0...(playersLeft-11))
@@ -177,7 +179,7 @@ class Characters: NSObject {
 //            roll2 -= 1
 //        }
 //        
-//        updateBroadcast()
+//        game.updateBroadcast()
 //        game.broadcastLineOneLabel.text = "\(char.NPCList[roll]) killed \(char.NPCList[roll2])"
 //        char.NPCList.remove(at: roll2)
 //    }
@@ -186,7 +188,7 @@ class Characters: NSObject {
 //        
 //        let roll = Int.random(in: 0...(playersLeft-11))
 //        
-//        updateBroadcast()
+//        game.updateBroadcast()
 //        game.broadcastLineOneLabel.text = "Main Villain killed \(char.NPCList[roll])"
 //        char.NPCList.remove(at: roll)
 //    }
@@ -194,12 +196,12 @@ class Characters: NSObject {
 //    func characterKillRandoBroadcast(character: String) {
 //        let roll = Int.random(in: 0...(playersLeft-11))
 //        
-//        updateBroadcast()
+//        game.updateBroadcast()
 //        game.broadcastLineOneLabel.text = "\(character) killed \(char.NPCList[roll])"
 //        char.NPCList.remove(at: roll)
 //    }
-//
-//    
+
+    
 //    func updateBroadcast () {
 //        game.broadcastLineFiveLabel.text = game.broadcastLineFourLabel.text
 //        game.broadcastLineFourLabel.text = game.broadcastLineThreeLabel.text

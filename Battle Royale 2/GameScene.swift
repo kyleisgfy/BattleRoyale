@@ -120,8 +120,9 @@ class GameScene: SKScene {
         
          self.lastUpdateTime = 0
         }
-
+//****************************************************************************************
 // Keyboard and mouse input functions.
+//****************************************************************************************
     
     func touchDown(atPoint pos : CGPoint) {
     }
@@ -177,7 +178,8 @@ class GameScene: SKScene {
                 print ("cannot increase time")
             }
         case 36:
-            print ("kill rando")
+            
+            forceKillRando()
             
         default:
             print("keyDown: \(event.characters!) keyCode: \(event.keyCode)")
@@ -189,8 +191,9 @@ class GameScene: SKScene {
     
     
 
-    
- // Timer functions
+//****************************************************************************************
+// Timer functions
+//****************************************************************************************
     
     override func update(_ currentTime: TimeInterval) {
         if (self.lastUpdateTime == 0) {
@@ -227,6 +230,7 @@ class GameScene: SKScene {
         time.gameTimeInSeconds += 1     //This will decrement(count down)the seconds.
             gameTimerLabel.text = timeString(time: TimeInterval(time.gameTimeInSeconds))
         restrictTheScreen()
+        killRando()
     }
     
     func runPhaseTimer() {
@@ -250,6 +254,27 @@ class GameScene: SKScene {
         let seconds = Int(time) % 60
         return String(format:"%02i:%02i", minutes, seconds)
     }
+    
+    
+    func phaseTimerFired () {
+        print ("phase timer fired")
+        time.phaseTimer.invalidate()
+        if phaseNumber == 1 || phaseNumber == 2 || phaseNumber == 0 {
+            phaseNumber += 1
+            print ("\(eventNumber).\(phaseNumber)")
+        } else if phaseNumber == 3 {
+            phaseNumber = 1
+            eventNumber += 1
+            print ("\(eventNumber).\(phaseNumber)")
+        } else {
+            print ("phase number is out of scope to change phase number.")
+        }
+        runPhase()
+    }
+    
+//****************************************************************************************
+// functions for the phase and the restriction of the screen
+//****************************************************************************************
     
     func restrictTheScreen() {
         if phaseNumber == 3 && eventNumber == 1 {
@@ -276,25 +301,6 @@ class GameScene: SKScene {
         }
         
     }
-    
-    
-    func phaseTimerFired () {
-        print ("phase timer fired")
-        time.phaseTimer.invalidate()
-        if phaseNumber == 1 || phaseNumber == 2 || phaseNumber == 0 {
-            phaseNumber += 1
-            print ("\(eventNumber).\(phaseNumber)")
-        } else if phaseNumber == 3 {
-            phaseNumber = 1
-            eventNumber += 1
-            print ("\(eventNumber).\(phaseNumber)")
-        } else {
-            print ("phase number is out of scope to change phase number.")
-        }
-        runPhase()
-    }
-    
-    
     
 
     func runPhase() {
@@ -348,6 +354,92 @@ class GameScene: SKScene {
         }
     }
     
+    func updatePlayersLeft () {
+        playersLeftLabel.text = "\(char.playersLeft)"
+        //        print(playersLeft)
+    }
+    
+    func killRando() {
+        if char.playersLeft > 11 && phaseNumber != 0 {
+//            let chance:Int = Int(time.gameTimeInSeconds)
+            let roll = Int.random(in: 0...10)
+            if roll > 7 {
+                let roll2 = Int.random(in: 1...10)
+                if roll2 <= 3 {
+                    print ("Main Villain Killed a Rando")
+                    char.playersLeft -= 1
+                    updatePlayersLeft()
+                    villainKillsBroadcast()
+                } else if roll2 <= 6 {
+                    print ("Rando Died")
+                    char.playersLeft -= 1
+                    updatePlayersLeft()
+                    randomBroadcast()
+                } else {
+                    print ("never mind")
+                }
+            }
+        } else {
+            print ("No more players to kill")
+        }
+    }
+
     
     
+    func forceKillRando() {
+        if char.playersLeft > 11 {
+            char.playersLeft -= 1
+            updatePlayersLeft()
+            randomBroadcast()
+        } else {
+            print ("No more players to kill")
+        }
+    }
+    
+    func characterKillRando(character: String) {
+        if char.playersLeft > 11 {
+            print ("\(character) killed rando")
+            char.playersLeft -= 1
+            updatePlayersLeft()
+        }
+    }
+    
+    func randomBroadcast() {
+        
+        let roll = Int.random(in: 0...(char.playersLeft-11))
+        var roll2 = Int.random(in: 0...(char.playersLeft-11))
+        if (roll == roll2) && (roll != 99) {
+            roll2 += 1
+        } else if (roll == roll2) && (roll == 99) {
+            roll2 -= 1
+        }
+        
+        updateBroadcast()
+        broadcastLineOneLabel.text = "\(char.NPCList[roll]) killed \(char.NPCList[roll2])"
+        char.NPCList.remove(at: roll2)
+    }
+    
+    func villainKillsBroadcast() {
+        
+        let roll = Int.random(in: 0...(char.playersLeft-11))
+        
+        updateBroadcast()
+        broadcastLineOneLabel.text = "Main Villain killed \(char.NPCList[roll])"
+        char.NPCList.remove(at: roll)
+    }
+    
+    func characterKillRandoBroadcast(character: String) {
+        let roll = Int.random(in: 0...(char.playersLeft-11))
+        
+        updateBroadcast()
+        broadcastLineOneLabel.text = "\(character) killed \(char.NPCList[roll])"
+        char.NPCList.remove(at: roll)
+    }
+    
+    func updateBroadcast () {
+        broadcastLineFiveLabel.text = broadcastLineFourLabel.text
+        broadcastLineFourLabel.text = broadcastLineThreeLabel.text
+        broadcastLineThreeLabel.text = broadcastLineTwoLabel.text
+        broadcastLineTwoLabel.text = broadcastLineOneLabel.text
+    }
 }

@@ -176,6 +176,8 @@ class GameScene: SKScene {
             } else {
                 print ("cannot increase time")
             }
+        case 36:
+            print ("kill rando")
             
         default:
             print("keyDown: \(event.characters!) keyCode: \(event.keyCode)")

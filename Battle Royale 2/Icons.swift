@@ -117,7 +117,7 @@ func createIcons () {
     poisonGasNode.zPosition = 1
     
     poisonGasPath2.addArc(center: CGPoint.zero,
-                         radius: (eventRadius),
+                         radius: (eventRadius + 20),
                          startAngle: 0,
                          endAngle: CGFloat.pi * 2,
                          clockwise: true)

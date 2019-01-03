@@ -240,6 +240,8 @@ class GameScene: SKScene {
             poisonGasNode.lineWidth += 40
         } else if phaseNumber == 3 && eventNumber == 2 {
             poisonGasNode2.lineWidth += 20
+        } else {
+            
         }
         
     }
@@ -252,6 +254,7 @@ class GameScene: SKScene {
             phaseNumber += 1
         } else if phaseNumber == 3 {
             phaseNumber = 1
+            eventNumber += 1
         } else {
             print ("phase number is out of scope to change phase number.")
         }
@@ -304,7 +307,6 @@ class GameScene: SKScene {
             print ("\(eventNumber).\(phaseNumber)")
             time.phaseTimerInSeconds = 27
             runPhaseTimer()
-            eventNumber += 1
         default:
             print ("Phase number is out of scope to move forward.")
         }

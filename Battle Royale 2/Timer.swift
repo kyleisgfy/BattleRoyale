@@ -8,11 +8,24 @@
 
 import Foundation
 
-var gameTimer = Timer()
-var restrictionTimer = Timer()
+var time: Time = Time ()
 
-var gameTimeInSeconds  = 120
-var restrictionTimeInSeconds = 5
+class Time: NSObject {
+    
+    var gameTimer = Timer()
+    var restrictionTimer = Timer()
+    
+    var phaseTimer = Timer()
+    
+    var phaseTimerInSeconds = 15
+    
+    var gameTimeInSeconds  = 0
+    var restrictionTimeInSeconds = 5
+    var restrictionTimeInSecondsSetup = 5
+
+}
+
+
 
 
 

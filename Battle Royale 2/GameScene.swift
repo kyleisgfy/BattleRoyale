@@ -9,6 +9,7 @@
 import SpriteKit
 import GameplayKit
 
+var game: GameScene = GameScene ()
 
 class GameScene: SKScene {
     var entities = [GKEntity]()
@@ -16,18 +17,60 @@ class GameScene: SKScene {
     private var lastUpdateTime : TimeInterval = 0
     
     
+    var gameTimerLabel:SKLabelNode = SKLabelNode()
+    var restrictionTimerLabel:SKLabelNode = SKLabelNode()
+    
+    var playersLeftLabel:SKLabelNode = SKLabelNode()
+    
+    var broadcastLineOneLabel:SKLabelNode = SKLabelNode()
+    var broadcastLineTwoLabel:SKLabelNode = SKLabelNode()
+    var broadcastLineThreeLabel:SKLabelNode = SKLabelNode()
+    var broadcastLineFourLabel:SKLabelNode = SKLabelNode()
+    var broadcastLineFiveLabel:SKLabelNode = SKLabelNode()
     
     
-    
-    
+    var eventNumber = 1
+    var phaseNumber = 0
     
     override func sceneDidLoad() {
         createIcons()
+        self.addChild(background)
+        self.addChild(eventOneNode)
+        self.addChild(eventTwoNode)
+        self.addChild(eventThreeNode)
+        self.addChild(eventFourNode)
         self.addChild(teamIconNode)
-        self.addChild(nextEventNode)
-        runTimer()
-       
+        self.addChild(poisonGasNode)
+        self.addChild(poisonGasNode2)
+//        self.addChild(backgroundGasCropNode)
         
+        runGameTimer()
+        runPhase()
+       
+        if let GameTimer:SKLabelNode = self.childNode(withName: "gameTimerLabel") as? SKLabelNode {
+            gameTimerLabel = GameTimer
+            gameTimerLabel.text = ""
+            print ("Game time in seconds inicialized")
+        } else {
+            print ("Game time label Failed")
+        }
+        
+        if let RestrictionTimer:SKLabelNode = self.childNode(withName: "restrictionTimerLabel") as? SKLabelNode {
+            restrictionTimerLabel = RestrictionTimer
+            time.restrictionTimeInSeconds = time.restrictionTimeInSecondsSetup
+            restrictionTimerLabel.text = ""
+            print ("Restriction timer label inicialized")
+        } else {
+            print ("Restriction timer label Failed")
+        }
+        
+        if let PlayersLeft:SKLabelNode = self.childNode(withName: "playersLeftLabel") as? SKLabelNode {
+            playersLeftLabel = PlayersLeft
+            print ("players left label inicialized")
+            playersLeftLabel.text = "\(char.playersLeft)"
+        } else {
+            print ("Players left label Failed")
+        }
         
         if let BroadcastOne:SKLabelNode = self.childNode(withName: "broadcastLineOneLabel") as? SKLabelNode {
             broadcastLineOneLabel = BroadcastOne
@@ -69,9 +112,10 @@ class GameScene: SKScene {
             print ("Broadcast line five label Failed")
         }
         
-        
          self.lastUpdateTime = 0
         }
+
+// Keyboard and mouse input functions.
     
     func touchDown(atPoint pos : CGPoint) {
     }
@@ -84,7 +128,20 @@ class GameScene: SKScene {
     
     override func mouseDown(with event: NSEvent) {
         self.touchDown(atPoint: event.location(in: self))
-        nextEventNode.position = event.location(in: self)
+        if eventNumber == 1 && phaseNumber == 1 {
+            eventOneNode.position = event.location(in: self)
+        } else if eventNumber == 2 && phaseNumber == 1 {
+            eventTwoNode.position = event.location(in: self)
+        } else if eventNumber == 3 && phaseNumber == 1 {
+            eventThreeNode.position = event.location(in: self)
+        } else if eventNumber == 4 && phaseNumber == 1 {
+            eventFourNode.position = event.location(in: self)
+        } else {
+            print ("Event out of scope for touch position to occur.")
+        }
+        
+        
+        
     }
     
     override func mouseDragged(with event: NSEvent) {
@@ -96,15 +153,28 @@ class GameScene: SKScene {
     }
     
     override func keyDown(with event: NSEvent) {
-        switch event.keyCode {
-        case 0x31:
-            print ("keydown")
+        let keycode = event.keyCode
+        
+        switch keycode {
+        case 36:
+            if time.restrictionTimer.isValid == true {
+                print ("cannot increase time")
+            } else {
+                time.phaseTimerInSeconds += 5
+            }
             
         default:
             print("keyDown: \(event.characters!) keyCode: \(event.keyCode)")
         }
+        
+       
     }
     
+    
+    
+
+    
+ // Timer functions
     
     override func update(_ currentTime: TimeInterval) {
         if (self.lastUpdateTime == 0) {
@@ -117,37 +187,129 @@ class GameScene: SKScene {
         self.lastUpdateTime = currentTime
     }
     
-    
-    
-    
-    
-    func runTimer() {
-        gameTimer = Timer.scheduledTimer(timeInterval: 1, target: self,   selector: (#selector(GameScene.updateTimer)), userInfo: nil, repeats: true)
+    func runGameTimer() {
+        time.gameTimer = Timer.scheduledTimer(timeInterval: 1, target: self,   selector: (#selector(GameScene.updateGameTimer)), userInfo: nil, repeats: true)
         print("Run timer iniciated")
     }
     
     func runRestrictionTimer () {
-        restrictionTimer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: (#selector(GameScene.updateRestrictionTimer)), userInfo: nil, repeats: true)
+        time.restrictionTimeInSeconds = 5
+        time.restrictionTimer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: (#selector(GameScene.updateRestrictionTimer)), userInfo: nil, repeats: true)
         print("Restriction Timer Started")
     }
     
     @objc func updateRestrictionTimer() {
-        restrictionTimeInSeconds -= 1
-//            restrictionTimerLabel.text = timeString(time: TimeInterval(restrictionTimeInSeconds))
-        print(restrictionTimeInSeconds)
+        time.restrictionTimeInSeconds -= 1
+        if time.restrictionTimeInSeconds == 0 {
+            time.restrictionTimer.invalidate()
+            restrictionTimerLabel.text = ""
+        }
+            restrictionTimerLabel.text = timeString(time: TimeInterval(time.restrictionTimeInSeconds))
     }
     
-    func updatePlayersLeft () {
-        //    playersLeftLabel.text = "\(playersLeft)"
-        print(playersLeft)
+    @objc func updateGameTimer() {
+        time.gameTimeInSeconds += 1     //This will decrement(count down)the seconds.
+            gameTimerLabel.text = timeString(time: TimeInterval(time.gameTimeInSeconds))
+        restrictTheScreen()
     }
     
-    @objc func updateTimer() {
-        gameTimeInSeconds -= 1     //This will decrement(count down)the seconds.
-        //    gameTimeInSecondsLabel.text = timeString(time: TimeInterval(gameTimeInSeconds))
-                print (gameTimeInSeconds)
+    func runPhaseTimer() {
+        time.phaseTimer = Timer.scheduledTimer(timeInterval: 1, target: self,   selector: (#selector(GameScene.updatePhaseTimer)), userInfo: nil, repeats: true)
     }
+    
+    @objc func updatePhaseTimer() {
+        time.phaseTimerInSeconds -= 1
+        if time.phaseTimerInSeconds == 0 {
+            phaseTimerFired()
+            restrictionTimerLabel.text = ""
+        } else {
+        }
+        
+    }
+    
+    
+    func timeString(time:TimeInterval) -> String {
+        //        let hours = Int(time) / 3600
+        let minutes = Int(time) / 60 % 60
+        let seconds = Int(time) % 60
+        return String(format:"%02i:%02i", minutes, seconds)
+    }
+    
+    func restrictTheScreen() {
+        if phaseNumber == 3 && eventNumber == 1 {
+            poisonGasNode.lineWidth += 40
+        } else if phaseNumber == 3 && eventNumber == 2 {
+            poisonGasNode2.lineWidth += 20
+        }
+        
+    }
+    
+    
+    func phaseTimerFired () {
+        print ("phase timer fired")
+        time.phaseTimer.invalidate()
+        if phaseNumber == 1 || phaseNumber == 2 || phaseNumber == 0 {
+            phaseNumber += 1
+        } else if phaseNumber == 3 {
+            phaseNumber = 1
+        } else {
+            print ("phase number is out of scope to change phase number.")
+        }
+        runPhase()
+    }
+    
+    
+    
 
-
-
+    func runPhase() {
+        switch phaseNumber {
+        case 0:
+            print ("\(eventNumber).\(phaseNumber)")
+            time.phaseTimerInSeconds = 5
+            runPhaseTimer()
+        case 1:
+            print ("\(eventNumber).\(phaseNumber)")
+            if eventNumber == 1 {
+                time.phaseTimerInSeconds = 5
+                eventOneNode.strokeColor = .blue
+            } else if eventNumber == 2 {
+                time.phaseTimerInSeconds = 5
+                eventOneNode.strokeColor = .clear
+                eventTwoNode.strokeColor = .blue
+            } else if eventNumber == 3 {
+                time.phaseTimerInSeconds = 5
+                eventTwoNode.strokeColor = .clear
+                eventThreeNode.strokeColor = .blue
+            } else if eventNumber == 4 {
+                time.phaseTimerInSeconds = 5
+                eventThreeNode.strokeColor = .clear
+                eventFourNode.strokeColor = .blue
+            } else {
+                print ("event number is out of scope to change color.")
+            }
+            runPhaseTimer()
+        case 2:
+            print ("\(eventNumber).\(phaseNumber)")
+            time.phaseTimerInSeconds = 5
+            runRestrictionTimer()
+            runPhaseTimer()
+            if eventNumber == 1 {
+                poisonGasNode.position = eventOneNode.position
+            } else if eventNumber == 2 {
+                poisonGasNode2.position = eventTwoNode.position
+            } else {
+            }
+            
+        case 3:
+            print ("\(eventNumber).\(phaseNumber)")
+            time.phaseTimerInSeconds = 27
+            runPhaseTimer()
+            eventNumber += 1
+        default:
+            print ("Phase number is out of scope to move forward.")
+        }
+    }
+    
+    
+    
 }

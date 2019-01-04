@@ -20,6 +20,8 @@ class GameScene: SKScene {
     var gameTimerLabel:SKLabelNode = SKLabelNode()
     var restrictionTimerLabel:SKLabelNode = SKLabelNode()
     
+    var restrictionLabel:SKLabelNode = SKLabelNode()
+    
     var playersLeftLabel:SKLabelNode = SKLabelNode()
     
     var broadcastLineOneLabel:SKLabelNode = SKLabelNode()
@@ -65,6 +67,14 @@ class GameScene: SKScene {
             restrictionTimerLabel = RestrictionTimer
             time.restrictionTimeInSeconds = time.restrictionTimeInSecondsSetup
             restrictionTimerLabel.text = ""
+            print ("Restriction timer label inicialized")
+        } else {
+            print ("Restriction timer label Failed")
+        }
+        
+        if let restrictionLabel:SKLabelNode = self.childNode(withName: "restrictionLabel") as? SKLabelNode {
+            restrictionLabel.text = "RESTRICT IN..."
+            restrictionLabel.alpha = 0.0
             print ("Restriction timer label inicialized")
         } else {
             print ("Restriction timer label Failed")
@@ -214,7 +224,7 @@ class GameScene: SKScene {
     func runRestrictionTimer () {
         time.restrictionTimeInSeconds = 5
         time.restrictionTimer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: (#selector(GameScene.updateRestrictionTimer)), userInfo: nil, repeats: true)
-        print("Restriction Timer Started")
+        
     }
     
     @objc func updateRestrictionTimer() {
@@ -229,6 +239,14 @@ class GameScene: SKScene {
     @objc func updateGameTimer() {
         time.gameTimeInSeconds += 1     //This will decrement(count down)the seconds.
             gameTimerLabel.text = timeString(time: TimeInterval(time.gameTimeInSeconds))
+        if time.restrictionTimer.isValid == true {
+            if restrictionLabel.alpha < 0.5 {
+               restrictionLabel.alpha = 1.0
+            } else {
+                restrictionLabel.alpha = 0.0
+            }
+        } else {
+        }
         restrictTheScreen()
         killRando()
     }
@@ -302,7 +320,6 @@ class GameScene: SKScene {
         
     }
     
-
     func runPhase() {
         switch phaseNumber {
         case 0:
@@ -384,8 +401,6 @@ class GameScene: SKScene {
         }
     }
 
-    
-    
     func forceKillRando() {
         if char.playersLeft > 11 {
             char.playersLeft -= 1

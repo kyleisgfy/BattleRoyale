@@ -36,8 +36,10 @@ class GameScene: SKScene {
     var eventNumber = 1
     var phaseNumber = 0
     var freeTime = 5
-    var restrictInTime = 5
-    var restrictTime = 20
+    var restrictInTime = 15
+    var restrictTime = 30
+    
+    var pauseIsActive = false
     
     override func sceneDidLoad() {
         createIcons()
@@ -51,6 +53,8 @@ class GameScene: SKScene {
 //        self.addChild(poisonGasNode2)
 //        self.addChild(backgroundGreenNode)
 //        self.addChild(backgroundGasCropNode)
+        
+        
         
         runGameTimer()
         runPhase()
@@ -72,9 +76,10 @@ class GameScene: SKScene {
             print ("Restriction timer label Failed")
         }
         
-        if let restrictionLabel:SKLabelNode = self.childNode(withName: "restrictionLabel") as? SKLabelNode {
-            restrictionLabel.text = "RESTRICT IN..."
+        if let restriction:SKLabelNode = self.childNode(withName: "restrictionLabel") as? SKLabelNode {
+            restrictionLabel = restriction
             restrictionLabel.alpha = 0.0
+            restrictionLabel.text = "RESTRICT IN..."
             print ("Restriction timer label inicialized")
         } else {
             print ("Restriction timer label Failed")
@@ -188,8 +193,15 @@ class GameScene: SKScene {
                 print ("cannot increase time")
             }
         case 36:
-            
             forceKillRando()
+        
+        case 49:
+            if pauseIsActive == true {
+                pauseIsActive = false
+            } else {
+                pauseIsActive = true
+            }
+            
             
         default:
             print("keyDown: \(event.characters!) keyCode: \(event.keyCode)")
@@ -222,33 +234,42 @@ class GameScene: SKScene {
     }
     
     func runRestrictionTimer () {
-        time.restrictionTimeInSeconds = 5
+        time.restrictionTimeInSeconds = restrictInTime
         time.restrictionTimer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: (#selector(GameScene.updateRestrictionTimer)), userInfo: nil, repeats: true)
         
     }
     
     @objc func updateRestrictionTimer() {
-        time.restrictionTimeInSeconds -= 1
-        if time.restrictionTimeInSeconds == 0 {
-            time.restrictionTimer.invalidate()
-            restrictionTimerLabel.text = ""
-        }
+        if pauseIsActive == false {
+            time.restrictionTimeInSeconds -= 1
+            if time.restrictionTimeInSeconds == 0 {
+                time.restrictionTimer.invalidate()
+                restrictionTimerLabel.text = ""
+                restrictionLabel.alpha = 0.0
+            }
             restrictionTimerLabel.text = timeString(time: TimeInterval(time.restrictionTimeInSeconds))
+        } else {
+        }
     }
     
     @objc func updateGameTimer() {
-        time.gameTimeInSeconds += 1     //This will decrement(count down)the seconds.
+        if pauseIsActive == false {
+            time.gameTimeInSeconds += 1     //This will decrement(count down)the seconds.
             gameTimerLabel.text = timeString(time: TimeInterval(time.gameTimeInSeconds))
-        if time.restrictionTimer.isValid == true {
-            if restrictionLabel.alpha < 0.5 {
-               restrictionLabel.alpha = 1.0
+            if time.restrictionTimer.isValid == true {
+                if restrictionLabel.alpha == 0.0 {
+                    restrictionLabel.alpha = 1.0
+                } else {
+                    restrictionLabel.alpha = 0.0
+                }
             } else {
-                restrictionLabel.alpha = 0.0
+                
             }
+            restrictTheScreen()
+            killRando()
         } else {
         }
-        restrictTheScreen()
-        killRando()
+        
     }
     
     func runPhaseTimer() {
@@ -256,13 +277,15 @@ class GameScene: SKScene {
     }
     
     @objc func updatePhaseTimer() {
-        time.phaseTimerInSeconds -= 1
-        if time.phaseTimerInSeconds == 0 {
-            phaseTimerFired()
-            restrictionTimerLabel.text = ""
+        if pauseIsActive == false {
+            time.phaseTimerInSeconds -= 1
+            if time.phaseTimerInSeconds == 0 {
+                phaseTimerFired()
+                restrictionTimerLabel.text = ""
+            } else {
+            }
         } else {
         }
-        
     }
     
     
@@ -295,50 +318,52 @@ class GameScene: SKScene {
 //****************************************************************************************
     
     func restrictTheScreen() {
-        if phaseNumber == 3 && eventNumber == 1 {
-            poisonGasNode.lineWidth += 2 * ((poisonGasRadius - eventRadius) / CGFloat(restrictTime))
-        } else if phaseNumber == 3 && eventNumber == 2 {
-            eventOneNode.alpha = 0.2
-            eventOneNode.strokeColor = .green
-            eventOneNode.lineWidth += (eventRadius / CGFloat(restrictTime))
-            eventOneNode.position.x = eventOneNode.position.x + x
-            eventOneNode.position.y = eventOneNode.position.y + y
-            
-        } else if phaseNumber == 3 && eventNumber == 3 {
-            eventTwoNode.alpha = 0.2
-            eventTwoNode.strokeColor = .green
-            eventTwoNode.lineWidth += (eventRadius / 2) / CGFloat(restrictTime)
-            eventTwoNode.position.x = eventTwoNode.position.x + x
-            eventTwoNode.position.y = eventTwoNode.position.y + y
-        } else if phaseNumber == 3 && eventNumber == 4 {
-            eventThreeNode.alpha = 0.2
-            eventThreeNode.strokeColor = .green
-            eventThreeNode.lineWidth += (eventRadius / 4) / CGFloat(restrictTime)
-            eventThreeNode.position.x = eventThreeNode.position.x + x
-            eventThreeNode.position.y = eventThreeNode.position.y + y
+        if pauseIsActive == false {
+            if phaseNumber == 3 && eventNumber == 1 {
+                poisonGasNode.lineWidth += 2 * ((poisonGasRadius - eventRadius) / CGFloat(restrictTime))
+            } else if phaseNumber == 3 && eventNumber == 2 {
+                eventOneNode.alpha = 0.2
+                eventOneNode.strokeColor = .green
+                eventOneNode.lineWidth += (eventRadius / CGFloat(restrictTime))
+                eventOneNode.position.x = eventOneNode.position.x + x
+                eventOneNode.position.y = eventOneNode.position.y + y
+                
+            } else if phaseNumber == 3 && eventNumber == 3 {
+                eventTwoNode.alpha = 0.2
+                eventTwoNode.strokeColor = .green
+                eventTwoNode.lineWidth += (eventRadius / 2) / CGFloat(restrictTime)
+                eventTwoNode.position.x = eventTwoNode.position.x + x
+                eventTwoNode.position.y = eventTwoNode.position.y + y
+            } else if phaseNumber == 3 && eventNumber == 4 {
+                eventThreeNode.alpha = 0.2
+                eventThreeNode.strokeColor = .green
+                eventThreeNode.lineWidth += (eventRadius / 4) / CGFloat(restrictTime)
+                eventThreeNode.position.x = eventThreeNode.position.x + x
+                eventThreeNode.position.y = eventThreeNode.position.y + y
+            }
+        } else {
         }
-        
     }
     
     func runPhase() {
         switch phaseNumber {
         case 0:
-            time.phaseTimerInSeconds = 5
+            time.phaseTimerInSeconds = freeTime
             runPhaseTimer()
         case 1:
             if eventNumber == 1 {
-                time.phaseTimerInSeconds = 5
+                time.phaseTimerInSeconds = freeTime
                 eventOneNode.strokeColor = .blue
             } else if eventNumber == 2 {
-                time.phaseTimerInSeconds = 5
+                time.phaseTimerInSeconds = freeTime
                 eventOneNode.strokeColor = .clear
                 eventTwoNode.strokeColor = .blue
             } else if eventNumber == 3 {
-                time.phaseTimerInSeconds = 5
+                time.phaseTimerInSeconds = freeTime
                 eventTwoNode.strokeColor = .clear
                 eventThreeNode.strokeColor = .blue
             } else if eventNumber == 4 {
-                time.phaseTimerInSeconds = 5
+                time.phaseTimerInSeconds = freeTime
                 eventThreeNode.strokeColor = .clear
                 eventFourNode.strokeColor = .blue
             } else {
@@ -346,7 +371,7 @@ class GameScene: SKScene {
             }
             runPhaseTimer()
         case 2:
-            time.phaseTimerInSeconds = 5
+            time.phaseTimerInSeconds = restrictInTime
             runRestrictionTimer()
             runPhaseTimer()
             if eventNumber == 1 {
@@ -383,21 +408,19 @@ class GameScene: SKScene {
             if roll > 7 {
                 let roll2 = Int.random(in: 1...10)
                 if roll2 <= 3 {
-                    print ("Main Villain Killed a Rando")
+//                    print ("Main Villain Killed a Rando")
                     char.playersLeft -= 1
                     updatePlayersLeft()
                     villainKillsBroadcast()
                 } else if roll2 <= 6 {
-                    print ("Rando Died")
+//                    print ("Rando Died")
                     char.playersLeft -= 1
                     updatePlayersLeft()
                     randomBroadcast()
                 } else {
-                    print ("never mind")
                 }
             }
         } else {
-            print ("No more players to kill")
         }
     }
 

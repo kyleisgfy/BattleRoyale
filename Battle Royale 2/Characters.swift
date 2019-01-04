@@ -23,6 +23,33 @@ class Characters: NSObject {
         "Snara Narke"
     ]
     
+    var killList = [
+        "murdered",
+        "skewered",
+        "beheaded",
+        "obliterated",
+        "ripped in half",
+        "decimated",
+        "polymorphed",
+        "decintegrated",
+        "bled out",
+        "sliced down",
+        "assassinated",
+        "destroyed",
+        "massacred",
+        "butchered",
+        "liquified",
+        "annihilated",
+        "exterminated",
+        "slaughtered",
+        "eliminated",
+        "ravaged",
+        "smashed",
+        "wasted",
+        "defeated",
+        "banished"
+    ]
+    
     var NPCList = [
         "Biff_Puncher", //1
         "L33ROYjenkins",//2

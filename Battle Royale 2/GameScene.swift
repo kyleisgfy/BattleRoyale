@@ -24,6 +24,8 @@ class GameScene: SKScene {
     
     var playersLeftLabel:SKLabelNode = SKLabelNode()
     
+    var pauseLabel:SKLabelNode = SKLabelNode()
+    
     var broadcastLineOneLabel:SKLabelNode = SKLabelNode()
     var broadcastLineTwoLabel:SKLabelNode = SKLabelNode()
     var broadcastLineThreeLabel:SKLabelNode = SKLabelNode()
@@ -133,6 +135,15 @@ class GameScene: SKScene {
             print ("Broadcast line five label Failed")
         }
         
+        if let pauseGame:SKLabelNode = self.childNode(withName: "pauseLabel") as? SKLabelNode {
+            pauseLabel = pauseGame
+            print ("Broadcast line five inicialized")
+            pauseLabel.alpha = 0.0
+            pauseLabel.text = "Game is Paused"
+        } else {
+            print ("Broadcast line five label Failed")
+        }
+        
          self.lastUpdateTime = 0
         }
 //****************************************************************************************
@@ -192,13 +203,15 @@ class GameScene: SKScene {
             } else {
                 print ("cannot increase time")
             }
-        case 36:
+        case 36: //return
             forceKillRando()
         
-        case 49:
+        case 49: //spacebar
             if pauseIsActive == true {
+                pauseLabel.alpha = 0.0
                 pauseIsActive = false
             } else {
+                pauseLabel.alpha = 1.0
                 pauseIsActive = true
             }
             
@@ -446,6 +459,7 @@ class GameScene: SKScene {
         
         let roll = Int.random(in: 0...(char.playersLeft-11))
         var roll2 = Int.random(in: 0...(char.playersLeft-11))
+        let roll3 = Int.random(in: 0...23)
         if (roll == roll2) && (roll != 99) {
             roll2 += 1
         } else if (roll == roll2) && (roll == 99) {
@@ -453,7 +467,7 @@ class GameScene: SKScene {
         }
         
         updateBroadcast()
-        broadcastLineOneLabel.text = "\(char.NPCList[roll]) killed \(char.NPCList[roll2])"
+        broadcastLineOneLabel.text = "\(char.NPCList[roll]) \(char.killList[roll3]) \(char.NPCList[roll2])"
         char.NPCList.remove(at: roll2)
     }
     

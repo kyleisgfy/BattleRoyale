@@ -26,6 +26,11 @@ class GameScene: SKScene {
     
     var pauseLabel:SKLabelNode = SKLabelNode()
     
+    var aliveLabel:SKLabelNode = SKLabelNode()
+    
+    var phaseLabel:SKLabelNode = SKLabelNode()
+    var phaseTimerLabel:SKLabelNode = SKLabelNode()
+    
     var broadcastLineOneLabel:SKLabelNode = SKLabelNode()
     var broadcastLineTwoLabel:SKLabelNode = SKLabelNode()
     var broadcastLineThreeLabel:SKLabelNode = SKLabelNode()
@@ -37,9 +42,9 @@ class GameScene: SKScene {
     
     var eventNumber = 1
     var phaseNumber = 0
-    var freeTime = 5
-    var restrictInTime = 15
-    var restrictTime = 30
+    var freeTime = 2
+    var restrictInTime = 2
+    var restrictTime = 2
     
     var pauseIsActive = false
     
@@ -82,9 +87,9 @@ class GameScene: SKScene {
             restrictionLabel = restriction
             restrictionLabel.alpha = 0.0
             restrictionLabel.text = "RESTRICT IN..."
-            print ("Restriction timer label inicialized")
+            print ("Restriction label inicialized")
         } else {
-            print ("Restriction timer label Failed")
+            print ("Restriction label Failed")
         }
         
         if let PlayersLeft:SKLabelNode = self.childNode(withName: "playersLeftLabel") as? SKLabelNode {
@@ -93,6 +98,30 @@ class GameScene: SKScene {
             playersLeftLabel.text = "\(char.playersLeft)"
         } else {
             print ("Players left label Failed")
+        }
+        
+        if let alive:SKLabelNode = self.childNode(withName: "aliveLabel") as? SKLabelNode {
+            aliveLabel = alive
+            print ("Alive label inicialized")
+            aliveLabel.text = "ALIVE"
+        } else {
+            print ("Alive left label Failed")
+        }
+        
+        if let phase:SKLabelNode = self.childNode(withName: "phaseLabel") as? SKLabelNode {
+            phaseLabel = phase
+            print ("players left label inicialized")
+            phaseLabel.text = "Game introduction"
+        } else {
+            print ("Phase label Failed")
+        }
+        
+        if let phaseTime:SKLabelNode = self.childNode(withName: "phaseTimerLabel") as? SKLabelNode {
+            phaseTimerLabel = phaseTime
+            print ("Phase timer label inicialized")
+            phaseTimerLabel.text = ""
+        } else {
+            print ("Phase timer label Failed")
         }
         
         if let BroadcastOne:SKLabelNode = self.childNode(withName: "broadcastLineOneLabel") as? SKLabelNode {
@@ -214,7 +243,24 @@ class GameScene: SKScene {
                 pauseLabel.alpha = 1.0
                 pauseIsActive = true
             }
+        
+        case 18: //1
+            characterKillRando(character: "Snara Narke")
             
+        case 19: //2
+            characterKillRando(character: "Meta")
+            
+        case 20: //3
+            characterKillRando(character: "Zinnakahn")
+            
+        case 21: //4
+            characterKillRando(character: "Auran")
+            
+        case 23: //5
+            characterKillRando(character: "Alaqua")
+            
+        case 22: //6
+            characterKillRando(character: "Tokobette")
             
         default:
             print("keyDown: \(event.characters!) keyCode: \(event.keyCode)")
@@ -292,6 +338,7 @@ class GameScene: SKScene {
     @objc func updatePhaseTimer() {
         if pauseIsActive == false {
             time.phaseTimerInSeconds -= 1
+            phaseTimerLabel.text = timeString(time: TimeInterval(time.phaseTimerInSeconds))
             if time.phaseTimerInSeconds == 0 {
                 phaseTimerFired()
                 restrictionTimerLabel.text = ""
@@ -316,10 +363,14 @@ class GameScene: SKScene {
         if phaseNumber == 1 || phaseNumber == 2 || phaseNumber == 0 {
             phaseNumber += 1
             print ("\(eventNumber).\(phaseNumber)")
-        } else if phaseNumber == 3 {
+        } else if phaseNumber == 3 && eventNumber != 4 {
             phaseNumber = 1
             eventNumber += 1
             print ("\(eventNumber).\(phaseNumber)")
+        } else if phaseNumber == 3 && eventNumber == 4 {
+            phaseLabel.text = "End game imminant"
+            phaseTimerLabel.text = ""
+            phaseNumber += 1
         } else {
             print ("phase number is out of scope to change phase number.")
         }
@@ -361,9 +412,11 @@ class GameScene: SKScene {
     func runPhase() {
         switch phaseNumber {
         case 0:
+            phaseLabel.text = "Game start introduction"
             time.phaseTimerInSeconds = freeTime
             runPhaseTimer()
         case 1:
+            phaseLabel.text = "Nothing will occur for"
             if eventNumber == 1 {
                 time.phaseTimerInSeconds = freeTime
                 eventOneNode.strokeColor = .blue
@@ -384,6 +437,7 @@ class GameScene: SKScene {
             }
             runPhaseTimer()
         case 2:
+            phaseLabel.text = "Safe zone will restrict in"
             time.phaseTimerInSeconds = restrictInTime
             runRestrictionTimer()
             runPhaseTimer()
@@ -402,12 +456,17 @@ class GameScene: SKScene {
             
             
         case 3:
+            phaseLabel.text = "Safe zone is restricting"
             time.phaseTimerInSeconds = restrictTime
             runPhaseTimer()
         default:
             print ("Phase number is out of scope to move forward.")
         }
     }
+    
+//****************************************************************************************
+// functions for broadcast and label text
+//****************************************************************************************
     
     func updatePlayersLeft () {
         playersLeftLabel.text = "\(char.playersLeft)"
@@ -449,7 +508,10 @@ class GameScene: SKScene {
     
     func characterKillRando(character: String) {
         if char.playersLeft > 11 {
-            print ("\(character) killed rando")
+            let roll = Int.random(in: 0...(char.playersLeft-11))
+            updateBroadcast()
+            broadcastLineOneLabel.text = ("\(character) killed \(char.NPCList[roll])")
+            char.NPCList.remove(at: roll)
             char.playersLeft -= 1
             updatePlayersLeft()
         }
@@ -467,26 +529,27 @@ class GameScene: SKScene {
         }
         
         updateBroadcast()
-        broadcastLineOneLabel.text = "\(char.NPCList[roll]) \(char.killList[roll3]) \(char.NPCList[roll2])"
+        broadcastLineOneLabel.text = ("\(char.NPCList[roll]) \(char.killList[roll3]) \(char.NPCList[roll2])")
         char.NPCList.remove(at: roll2)
     }
     
     func villainKillsBroadcast() {
         
         let roll = Int.random(in: 0...(char.playersLeft-11))
+        let roll2 = Int.random(in: 0...23)
         
         updateBroadcast()
-        broadcastLineOneLabel.text = "Main Villain killed \(char.NPCList[roll])"
+        broadcastLineOneLabel.text = "Evil Rick \(char.killList[roll2]) \(char.NPCList[roll])"
         char.NPCList.remove(at: roll)
     }
     
-    func characterKillRandoBroadcast(character: String) {
-        let roll = Int.random(in: 0...(char.playersLeft-11))
-        
-        updateBroadcast()
-        broadcastLineOneLabel.text = "\(character) killed \(char.NPCList[roll])"
-        char.NPCList.remove(at: roll)
-    }
+//    func characterKillRandoBroadcast(character: String) {
+//        let roll = Int.random(in: 0...(char.playersLeft-11))
+//
+//        updateBroadcast()
+//        broadcastLineOneLabel.text = "\(character) killed \(char.NPCList[roll])"
+//        char.NPCList.remove(at: roll)
+//    }
     
     func updateBroadcast () {
         broadcastLineFiveLabel.text = broadcastLineFourLabel.text

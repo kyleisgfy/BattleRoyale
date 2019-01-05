@@ -14,7 +14,7 @@ class Characters: NSObject {
    
     var playersLeft = 100
     
-    let characterList = [
+    let characterListPlain = [
         "Alaqua",
         "Tokobette",
         "Auran",
@@ -54,93 +54,93 @@ class Characters: NSObject {
         "Biff_Puncher", //1
         "L33ROYjenkins",//2
         "Parcival",//3
-        "JudgeDredddddd",//4
+        "JudgeDredddd",//4
         "Mr.Christopher_Perkins",//5
-        "XXx_Taser_Face_xXX",//6
+        "Taser_Face",//6
         "Sylgar_Eater",//7
         "FuzzyPotter",//8
-        "Inky:D",//9
-        "Blinky:D",//10
-        "Pinky:D",//11
+        "Inky",//9
+        "Blinky",//10
+        "Pinky",//11
         "Clyde",//12
         "MuggleB0rnSquib",//13
         "MisterEvil",//14
-        "15",//15
-        "16",//16
-        "17",//17
-        "18",//18
-        "19",//19
-        "20",//20
-        "21",//21
-        "22",//22
-        "23",//23
-        "24",//24
-        "25",//25
-        "26",//26
-        "27",//27
-        "28",//28
-        "29",//29
-        "30",//30
-        "31",//31
-        "32",//32
-        "33",//33
-        "34",//34
-        "35",//35
-        "36",//36
-        "37",//37
-        "38",//38
-        "39",//39
-        "40",//40
-        "41",//41
-        "42",//42
-        "43",//43
-        "44",//44
-        "45",//45
-        "46",//46
-        "47",//47
-        "48",//48
-        "49",//49
-        "50",//50
-        "51",//51
-        "52",//52
-        "53",//53
-        "54",//54
-        "55",//55
-        "56",//56
-        "57",//57
-        "58",//58
-        "59",//59
-        "60",//60
-        "61",//61
-        "62",//62
-        "63",//63
-        "64",//64
-        "65",//65
-        "66",//66
-        "67",//67
-        "68",//68
-        "69",//69
-        "70",//70
-        "71",//71
-        "72",//72
-        "73",//73
-        "74",//74
-        "75",//75
-        "76",//76
-        "77",//77
-        "78",//78
-        "79",//79
-        "80",//80
-        "81",//81
-        "82",//82
-        "83",//83
-        "84",//84
-        "85",//85
-        "86",//86
-        "87",//87
-        "88",//88
-        "89",//89
-        "90",//90
+        "Tyler_Durnen",//15
+        "MasterChief",//16
+        "Stewie_Griffin",//17
+        "Jack_Bauer",//18
+        "Ron_Burgundy?",//19
+        "Forrest,Forrest_Gump",//20
+        "BuzzLightyear",//21
+        "TheDude",//22
+        "Squidward",//23
+        "Ross_Gellar",//24
+        "Bond,James_Bond",//25
+        "Han_shot_1st",//26
+        "Hello...McFly",//27
+        "John_McClane",//28
+        "The_Doe_Patronous",//29
+        "Rambo",//30
+        "Kevin_McCallister",//31
+        "Sarah_Connor",//32
+        "Maximus_Decimus_Meridius",//33
+        "King_Leonidas",//34
+        "Samwise*Rudy*",//35
+        "Odds_in_my_favour",//36
+        "Hans_Gruber",//37
+        "Agent_Smith",//38
+        "Travis_Barker",//39
+        "Goku",//40
+        "Dr._Sherlock_Strange",//41
+        "Wick_is_Babayaga",//42
+        "Dwayne_Johnson",//43
+        "Dave_Grohl",//44
+        "Raiden",//45
+        "Daenerys",//46
+        "Omin",//47
+        "Jim_Darkmagic",//48
+        "Viari",//49
+        "Binwin_Bronzebottom",//50
+        "X-Force_Peter",//51
+        "Taxi_Dopinder",//52
+        "Fluffy_Fingers",//53
+        "Assistant_to_the_Dungeon_Manager",//54
+        "8ruce_Wayne",//55
+        "Bruce_Banner",//56
+        "James_Gordon",//57
+        "Rick_Grimes",//58
+        "Linus_Van_Pelt",//59
+        "Underdog",//60
+        "Donatello",//61
+        "Voldemort",//62
+        "Stanley_Ipkiss",//63
+        "Not_The_Mamma",//64
+        "Michelin_Man",//65
+        "Cookie_Monster",//66
+        "The_Blue_Ranger",//67
+        "Mowgli",//68
+        "Santa's_Lil_Helper",//69
+        "Voltron",//70
+        "The_White_Rabit",//71
+        "Optimus_Prime",//72
+        "John_Bender",//73
+        "Sailor_Moon",//74
+        "Sheldon_Cooper",//75
+        "Lara_Croft",//76
+        "Walter_White",//77
+        "The_10th_Doctor",//78
+        "Drizzt Do'urden",//79
+        "Chell",//80
+        "Samuel_Flynn",//81
+        "Kevin_Bacon",//82
+        "Leeloo",//83
+        "The_Bride",//84
+        "Inigo_Montoya",//85
+        "Prince_Humperdinck",//86
+        "Sulley",//87
+        "Buddy_Elf",//88
+        "Carl_Friedricksen",//89
+        "McLovin'",//90
     ]
 //    func test() {
 //        print ("kill rando")

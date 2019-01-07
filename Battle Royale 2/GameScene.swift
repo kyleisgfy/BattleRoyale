@@ -42,9 +42,9 @@ class GameScene: SKScene {
     
     var eventNumber = 1
     var phaseNumber = 0
-    var freeTime = 300
-    var restrictInTime = 300
-    var restrictTime = 300
+    var freeTime = 5
+    var restrictInTime = 5
+    var restrictTime = 5
     
     var pauseIsActive = false
     
@@ -318,6 +318,7 @@ class GameScene: SKScene {
     }
     
     @objc func updateGameTimer() {
+        updateCommandLine()
         if pauseIsActive == false {
             time.gameTimeInSeconds += 1     //This will decrement(count down)the seconds.
             gameTimerLabel.text = timeString(time: TimeInterval(time.gameTimeInSeconds))
@@ -364,7 +365,7 @@ class GameScene: SKScene {
     
     
     func phaseTimerFired () {
-        print ("phase timer fired")
+//        print ("phase timer fired")
         time.phaseTimer.invalidate()
         if phaseNumber == 1 || phaseNumber == 2 || phaseNumber == 0 {
             phaseNumber += 1
@@ -562,5 +563,12 @@ class GameScene: SKScene {
         broadcastLineFourLabel.text = broadcastLineThreeLabel.text
         broadcastLineThreeLabel.text = broadcastLineTwoLabel.text
         broadcastLineTwoLabel.text = broadcastLineOneLabel.text
+    }
+    
+    func updateCommandLine() {
+        print ("*********************************************")
+        print ("\(eventNumber).\(phaseNumber)")
+        print ("Game Time: \(gameTimerLabel.text ?? "")" )
+        print ("\(phaseLabel.text ?? ""): \(phaseTimerLabel.text ?? "")")
     }
 }

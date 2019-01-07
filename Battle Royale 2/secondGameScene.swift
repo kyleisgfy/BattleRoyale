@@ -31,6 +31,8 @@ class SecondGameScene: SKScene {
     
     override func sceneDidLoad() {
         
+       
+        
         self.addChild(background2)
         self.addChild(eventOneNode2)
         self.addChild(eventTwoNode2)
@@ -38,6 +40,7 @@ class SecondGameScene: SKScene {
         self.addChild(eventFourNode2)
         self.addChild(teamIconNode2)
         self.addChild(poisonGasNode2)
+        
         
         
         if let RestrictionTimer2:SKLabelNode = self.childNode(withName: "restrictionTimerLabel2") as? SKLabelNode {

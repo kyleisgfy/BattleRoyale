@@ -42,9 +42,9 @@ class GameScene: SKScene {
     
     var eventNumber = 1
     var phaseNumber = 0
-    var freeTime = 2
-    var restrictInTime = 2
-    var restrictTime = 2
+    var freeTime = 300
+    var restrictInTime = 300
+    var restrictTime = 300
     
     var pauseIsActive = false
     
@@ -226,9 +226,15 @@ class GameScene: SKScene {
             teamIconNode.position.x = teamIconNode.position.x + 28.8
         case 123: //left arrow
             teamIconNode.position.x = teamIconNode.position.x - 28.8
+        case 27: //down arrow
+            if phaseNumber == 1 || phaseNumber == 0 {
+                time.phaseTimerInSeconds -= 60
+            } else {
+                print ("cannot decrease time")
+            }
         case 34: //plus key
             if phaseNumber == 1 {
-                time.phaseTimerInSeconds += 5
+                time.phaseTimerInSeconds += 120
             } else {
                 print ("cannot increase time")
             }
@@ -339,7 +345,7 @@ class GameScene: SKScene {
         if pauseIsActive == false {
             time.phaseTimerInSeconds -= 1
             phaseTimerLabel.text = timeString(time: TimeInterval(time.phaseTimerInSeconds))
-            if time.phaseTimerInSeconds == 0 {
+            if time.phaseTimerInSeconds <= 0 {
                 phaseTimerFired()
                 restrictionTimerLabel.text = ""
             } else {
@@ -476,15 +482,15 @@ class GameScene: SKScene {
     func killRando() {
         if char.playersLeft > 11 && phaseNumber != 0 {
 //            let chance:Int = Int(time.gameTimeInSeconds)
-            let roll = Int.random(in: 0...10)
-            if roll > 7 {
+            let roll = Int.random(in: 0...100)
+            if roll <= 2 {
                 let roll2 = Int.random(in: 1...10)
-                if roll2 <= 3 {
+                if roll2 <= 2 {
 //                    print ("Main Villain Killed a Rando")
                     char.playersLeft -= 1
                     updatePlayersLeft()
                     villainKillsBroadcast()
-                } else if roll2 <= 6 {
+                } else if roll2 <= 10 {
 //                    print ("Rando Died")
                     char.playersLeft -= 1
                     updatePlayersLeft()

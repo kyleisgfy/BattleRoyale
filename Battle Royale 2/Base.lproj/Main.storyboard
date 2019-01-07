@@ -728,7 +728,7 @@
         <scene sceneID="yU7-Ku-NbG">
             <objects>
                 <viewController id="5Ex-eE-v88" customClass="secondViewController" customModule="Battle_Royale_2" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" id="Lfr-Jh-j8C">
+                    <view key="view" id="Lfr-Jh-j8C" customClass="SecondView">
                         <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </view>
@@ -754,7 +754,7 @@
                 </viewController>
                 <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="75" y="817"/>
+            <point key="canvasLocation" x="142" y="1124"/>
         </scene>
     </scenes>
 </document>

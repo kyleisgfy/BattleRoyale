@@ -13,8 +13,8 @@ import GameplayKit
 var SecondGame: SecondGameScene = SecondGameScene ()
 
 class SecondGameScene: SKScene {
-    var secondEntities = [GKEntity]()
-    var secondGraphs = [String : GKGraph]()
+    var entities = [GKEntity]()
+    var graphs = [String : GKGraph]()
     private var lastUpdateTime : TimeInterval = 0
     
     var testPath = CGMutablePath()

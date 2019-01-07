@@ -8,7 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		B105A72B21E30D6B005F9EA6 /* secondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B105A72A21E30D6B005F9EA6 /* secondViewController.swift */; };
-		B105A72D21E310BE005F9EA6 /* secondGameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = B105A72C21E310BE005F9EA6 /* secondGameScene.swift */; };
+		B105A73121E31DF4005F9EA6 /* SecondGameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = B105A73021E31DF4005F9EA6 /* SecondGameScene.sks */; };
+		B105A73321E31FCC005F9EA6 /* SecondGameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = B105A73221E31FCC005F9EA6 /* SecondGameScene.swift */; };
 		B1BB70E721B25057001F7293 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1BB70E621B25057001F7293 /* AppDelegate.swift */; };
 		B1BB70E921B25057001F7293 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = B1BB70E821B25057001F7293 /* GameScene.sks */; };
 		B1BB70EB21B25057001F7293 /* Actions.sks in Resources */ = {isa = PBXBuildFile; fileRef = B1BB70EA21B25057001F7293 /* Actions.sks */; };
@@ -42,7 +43,8 @@
 
 /* Begin PBXFileReference section */
 		B105A72A21E30D6B005F9EA6 /* secondViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = secondViewController.swift; sourceTree = "<group>"; };
-		B105A72C21E310BE005F9EA6 /* secondGameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = secondGameScene.swift; sourceTree = "<group>"; };
+		B105A73021E31DF4005F9EA6 /* SecondGameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = SecondGameScene.sks; sourceTree = "<group>"; };
+		B105A73221E31FCC005F9EA6 /* SecondGameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondGameScene.swift; sourceTree = "<group>"; };
 		B1BB70E321B25057001F7293 /* Battle Royale 2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Battle Royale 2.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B1BB70E621B25057001F7293 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B1BB70E821B25057001F7293 /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
@@ -114,13 +116,14 @@
 			children = (
 				B1BB70E621B25057001F7293 /* AppDelegate.swift */,
 				B1BB70E821B25057001F7293 /* GameScene.sks */,
+				B105A73021E31DF4005F9EA6 /* SecondGameScene.sks */,
 				B1BB70EA21B25057001F7293 /* Actions.sks */,
 				B1BB70EC21B25057001F7293 /* GameScene.swift */,
+				B105A73221E31FCC005F9EA6 /* SecondGameScene.swift */,
 				B1BB711821B656CA001F7293 /* Icons.swift */,
 				B1BB711A21B6609A001F7293 /* Timer.swift */,
 				B1BB711C21B6665D001F7293 /* Characters.swift */,
 				B1BB70EE21B25057001F7293 /* ViewController.swift */,
-				B105A72C21E310BE005F9EA6 /* secondGameScene.swift */,
 				B105A72A21E30D6B005F9EA6 /* secondViewController.swift */,
 				B1BB70F021B25059001F7293 /* Assets.xcassets */,
 				B1BB70F221B25059001F7293 /* Main.storyboard */,
@@ -255,6 +258,7 @@
 				B1BB70E921B25057001F7293 /* GameScene.sks in Resources */,
 				B1BB70F121B25059001F7293 /* Assets.xcassets in Resources */,
 				B1BB70EB21B25057001F7293 /* Actions.sks in Resources */,
+				B105A73121E31DF4005F9EA6 /* SecondGameScene.sks in Resources */,
 				B1BB70F421B25059001F7293 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -284,7 +288,7 @@
 				B105A72B21E30D6B005F9EA6 /* secondViewController.swift in Sources */,
 				B1BB711D21B6665D001F7293 /* Characters.swift in Sources */,
 				B1BB70ED21B25057001F7293 /* GameScene.swift in Sources */,
-				B105A72D21E310BE005F9EA6 /* secondGameScene.swift in Sources */,
+				B105A73321E31FCC005F9EA6 /* SecondGameScene.swift in Sources */,
 				B1BB711921B656CA001F7293 /* Icons.swift in Sources */,
 				B1BB711B21B6609A001F7293 /* Timer.swift in Sources */,
 				B1BB70E721B25057001F7293 /* AppDelegate.swift in Sources */,

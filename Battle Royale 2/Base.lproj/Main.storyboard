@@ -728,7 +728,7 @@
         <scene sceneID="yU7-Ku-NbG">
             <objects>
                 <viewController id="5Ex-eE-v88" customClass="secondViewController" customModule="Battle_Royale_2" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" id="Lfr-Jh-j8C" customClass="SecondView">
+                    <view key="view" id="Lfr-Jh-j8C" customClass="SKView">
                         <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </view>

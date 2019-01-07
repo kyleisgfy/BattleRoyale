@@ -20,11 +20,11 @@ class secondViewController: NSViewController {
         
         // Load 'GameScene.sks' as a GKScene. This provides gameplay related content
         // including entities and graphs.
-        if let scene = GKScene(fileNamed: "GameScene") {
-            print ("1")
+        if let scene = GKScene(fileNamed: "SecondGameScene") {
+            
             // Get the SKScene from the loaded GKScene
-            if let sceneNode = scene.rootNode as! GameScene? {
-                print ("2")
+            if let sceneNode = scene.rootNode as! SecondGameScene? {
+                
                 // Copy gameplay related content over to the scene
                 sceneNode.entities = scene.entities
                 sceneNode.graphs = scene.graphs
@@ -34,7 +34,7 @@ class secondViewController: NSViewController {
                 
                 // Present the scene
                 if let secondView = self.secondView {
-                    print ("3")
+                
                     secondView.presentScene(sceneNode)
                     
                     secondView.ignoresSiblingOrder = true

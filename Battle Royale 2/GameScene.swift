@@ -42,9 +42,9 @@ class GameScene: SKScene {
     
     var eventNumber = 1
     var phaseNumber = 0
-    var freeTime = 500
-    var restrictInTime = 500
-    var restrictTime = 500
+    var freeTime = 10
+    var restrictInTime = 10
+    var restrictTime = 10
     
     var pauseIsActive = false
     
@@ -318,15 +318,17 @@ class GameScene: SKScene {
     }
     
     @objc func updateGameTimer() {
-//        updateCommandLine()
+        updateSecondView()
         if pauseIsActive == false {
             time.gameTimeInSeconds += 1     //This will decrement(count down)the seconds.
             gameTimerLabel.text = timeString(time: TimeInterval(time.gameTimeInSeconds))
             if time.restrictionTimer.isValid == true {
                 if restrictionLabel.alpha == 0.0 {
                     restrictionLabel.alpha = 1.0
+                    SecondGame.restrictionTimerLabel2.alpha = 1.0
                 } else {
                     restrictionLabel.alpha = 0.0
+                    SecondGame.restrictionTimerLabel2.alpha = 0.0
                 }
             } else {
                 
@@ -349,6 +351,7 @@ class GameScene: SKScene {
             if time.phaseTimerInSeconds <= 0 {
                 phaseTimerFired()
                 restrictionTimerLabel.text = ""
+                SecondGame.restrictionTimerLabel2.text = ""
             } else {
             }
         } else {
@@ -388,10 +391,20 @@ class GameScene: SKScene {
 // functions for the phase and the restriction of the screen
 //****************************************************************************************
     
+    func copyCircle(circle2: SKShapeNode, circle: SKShapeNode) {
+        circle2.alpha = circle.alpha
+        circle2.strokeColor = circle.strokeColor
+        circle2.lineWidth += circle.lineWidth
+        circle2.position.x = circle.position.x
+        circle2.position.y = circle.position.y
+    }
+    
     func restrictTheScreen() {
         if pauseIsActive == false {
             if phaseNumber == 3 && eventNumber == 1 {
+                copyCircle(circle2: poisonGasNode2, circle: poisonGasNode)
                 poisonGasNode.lineWidth += 2 * ((poisonGasRadius - eventRadius) / CGFloat(restrictTime))
+                poisonGasNode2.lineWidth = poisonGasNode.lineWidth
             } else if phaseNumber == 3 && eventNumber == 2 {
                 eventOneNode.alpha = 0.2
                 eventOneNode.strokeColor = .green
@@ -399,18 +412,26 @@ class GameScene: SKScene {
                 eventOneNode.position.x = eventOneNode.position.x + x
                 eventOneNode.position.y = eventOneNode.position.y + y
                 
+                copyCircle(circle2: eventOneNode2, circle: eventOneNode)
+
             } else if phaseNumber == 3 && eventNumber == 3 {
                 eventTwoNode.alpha = 0.2
                 eventTwoNode.strokeColor = .green
                 eventTwoNode.lineWidth += (eventRadius / 2) / CGFloat(restrictTime)
                 eventTwoNode.position.x = eventTwoNode.position.x + x
                 eventTwoNode.position.y = eventTwoNode.position.y + y
+                
+                copyCircle(circle2: eventTwoNode2, circle: eventTwoNode)
+                
             } else if phaseNumber == 3 && eventNumber == 4 {
                 eventThreeNode.alpha = 0.2
                 eventThreeNode.strokeColor = .green
                 eventThreeNode.lineWidth += (eventRadius / 4) / CGFloat(restrictTime)
                 eventThreeNode.position.x = eventThreeNode.position.x + x
                 eventThreeNode.position.y = eventThreeNode.position.y + y
+                
+                copyCircle(circle2: eventThreeNode2, circle: eventThreeNode)
+                
             }
         } else {
         }
@@ -427,18 +448,25 @@ class GameScene: SKScene {
             if eventNumber == 1 {
                 time.phaseTimerInSeconds = freeTime
                 eventOneNode.strokeColor = .blue
+                eventOneNode2.strokeColor = eventOneNode.strokeColor
             } else if eventNumber == 2 {
                 time.phaseTimerInSeconds = freeTime
                 eventOneNode.strokeColor = .clear
+                eventOneNode2.strokeColor = eventOneNode.strokeColor
                 eventTwoNode.strokeColor = .blue
+                eventTwoNode2.strokeColor = eventTwoNode.strokeColor
             } else if eventNumber == 3 {
                 time.phaseTimerInSeconds = freeTime
                 eventTwoNode.strokeColor = .clear
+                eventTwoNode2.strokeColor = eventTwoNode.strokeColor
                 eventThreeNode.strokeColor = .blue
+                eventThreeNode2.strokeColor = eventThreeNode.strokeColor
             } else if eventNumber == 4 {
                 time.phaseTimerInSeconds = freeTime
                 eventThreeNode.strokeColor = .clear
+                eventThreeNode2.strokeColor = eventThreeNode.strokeColor
                 eventFourNode.strokeColor = .blue
+                eventFourNode2.strokeColor = eventFourNode.strokeColor
             } else {
                 print ("event number is out of scope to change color.")
             }
@@ -570,5 +598,14 @@ class GameScene: SKScene {
         print ("\(eventNumber).\(phaseNumber)")
         print ("Game Time: \(gameTimerLabel.text ?? "")" )
         print ("\(phaseLabel.text ?? ""): \(phaseTimerLabel.text ?? "")")
+    }
+    
+    func updateSecondView() {
+        SecondGame.restrictionTimerLabel2.text = restrictionTimerLabel.text
+        SecondGame.broadcastLineOneLabel2.text = broadcastLineOneLabel.text
+        SecondGame.broadcastLineTwoLabel2.text = broadcastLineTwoLabel.text
+        SecondGame.broadcastLineThreeLabel2.text = broadcastLineThreeLabel.text
+        SecondGame.broadcastLineFourLabel2.text = broadcastLineFourLabel.text
+        SecondGame.broadcastLineFiveLabel2.text = broadcastLineFiveLabel.text
     }
 }

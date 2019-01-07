@@ -62,6 +62,7 @@
                                         <menuItem title="New" keyEquivalent="n" id="Was-JA-tGl">
                                             <connections>
                                                 <action selector="newDocument:" target="Ady-hI-5gd" id="4Si-XN-c54"/>
+                                                <segue destination="iTX-Ky-R53" kind="show" id="aXF-pM-tn5"/>
                                             </connections>
                                         </menuItem>
                                         <menuItem title="Open…" keyEquivalent="o" id="IAo-SY-fd9">
@@ -701,6 +702,43 @@
                 <customObject id="Oky-zY-oP4" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="75" y="250"/>
+        </scene>
+        <!--Window Controller-->
+        <scene sceneID="OUy-ta-MLo">
+            <objects>
+                <windowController id="iTX-Ky-R53" sceneMemberID="viewController">
+                    <window key="window" title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" frameAutosaveName="" animationBehavior="default" id="Lbl-UP-cE0">
+                        <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
+                        <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
+                        <rect key="contentRect" x="294" y="362" width="480" height="270"/>
+                        <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1177"/>
+                        <connections>
+                            <outlet property="delegate" destination="iTX-Ky-R53" id="Mtr-NC-aaW"/>
+                        </connections>
+                    </window>
+                    <connections>
+                        <segue destination="5Ex-eE-v88" kind="relationship" relationship="window.shadowedContentViewController" id="rGD-z2-haO"/>
+                    </connections>
+                </windowController>
+                <customObject id="r2I-aR-w54" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1057" y="153"/>
+        </scene>
+        <!--Second View Controller-->
+        <scene sceneID="yU7-Ku-NbG">
+            <objects>
+                <viewController id="5Ex-eE-v88" customClass="secondViewController" customModule="Battle_Royale_2" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" id="Lfr-Jh-j8C">
+                        <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </view>
+                    <connections>
+                        <outlet property="secondView" destination="Lfr-Jh-j8C" id="Tjg-JC-b9o"/>
+                    </connections>
+                </viewController>
+                <customObject id="M1P-oJ-NMT" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1764" y="128"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="hIz-AP-VOD">

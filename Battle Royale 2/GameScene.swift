@@ -42,9 +42,9 @@ class GameScene: SKScene {
     
     var eventNumber = 1
     var phaseNumber = 0
-    var freeTime = 10
-    var restrictInTime = 10
-    var restrictTime = 10
+    var freeTime = 15
+    var restrictInTime = 15
+    var restrictTime = 15
     
     var pauseIsActive = false
     
@@ -61,116 +61,114 @@ class GameScene: SKScene {
 //        self.addChild(backgroundGreenNode)
 //        self.addChild(backgroundGasCropNode)
         
-        
-        
         runGameTimer()
         runPhase()
-       
+       pauseGame()
         if let GameTimer:SKLabelNode = self.childNode(withName: "gameTimerLabel") as? SKLabelNode {
             gameTimerLabel = GameTimer
             gameTimerLabel.text = ""
-            print ("Game time in seconds inicialized")
+//            print ("Game time in seconds inicialized")
         } else {
-            print ("Game time label Failed")
+//            print ("Game time label Failed")
         }
         
         if let RestrictionTimer:SKLabelNode = self.childNode(withName: "restrictionTimerLabel") as? SKLabelNode {
             restrictionTimerLabel = RestrictionTimer
             time.restrictionTimeInSeconds = time.restrictionTimeInSecondsSetup
             restrictionTimerLabel.text = ""
-            print ("Restriction timer label inicialized")
+//            print ("Restriction timer label inicialized")
         } else {
-            print ("Restriction timer label Failed")
+//            print ("Restriction timer label Failed")
         }
         
         if let restriction:SKLabelNode = self.childNode(withName: "restrictionLabel") as? SKLabelNode {
             restrictionLabel = restriction
             restrictionLabel.alpha = 0.0
             restrictionLabel.text = "RESTRICT IN..."
-            print ("Restriction label inicialized")
+//            print ("Restriction label inicialized")
         } else {
-            print ("Restriction label Failed")
+//            print ("Restriction label Failed")
         }
         
         if let PlayersLeft:SKLabelNode = self.childNode(withName: "playersLeftLabel") as? SKLabelNode {
             playersLeftLabel = PlayersLeft
-            print ("players left label inicialized")
+//            print ("players left label inicialized")
             playersLeftLabel.text = "\(char.playersLeft)"
         } else {
-            print ("Players left label Failed")
+//            print ("Players left label Failed")
         }
         
         if let alive:SKLabelNode = self.childNode(withName: "aliveLabel") as? SKLabelNode {
             aliveLabel = alive
-            print ("Alive label inicialized")
+//            print ("Alive label inicialized")
             aliveLabel.text = "ALIVE"
         } else {
-            print ("Alive left label Failed")
+//            print ("Alive left label Failed")
         }
         
         if let phase:SKLabelNode = self.childNode(withName: "phaseLabel") as? SKLabelNode {
             phaseLabel = phase
-            print ("players left label inicialized")
+//            print ("players left label inicialized")
             phaseLabel.text = "Game introduction"
         } else {
-            print ("Phase label Failed")
+//            print ("Phase label Failed")
         }
         
         if let phaseTime:SKLabelNode = self.childNode(withName: "phaseTimerLabel") as? SKLabelNode {
             phaseTimerLabel = phaseTime
-            print ("Phase timer label inicialized")
+//            print ("Phase timer label inicialized")
             phaseTimerLabel.text = ""
         } else {
-            print ("Phase timer label Failed")
+//            print ("Phase timer label Failed")
         }
         
         if let BroadcastOne:SKLabelNode = self.childNode(withName: "broadcastLineOneLabel") as? SKLabelNode {
             broadcastLineOneLabel = BroadcastOne
-            print ("Broadcast line one label inicialized")
+//            print ("Broadcast line one label inicialized")
             broadcastLineOneLabel.text = ""
         } else {
-            print ("Broadcast line one label Failed")
+            print ("Broadcast line one label Failed for scene one")
         }
         
         if let BroadcastTwo:SKLabelNode = self.childNode(withName: "broadcastLineTwoLabel") as? SKLabelNode {
             broadcastLineTwoLabel = BroadcastTwo
-            print ("Broadcast line two inicialized")
+//            print ("Broadcast line two inicialized")
             broadcastLineTwoLabel.text = ""
         } else {
-            print ("Broadcast line two label Failed")
+//            print ("Broadcast line two label Failed")
         }
         
         if let BroadcastThree:SKLabelNode = self.childNode(withName: "broadcastLineThreeLabel") as? SKLabelNode {
             broadcastLineThreeLabel = BroadcastThree
-            print ("Broadcast line three label inicialized")
+//            print ("Broadcast line three label inicialized")
             broadcastLineThreeLabel.text = ""
         } else {
-            print ("Broadcast line three label Failed")
+//            print ("Broadcast line three label Failed")
         }
         
         if let BroadcastFour:SKLabelNode = self.childNode(withName: "broadcastLineFourLabel") as? SKLabelNode {
             broadcastLineFourLabel = BroadcastFour
-            print ("Broadcast line four label inicialized")
+//            print ("Broadcast line four label inicialized")
             broadcastLineFourLabel.text = ""
         } else {
-            print ("Broadcast line four label Failed")
+//            print ("Broadcast line four label Failed")
         }
         
         if let BroadcastFive:SKLabelNode = self.childNode(withName: "broadcastLineFiveLabel") as? SKLabelNode {
             broadcastLineFiveLabel = BroadcastFive
-            print ("Broadcast line five inicialized")
+//            print ("Broadcast line five inicialized")
             broadcastLineFiveLabel.text = ""
         } else {
-            print ("Broadcast line five label Failed")
+//            print ("Broadcast line five label Failed")
         }
         
         if let pauseGame:SKLabelNode = self.childNode(withName: "pauseLabel") as? SKLabelNode {
             pauseLabel = pauseGame
-            print ("Broadcast line five inicialized")
+//            print ("Broadcast line five inicialized")
             pauseLabel.alpha = 0.0
             pauseLabel.text = "Game is Paused"
         } else {
-            print ("Broadcast line five label Failed")
+//            print ("Broadcast line five label Failed")
         }
         
          self.lastUpdateTime = 0
@@ -242,13 +240,7 @@ class GameScene: SKScene {
             forceKillRando()
         
         case 49: //spacebar
-            if pauseIsActive == true {
-                pauseLabel.alpha = 0.0
-                pauseIsActive = false
-            } else {
-                pauseLabel.alpha = 1.0
-                pauseIsActive = true
-            }
+            pauseGame()
         
         case 18: //1
             characterKillRando(character: "Snara Narke")
@@ -307,7 +299,7 @@ class GameScene: SKScene {
     @objc func updateRestrictionTimer() {
         if pauseIsActive == false {
             time.restrictionTimeInSeconds -= 1
-            if time.restrictionTimeInSeconds == 0 {
+            if time.restrictionTimeInSeconds <= 0 {
                 time.restrictionTimer.invalidate()
                 restrictionTimerLabel.text = ""
                 restrictionLabel.alpha = 0.0
@@ -315,20 +307,18 @@ class GameScene: SKScene {
             restrictionTimerLabel.text = timeString(time: TimeInterval(time.restrictionTimeInSeconds))
         } else {
         }
+        time.restrictionTimeString = "\(restrictionTimerLabel.text ?? "")"
     }
     
     @objc func updateGameTimer() {
-        updateSecondView()
         if pauseIsActive == false {
             time.gameTimeInSeconds += 1     //This will decrement(count down)the seconds.
             gameTimerLabel.text = timeString(time: TimeInterval(time.gameTimeInSeconds))
             if time.restrictionTimer.isValid == true {
                 if restrictionLabel.alpha == 0.0 {
                     restrictionLabel.alpha = 1.0
-                    SecondGame.restrictionTimerLabel2.alpha = 1.0
                 } else {
                     restrictionLabel.alpha = 0.0
-                    SecondGame.restrictionTimerLabel2.alpha = 0.0
                 }
             } else {
                 
@@ -351,7 +341,6 @@ class GameScene: SKScene {
             if time.phaseTimerInSeconds <= 0 {
                 phaseTimerFired()
                 restrictionTimerLabel.text = ""
-                SecondGame.restrictionTimerLabel2.text = ""
             } else {
             }
         } else {
@@ -394,17 +383,18 @@ class GameScene: SKScene {
     func copyCircle(circle2: SKShapeNode, circle: SKShapeNode) {
         circle2.alpha = circle.alpha
         circle2.strokeColor = circle.strokeColor
-        circle2.lineWidth += circle.lineWidth
+        circle2.lineWidth = circle.lineWidth
         circle2.position.x = circle.position.x
         circle2.position.y = circle.position.y
+        
     }
     
     func restrictTheScreen() {
         if pauseIsActive == false {
             if phaseNumber == 3 && eventNumber == 1 {
-                copyCircle(circle2: poisonGasNode2, circle: poisonGasNode)
+                
                 poisonGasNode.lineWidth += 2 * ((poisonGasRadius - eventRadius) / CGFloat(restrictTime))
-                poisonGasNode2.lineWidth = poisonGasNode.lineWidth
+                copyCircle(circle2: poisonGasNode2, circle: poisonGasNode)
             } else if phaseNumber == 3 && eventNumber == 2 {
                 eventOneNode.alpha = 0.2
                 eventOneNode.strokeColor = .green
@@ -448,25 +438,21 @@ class GameScene: SKScene {
             if eventNumber == 1 {
                 time.phaseTimerInSeconds = freeTime
                 eventOneNode.strokeColor = .blue
-                eventOneNode2.strokeColor = eventOneNode.strokeColor
             } else if eventNumber == 2 {
                 time.phaseTimerInSeconds = freeTime
                 eventOneNode.strokeColor = .clear
                 eventOneNode2.strokeColor = eventOneNode.strokeColor
                 eventTwoNode.strokeColor = .blue
-                eventTwoNode2.strokeColor = eventTwoNode.strokeColor
             } else if eventNumber == 3 {
                 time.phaseTimerInSeconds = freeTime
                 eventTwoNode.strokeColor = .clear
                 eventTwoNode2.strokeColor = eventTwoNode.strokeColor
                 eventThreeNode.strokeColor = .blue
-                eventThreeNode2.strokeColor = eventThreeNode.strokeColor
             } else if eventNumber == 4 {
                 time.phaseTimerInSeconds = freeTime
                 eventThreeNode.strokeColor = .clear
                 eventThreeNode2.strokeColor = eventThreeNode.strokeColor
                 eventFourNode.strokeColor = .blue
-                eventFourNode2.strokeColor = eventFourNode.strokeColor
             } else {
                 print ("event number is out of scope to change color.")
             }
@@ -478,13 +464,25 @@ class GameScene: SKScene {
             runPhaseTimer()
             if eventNumber == 1 {
                 poisonGasNode.position = eventOneNode.position
+                eventOneNode2.position.x = eventOneNode.position.x
+                eventOneNode2.position.y = eventOneNode.position.y
+                eventOneNode2.strokeColor = eventOneNode.strokeColor
             } else if eventNumber == 2 {
+                eventTwoNode2.position.x = eventTwoNode.position.x
+                eventTwoNode2.position.y = eventTwoNode.position.y
+                eventTwoNode2.strokeColor = eventTwoNode.strokeColor
                 x = ((eventOneNode.position.x - eventTwoNode.position.x) / CGFloat((-1 * restrictTime)))
                 y = ((eventOneNode.position.y - eventTwoNode.position.y) / CGFloat((-1 * restrictTime)))
             } else if eventNumber == 3 {
+                eventThreeNode2.position.x = eventThreeNode.position.x
+                eventThreeNode2.position.y = eventThreeNode.position.y
+                eventThreeNode2.strokeColor = eventThreeNode.strokeColor
                 x = ((eventTwoNode.position.x - eventThreeNode.position.x) / CGFloat((-1 * restrictTime)))
                 y = ((eventTwoNode.position.y - eventThreeNode.position.y) / CGFloat((-1 * restrictTime)))
             } else if eventNumber == 4 {
+                eventFourNode2.position.x = eventFourNode.position.x
+                eventFourNode2.position.y = eventFourNode.position.y
+                eventFourNode2.strokeColor = eventFourNode.strokeColor
                 x = ((eventThreeNode.position.x - eventFourNode.position.x) / CGFloat((-1 * restrictTime)))
                 y = ((eventThreeNode.position.y - eventFourNode.position.y) / CGFloat((-1 * restrictTime)))
             }
@@ -546,6 +544,7 @@ class GameScene: SKScene {
             let roll = Int.random(in: 0...(char.playersLeft-11))
             updateBroadcast()
             broadcastLineOneLabel.text = ("\(character) killed \(char.NPCList[roll])")
+            char.broadcastLineOne = "\(broadcastLineOneLabel.text ?? "")"
             char.NPCList.remove(at: roll)
             char.playersLeft -= 1
             updatePlayersLeft()
@@ -565,6 +564,7 @@ class GameScene: SKScene {
         
         updateBroadcast()
         broadcastLineOneLabel.text = ("\(char.NPCList[roll]) \(char.killList[roll3]) \(char.NPCList[roll2])")
+        char.broadcastLineOne = "\(broadcastLineOneLabel.text ?? "")"
         char.NPCList.remove(at: roll2)
     }
     
@@ -575,37 +575,31 @@ class GameScene: SKScene {
         
         updateBroadcast()
         broadcastLineOneLabel.text = "Evil Rick \(char.killList[roll2]) \(char.NPCList[roll])"
+        char.broadcastLineOne = "\(broadcastLineOneLabel.text ?? "")"
         char.NPCList.remove(at: roll)
     }
-    
-//    func characterKillRandoBroadcast(character: String) {
-//        let roll = Int.random(in: 0...(char.playersLeft-11))
-//
-//        updateBroadcast()
-//        broadcastLineOneLabel.text = "\(character) killed \(char.NPCList[roll])"
-//        char.NPCList.remove(at: roll)
-//    }
     
     func updateBroadcast () {
         broadcastLineFiveLabel.text = broadcastLineFourLabel.text
         broadcastLineFourLabel.text = broadcastLineThreeLabel.text
         broadcastLineThreeLabel.text = broadcastLineTwoLabel.text
         broadcastLineTwoLabel.text = broadcastLineOneLabel.text
+        
+        char.broadcastLineTwo = "\(broadcastLineTwoLabel.text ?? "")"
+        char.broadcastLineThree = "\(broadcastLineThreeLabel.text ?? "")"
+        char.broadcastLineFour = "\(broadcastLineFourLabel.text ?? "")"
+        char.broadcastLineFive = "\(broadcastLineFiveLabel.text ?? "")"
+        
+        
     }
     
-    func updateCommandLine() {
-        print ("*********************************************")
-        print ("\(eventNumber).\(phaseNumber)")
-        print ("Game Time: \(gameTimerLabel.text ?? "")" )
-        print ("\(phaseLabel.text ?? ""): \(phaseTimerLabel.text ?? "")")
-    }
-    
-    func updateSecondView() {
-        SecondGame.restrictionTimerLabel2.text = restrictionTimerLabel.text
-        SecondGame.broadcastLineOneLabel2.text = broadcastLineOneLabel.text
-        SecondGame.broadcastLineTwoLabel2.text = broadcastLineTwoLabel.text
-        SecondGame.broadcastLineThreeLabel2.text = broadcastLineThreeLabel.text
-        SecondGame.broadcastLineFourLabel2.text = broadcastLineFourLabel.text
-        SecondGame.broadcastLineFiveLabel2.text = broadcastLineFiveLabel.text
+    func pauseGame() {
+        if pauseIsActive == true {
+            pauseLabel.alpha = 0.0
+            pauseIsActive = false
+        } else {
+            pauseLabel.alpha = 1.0
+            pauseIsActive = true
+        }
     }
 }

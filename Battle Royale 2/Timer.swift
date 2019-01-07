@@ -22,6 +22,7 @@ class Time: NSObject {
     var gameTimeInSeconds  = 0
     var restrictionTimeInSeconds = 5
     var restrictionTimeInSecondsSetup = 5
+    var restrictionTimeString = ""
 
 }
 

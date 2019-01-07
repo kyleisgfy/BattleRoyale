@@ -14,12 +14,11 @@ class ViewController: NSViewController {
 
     @IBOutlet var skView: SKView!
     
-    @IBAction func action(_ sender: AnyObject) {
-        print ("launch second window")
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        performSegue(withIdentifier: "openSecond", sender: nil)
         
         // Load 'GameScene.sks' as a GKScene. This provides gameplay related content
         // including entities and graphs.

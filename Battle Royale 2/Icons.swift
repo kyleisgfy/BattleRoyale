@@ -52,6 +52,7 @@ let eventRadius = CGFloat(336)
 
 var background = SKSpriteNode()
 var background2 = SKSpriteNode()
+
 //var backgroundGasNode = SKSpriteNode(imageNamed: "backgroundImageGas")
 //var backgroundGasCropNode = SKCropNode()
 
@@ -67,14 +68,6 @@ func createIcons () {
     background.position.x = 0
     background.position.y = 0
     
-    background2 = SKSpriteNode(imageNamed: "backgroundImage")
-    background2.position = CGPoint.zero
-    background2.size.width = 1242
-    background2.size.height = 720
-    background2.zPosition = 0
-    background2.position.x = 0
-    background2.position.y = 0
-    
     teamIconPath.addArc(center: CGPoint.zero,
                            radius: 15,
                            startAngle: 0,
@@ -88,18 +81,7 @@ func createIcons () {
     teamIconNode.position.x = 0
     teamIconNode.position.y = 0
     
-    teamIconPath2.addArc(center: CGPoint.zero,
-                        radius: 15,
-                        startAngle: 0,
-                        endAngle: CGFloat.pi * 2,
-                        clockwise: true)
-    teamIconNode2 = SKShapeNode(path:    teamIconPath2)
-    teamIconNode2.lineWidth = 0
-    teamIconNode2.fillColor = .red
-    teamIconNode2.strokeColor = .clear
-    teamIconNode2.zPosition = 2
-    teamIconNode2.position.x = 0
-    teamIconNode2.position.y = 0
+
     
     eventOnePath.addArc(center: CGPoint.zero,
                         radius: eventRadius,
@@ -107,7 +89,7 @@ func createIcons () {
                         endAngle: CGFloat.pi * 2,
                         clockwise: true)
     eventOneNode = SKShapeNode(path:    eventOnePath)
-    eventOneNode.lineWidth = 10
+    eventOneNode.lineWidth = 5
     eventOneNode.fillColor = .clear
     eventOneNode.strokeColor = .clear
     eventOneNode.zPosition = 1
@@ -118,7 +100,7 @@ func createIcons () {
                         endAngle: CGFloat.pi * 2,
                         clockwise: true)
     eventTwoNode = SKShapeNode(path:    eventTwoPath)
-    eventTwoNode.lineWidth = 10
+    eventTwoNode.lineWidth = 5
     eventTwoNode.fillColor = .clear
     eventTwoNode.strokeColor = .clear
     eventTwoNode.zPosition = 1
@@ -129,7 +111,7 @@ func createIcons () {
                         endAngle: CGFloat.pi * 2,
                         clockwise: true)
     eventThreeNode = SKShapeNode(path:    eventThreePath)
-    eventThreeNode.lineWidth = 10
+    eventThreeNode.lineWidth = 5
     eventThreeNode.fillColor = .clear
     eventThreeNode.strokeColor = .clear
     eventThreeNode.zPosition = 1
@@ -140,54 +122,13 @@ func createIcons () {
                         endAngle: CGFloat.pi * 2,
                         clockwise: true)
     eventFourNode = SKShapeNode(path:    eventFourPath)
-    eventFourNode.lineWidth = 10
+    eventFourNode.lineWidth = 5
     eventFourNode.fillColor = .clear
     eventFourNode.strokeColor = .clear
     eventFourNode.zPosition = 1
     
-    eventOnePath2.addArc(center: CGPoint.zero,
-                        radius: eventRadius,
-                        startAngle: 0,
-                        endAngle: CGFloat.pi * 2,
-                        clockwise: true)
-    eventOneNode2 = SKShapeNode(path:    eventOnePath2)
-    eventOneNode2.lineWidth = 10
-    eventOneNode2.fillColor = .clear
-    eventOneNode2.strokeColor = .clear
-    eventOneNode2.zPosition = 1
     
-    eventTwoPath2.addArc(center: CGPoint.zero,
-                        radius: (eventRadius/2),
-                        startAngle: 0,
-                        endAngle: CGFloat.pi * 2,
-                        clockwise: true)
-    eventTwoNode2 = SKShapeNode(path:    eventTwoPath2)
-    eventTwoNode2.lineWidth = 10
-    eventTwoNode2.fillColor = .clear
-    eventTwoNode2.strokeColor = .clear
-    eventTwoNode2.zPosition = 1
-    
-    eventThreePath2.addArc(center: CGPoint.zero,
-                          radius: (eventRadius/4),
-                          startAngle: 0,
-                          endAngle: CGFloat.pi * 2,
-                          clockwise: true)
-    eventThreeNode2 = SKShapeNode(path:    eventThreePath2)
-    eventThreeNode2.lineWidth = 10
-    eventThreeNode2.fillColor = .clear
-    eventThreeNode2.strokeColor = .clear
-    eventThreeNode2.zPosition = 1
-    
-    eventFourPath2.addArc(center: CGPoint.zero,
-                         radius: (eventRadius/8),
-                         startAngle: 0,
-                         endAngle: CGFloat.pi * 2,
-                         clockwise: true)
-    eventFourNode2 = SKShapeNode(path:    eventFourPath2)
-    eventFourNode2.lineWidth = 10
-    eventFourNode2.fillColor = .clear
-    eventFourNode2.strokeColor = .clear
-    eventFourNode2.zPosition = 1
+
     
 //    backgroundGreenPath.addArc(center: CGPoint.zero,
 //                         radius: (1024),
@@ -213,17 +154,7 @@ func createIcons () {
     poisonGasNode.alpha = 0.2
     poisonGasNode.zPosition = 1
     
-    poisonGasPath2.addArc(center: CGPoint.zero,
-                         radius: (poisonGasRadius),
-                         startAngle: 0,
-                         endAngle: CGFloat.pi * 2,
-                         clockwise: true)
-    poisonGasNode2 = SKShapeNode(path:    poisonGasPath2)
-    poisonGasNode2.lineWidth = 0
-    poisonGasNode2.fillColor = .clear
-    poisonGasNode2.strokeColor = .green
-    poisonGasNode2.alpha = 0.2
-    poisonGasNode2.zPosition = 1
+
     
 //    poisonGasPath2.addArc(center: CGPoint.zero,
 //                         radius: (eventRadius + 20),
@@ -243,4 +174,86 @@ func createIcons () {
 //    backgroundGasCropNode.maskNode = poisonGasNode
     
 
+}
+
+func createIcons2() {
+    
+    background2 = SKSpriteNode(imageNamed: "backgroundImage")
+    background2.position = CGPoint.zero
+    background2.size.width = 1242
+    background2.size.height = 720
+    background2.zPosition = 0
+    background2.position.x = 0
+    background2.position.y = 0
+    
+    teamIconPath2.addArc(center: CGPoint.zero,
+                         radius: 15,
+                         startAngle: 0,
+                         endAngle: CGFloat.pi * 2,
+                         clockwise: true)
+    teamIconNode2 = SKShapeNode(path:    teamIconPath2)
+    teamIconNode2.lineWidth = 0
+    teamIconNode2.fillColor = .red
+    teamIconNode2.strokeColor = .clear
+    teamIconNode2.zPosition = 2
+    teamIconNode2.position.x = 0
+    teamIconNode2.position.y = 0
+    
+    eventOnePath2.addArc(center: CGPoint.zero,
+                         radius: eventRadius,
+                         startAngle: 0,
+                         endAngle: CGFloat.pi * 2,
+                         clockwise: true)
+    
+    eventOneNode2 = SKShapeNode(path:    eventOnePath2)
+    eventOneNode2.lineWidth = 5
+    eventOneNode2.alpha = 1.0
+    eventOneNode2.fillColor = .clear
+    eventOneNode2.strokeColor = .clear
+    eventOneNode2.zPosition = 1
+    
+    eventTwoPath2.addArc(center: CGPoint.zero,
+                         radius: (eventRadius/2),
+                         startAngle: 0,
+                         endAngle: CGFloat.pi * 2,
+                         clockwise: true)
+    eventTwoNode2 = SKShapeNode(path:    eventTwoPath2)
+    eventTwoNode2.lineWidth = 5
+    eventTwoNode2.fillColor = .clear
+    eventTwoNode2.strokeColor = .clear
+    eventTwoNode2.zPosition = 1
+    
+    eventThreePath2.addArc(center: CGPoint.zero,
+                           radius: (eventRadius/4),
+                           startAngle: 0,
+                           endAngle: CGFloat.pi * 2,
+                           clockwise: true)
+    eventThreeNode2 = SKShapeNode(path:    eventThreePath2)
+    eventThreeNode2.lineWidth = 5
+    eventThreeNode2.fillColor = .clear
+    eventThreeNode2.strokeColor = .clear
+    eventThreeNode2.zPosition = 1
+    
+    eventFourPath2.addArc(center: CGPoint.zero,
+                          radius: (eventRadius/8),
+                          startAngle: 0,
+                          endAngle: CGFloat.pi * 2,
+                          clockwise: true)
+    eventFourNode2 = SKShapeNode(path:    eventFourPath2)
+    eventFourNode2.lineWidth = 5
+    eventFourNode2.fillColor = .clear
+    eventFourNode2.strokeColor = .clear
+    eventFourNode2.zPosition = 1
+    
+    poisonGasPath2.addArc(center: CGPoint.zero,
+                          radius: (poisonGasRadius),
+                          startAngle: 0,
+                          endAngle: CGFloat.pi * 2,
+                          clockwise: true)
+    poisonGasNode2 = SKShapeNode(path:    poisonGasPath2)
+    poisonGasNode2.lineWidth = 0
+    poisonGasNode2.fillColor = .clear
+    poisonGasNode2.strokeColor = .green
+    poisonGasNode2.alpha = 0.2
+    poisonGasNode2.zPosition = 1
 }

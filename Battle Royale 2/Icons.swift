@@ -69,7 +69,7 @@ func createIcons () {
     background.position.y = 0
     
     teamIconPath.addArc(center: CGPoint.zero,
-                           radius: 15,
+                           radius: 12,
                            startAngle: 0,
                            endAngle: CGFloat.pi * 2,
                            clockwise: true)
@@ -78,8 +78,8 @@ func createIcons () {
     teamIconNode.fillColor = .red
     teamIconNode.strokeColor = .clear
     teamIconNode.zPosition = 2
-    teamIconNode.position.x = 0
-    teamIconNode.position.y = 0
+    teamIconNode.position.x = 0.7
+    teamIconNode.position.y = -0.7
     
 
     
@@ -127,21 +127,6 @@ func createIcons () {
     eventFourNode.strokeColor = .clear
     eventFourNode.zPosition = 1
     
-    
-
-    
-//    backgroundGreenPath.addArc(center: CGPoint.zero,
-//                         radius: (1024),
-//                         startAngle: 0,
-//                         endAngle: CGFloat.pi * 2,
-//                         clockwise: true)
-//    backgroundGreenNode = SKShapeNode(path:    backgroundGreenPath)
-//    backgroundGreenNode.lineWidth = 0
-//    backgroundGreenNode.fillColor = .green
-//    backgroundGreenNode.strokeColor = .green
-//    backgroundGreenNode.alpha = 0.2
-//    backgroundGreenNode.zPosition = 1
-    
     poisonGasPath.addArc(center: CGPoint.zero,
                          radius: (poisonGasRadius),
                          startAngle: 0,
@@ -153,27 +138,6 @@ func createIcons () {
     poisonGasNode.strokeColor = .green
     poisonGasNode.alpha = 0.2
     poisonGasNode.zPosition = 1
-    
-
-    
-//    poisonGasPath2.addArc(center: CGPoint.zero,
-//                         radius: (eventRadius + 20),
-//                         startAngle: 0,
-//                         endAngle: CGFloat.pi * 2,
-//                         clockwise: true)
-//    poisonGasNode2 = SKShapeNode(path:    poisonGasPath2)
-//    poisonGasNode2.lineWidth = 0
-//    poisonGasNode2.fillColor = .clear
-//    poisonGasNode2.strokeColor = .green
-//    poisonGasNode2.alpha = 0.2
-//    poisonGasNode2.zPosition = 1
-    
-//    backgroundGasCropNode.position = CGPoint(x: 0, y: 0)
-//    backgroundGasCropNode.zPosition = 1
-//    backgroundGasCropNode.addChild(backgroundGreenNode)
-//    backgroundGasCropNode.maskNode = poisonGasNode
-    
-
 }
 
 func createIcons2() {
@@ -187,7 +151,7 @@ func createIcons2() {
     background2.position.y = 0
     
     teamIconPath2.addArc(center: CGPoint.zero,
-                         radius: 15,
+                         radius: 12,
                          startAngle: 0,
                          endAngle: CGFloat.pi * 2,
                          clockwise: true)
@@ -196,8 +160,8 @@ func createIcons2() {
     teamIconNode2.fillColor = .red
     teamIconNode2.strokeColor = .clear
     teamIconNode2.zPosition = 2
-    teamIconNode2.position.x = 0
-    teamIconNode2.position.y = 0
+    teamIconNode2.position.x = 0.7
+    teamIconNode2.position.y = -0.7
     
     eventOnePath2.addArc(center: CGPoint.zero,
                          radius: eventRadius,

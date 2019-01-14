@@ -526,7 +526,8 @@ class GameScene: SKScene {
     
     func randomChance() {
         let roll = Int.random(in: 0...100)
-        if roll < chance {
+        let roll2 = Int.random(in: 0...100)
+        if roll < chance && roll2 < char.playersLeft {
             killRando()
         }
 //        let roll = Int.random(in: 0...(totalGameTime*totalGameTime))

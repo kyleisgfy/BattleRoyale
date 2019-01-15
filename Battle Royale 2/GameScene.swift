@@ -61,6 +61,20 @@ class GameScene: SKScene {
         self.addChild(eventFourNode)
         self.addChild(teamIconNode)
         self.addChild(poisonGasNode)
+        self.addChild(eventBoarder)
+        self.addChild(eventBarZero)
+        self.addChild(eventBarOne)
+        self.addChild(eventBarTwo)
+        self.addChild(eventBarThree)
+        self.addChild(eventBarFour)
+        self.addChild(eventBarFive)
+        self.addChild(eventBarSix)
+        self.addChild(eventBarSeven)
+        self.addChild(eventBarEight)
+        self.addChild(eventBarNine)
+        self.addChild(eventBarTen)
+        self.addChild(eventBarEleven)
+        self.addChild(eventBarTwelve)
         
         totalGameTime = ((freeTime * 5) + (restrictInTime * 4) + (restrictTime * 4))
         
@@ -76,23 +90,23 @@ class GameScene: SKScene {
             print ("Game time label Failed")
         }
         
-        if let RestrictionTimer:SKLabelNode = self.childNode(withName: "restrictionTimerLabel") as? SKLabelNode {
-            restrictionTimerLabel = RestrictionTimer
-            time.restrictionTimeInSeconds = time.restrictionTimeInSecondsSetup
-            restrictionTimerLabel.text = ""
-            print ("Restriction timer label inicialized")
-        } else {
-            print ("Restriction timer label Failed")
-        }
-        
-        if let restriction:SKLabelNode = self.childNode(withName: "restrictionLabel") as? SKLabelNode {
-            restrictionLabel = restriction
-            restrictionLabel.alpha = 0.0
-            restrictionLabel.text = "RESTRICT IN..."
-            print ("Restriction label inicialized")
-        } else {
-            print ("Restriction label Failed")
-        }
+//        if let RestrictionTimer:SKLabelNode = self.childNode(withName: "restrictionTimerLabel") as? SKLabelNode {
+//            restrictionTimerLabel = RestrictionTimer
+//            time.restrictionTimeInSeconds = time.restrictionTimeInSecondsSetup
+//            restrictionTimerLabel.text = ""
+//            print ("Restriction timer label inicialized")
+//        } else {
+//            print ("Restriction timer label Failed")
+//        }
+//
+//        if let restriction:SKLabelNode = self.childNode(withName: "restrictionLabel") as? SKLabelNode {
+//            restrictionLabel = restriction
+//            restrictionLabel.alpha = 0.0
+//            restrictionLabel.text = "RESTRICT IN..."
+//            print ("Restriction label inicialized")
+//        } else {
+//            print ("Restriction label Failed")
+//        }
         
         if let PlayersLeft:SKLabelNode = self.childNode(withName: "playersLeftLabel") as? SKLabelNode {
             playersLeftLabel = PlayersLeft

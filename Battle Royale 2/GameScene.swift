@@ -42,11 +42,12 @@ class GameScene: SKScene {
     
     var eventNumber = 1
     var phaseNumber = 0
-    var freeTime = 900
-    var restrictInTime = 300
-    var restrictTime = 600
+    var freeTime = 90
+    var restrictInTime = 30
+    var restrictTime = 60
     
     var totalGameTime = 5
+    var timeIndicator = CGFloat(0)
     
     var pauseIsActive = false
     
@@ -77,6 +78,11 @@ class GameScene: SKScene {
         self.addChild(eventBarTwelve)
         
         totalGameTime = ((freeTime * 5) + (restrictInTime * 4) + (restrictTime * 4))
+        timeIndicator = (CGFloat(barWidth * 27) / CGFloat(totalGameTime))
+        print ("\(totalGameTime)")
+        print ("\(barWidth * 27)")
+        print ("\(timeIndicator)")
+        
         
         runGameTimer()
         runPhase()
@@ -255,14 +261,20 @@ class GameScene: SKScene {
             
         case 27: //minus key
             if phaseNumber == 1 || phaseNumber == 0 {
-                time.phaseTimerInSeconds -= 60
+                if time.phaseTimerInSeconds >= 60 {
+                    time.phaseTimerInSeconds -= 60
+                    eventBoarder.position.x = eventBoarder.position.x + CGFloat((60 * timeIndicator))
+                }
             } else {
                 print ("cannot decrease time")
             }
             
-        case 34: //plus key
-            if phaseNumber == 1 {
-                time.phaseTimerInSeconds += 120
+        case 24: //plus key
+            if phaseNumber == 0 || phaseNumber == 1 {
+                if time.phaseTimerInSeconds <= freeTime - 120 {
+                    time.phaseTimerInSeconds += 120
+                    eventBoarder.position.x = eventBoarder.position.x - CGFloat((120 * timeIndicator))
+                }
             } else {
                 print ("cannot increase time")
             }
@@ -342,6 +354,9 @@ class GameScene: SKScene {
     @objc func updateGameTimer() {
         if pauseIsActive == false {
             time.gameTimeInSeconds += 1     //This will decrement(count down)the seconds.
+            if eventBoarder.position.x < CGFloat(barWidth * 27 / 2) {
+                    eventBoarder.position.x = eventBoarder.position.x + CGFloat(timeIndicator)
+            }
             randomChance()
             gameTimerLabel.text = timeString(time: TimeInterval(time.gameTimeInSeconds))
             if time.restrictionTimer.isValid == true {
@@ -352,7 +367,6 @@ class GameScene: SKScene {
                 }
             }
             restrictTheScreen()
-//            killRando()
         }
     }
     

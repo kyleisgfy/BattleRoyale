@@ -47,9 +47,9 @@ var poisonGasRadius = CGFloat(876)
 
 let barHeight = 5
 let barWidth = 35
-let barY = 330
+let barY = CGFloat(330)
 
-let eventBoarder = SKShapeNode(rectOf: CGSize(width: (barWidth * 27), height: barHeight))
+let eventBoarder = SKShapeNode(rectOf: CGSize(width: (2), height: (barHeight + 10)))
 let eventBarZero = SKShapeNode(rectOf: CGSize(width: (barWidth * 3), height: barHeight))
 let eventBarOne = SKShapeNode(rectOf: CGSize(width: (barWidth * 3), height: barHeight))
 let eventBarTwo = SKShapeNode(rectOf: CGSize(width: (barWidth * 1), height: barHeight))
@@ -156,62 +156,67 @@ func createIcons () {
     poisonGasNode.zPosition = 1
     
     let totalBarLength = (barWidth * 27)
+    let firstEvent = CGFloat((barWidth) * 3)
+    let singleEvent = CGFloat((barWidth) * 2)
+    let doubleEvent = CGFloat((barWidth) * 3 / 2)
+    let trippleEvent = CGFloat((barWidth) * 5 / 2)
     
-    eventBoarder.fillColor = .white
-    eventBoarder.zPosition = 3
-    eventBoarder.position = CGPoint(x: 0 , y: 330)
+    eventBoarder.fillColor = .black
+    eventBoarder.strokeColor = .black
+    eventBoarder.zPosition = 4
+    eventBoarder.position = CGPoint(x: 0 - (totalBarLength / 2) , y: 330)
     
     eventBarZero.fillColor = .white
     eventBarZero.zPosition = 3
-    eventBarZero.position = CGPoint(x:((0 - (totalBarLength / 2)) + (barWidth / 2 * 3)) , y: barY)
+    eventBarZero.position = CGPoint(x:(CGFloat(0 - (totalBarLength / 2)) + CGFloat(barWidth * 3 / 2)) , y: barY)
     
     eventBarOne.fillColor = .green
     eventBarOne.zPosition = 3
-    eventBarOne.position = CGPoint(x:(CGFloat(eventBarZero.position.x) + CGFloat(barWidth * 3 / 2) + CGFloat(barWidth) * 3 / 2) , y: barY)
+    eventBarOne.position = CGPoint(x:(CGFloat(eventBarZero.position.x) + firstEvent) , y: barY)
     
     eventBarTwo.fillColor = .yellow
     eventBarTwo.zPosition = 3
-    eventBarTwo.position = CGPoint(x:(CGFloat(eventBarOne.position.x) + CGFloat(barWidth * 3 / 2) + CGFloat(barWidth) * 1 / 2) , y: barY)
+    eventBarTwo.position = CGPoint(x:(CGFloat(eventBarOne.position.x) + singleEvent) , y: barY)
     
     eventBarThree.fillColor = .red
     eventBarThree.zPosition = 3
-    eventBarThree.position = CGPoint(x:(CGFloat(eventBarTwo.position.x) + CGFloat(barWidth * 1 / 2) + CGFloat(barWidth) * 2 / 2) , y: barY)
+    eventBarThree.position = CGPoint(x:(CGFloat(eventBarTwo.position.x) + doubleEvent) , y: barY)
     
     eventBarFour.fillColor = .green
     eventBarFour.zPosition = 3
-    eventBarFour.position = CGPoint(x:(CGFloat(eventBarThree.position.x) + CGFloat(barWidth * 2 / 2) + CGFloat(barWidth) * 3 / 2) , y: barY)
+    eventBarFour.position = CGPoint(x:(CGFloat(eventBarThree.position.x) + trippleEvent) , y: barY)
     
     eventBarFive.fillColor = .yellow
     eventBarFive.zPosition = 3
-    eventBarFive.position = CGPoint(x:(CGFloat(eventBarFour.position.x) + CGFloat(barWidth * 3 / 2) + CGFloat(barWidth) * 1 / 2) , y: barY)
+    eventBarFive.position = CGPoint(x:(CGFloat(eventBarFour.position.x) + singleEvent) , y: barY)
     
     eventBarSix.fillColor = .red
     eventBarSix.zPosition = 3
-    eventBarSix.position = CGPoint(x:(CGFloat(eventBarFive.position.x) + CGFloat(barWidth * 1 / 2) + CGFloat(barWidth) * 2 / 2) , y: barY)
+    eventBarSix.position = CGPoint(x:(CGFloat(eventBarFive.position.x) + doubleEvent) , y: barY)
     
     eventBarSeven.fillColor = .green
     eventBarSeven.zPosition = 3
-    eventBarSeven.position = CGPoint(x:(CGFloat(eventBarSix.position.x) + CGFloat(barWidth * 2 / 2) + CGFloat(barWidth) * 3 / 2) , y: barY)
+    eventBarSeven.position = CGPoint(x:(CGFloat(eventBarSix.position.x) + trippleEvent) , y: barY)
     
     eventBarEight.fillColor = .yellow
     eventBarEight.zPosition = 3
-    eventBarEight.position = CGPoint(x:(CGFloat(eventBarSeven.position.x) + CGFloat(barWidth * 3 / 2) + CGFloat(barWidth) * 1 / 2) , y: barY)
+    eventBarEight.position = CGPoint(x:(CGFloat(eventBarSeven.position.x) + singleEvent) , y: barY)
     
     eventBarNine.fillColor = .red
     eventBarNine.zPosition = 3
-    eventBarNine.position = CGPoint(x:(CGFloat(eventBarEight.position.x) + CGFloat(barWidth * 1 / 2) + CGFloat(barWidth) * 2 / 2) , y: barY)
+    eventBarNine.position = CGPoint(x:(CGFloat(eventBarEight.position.x) + doubleEvent) , y: barY)
     
     eventBarTen.fillColor = .green
     eventBarTen.zPosition = 3
-    eventBarTen.position = CGPoint(x:(CGFloat(eventBarNine.position.x) + CGFloat(barWidth * 2 / 2) + CGFloat(barWidth) * 3 / 2) , y: barY)
+    eventBarTen.position = CGPoint(x:(CGFloat(eventBarNine.position.x) + trippleEvent) , y: barY)
     
     eventBarEleven.fillColor = .yellow
     eventBarEleven.zPosition = 3
-    eventBarEleven.position = CGPoint(x:(CGFloat(eventBarTen.position.x) + CGFloat(barWidth * 3 / 2) + CGFloat(barWidth) * 1 / 2) , y: barY)
+    eventBarEleven.position = CGPoint(x:(CGFloat(eventBarTen.position.x) + singleEvent) , y: barY)
     
     eventBarTwelve.fillColor = .red
     eventBarTwelve.zPosition = 3
-    eventBarTwelve.position = CGPoint(x:(CGFloat(eventBarEleven.position.x) + CGFloat(barWidth * 1 / 2) + CGFloat(barWidth) * 2 / 2) , y: barY)
+    eventBarTwelve.position = CGPoint(x:(CGFloat(eventBarEleven.position.x) + doubleEvent) , y: barY)
 }
 
 func createIcons2() {

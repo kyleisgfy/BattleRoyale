@@ -42,9 +42,9 @@ class GameScene: SKScene {
     
     var eventNumber = 1
     var phaseNumber = 0
-    var freeTime = 90
-    var restrictInTime = 30
-    var restrictTime = 60
+    var freeTime = 180
+    var restrictInTime = 60
+    var restrictTime = 120
     
     var totalGameTime = 5
     var timeIndicator = CGFloat(0)
@@ -55,6 +55,7 @@ class GameScene: SKScene {
     
     override func sceneDidLoad() {
         createIcons()
+        
         self.addChild(background)
         self.addChild(eventOneNode)
         self.addChild(eventTwoNode)
@@ -79,10 +80,6 @@ class GameScene: SKScene {
         
         totalGameTime = ((freeTime * 5) + (restrictInTime * 4) + (restrictTime * 4))
         timeIndicator = (CGFloat(barWidth * 27) / CGFloat(totalGameTime))
-        print ("\(totalGameTime)")
-        print ("\(barWidth * 27)")
-        print ("\(timeIndicator)")
-        
         
         runGameTimer()
         runPhase()
@@ -95,24 +92,6 @@ class GameScene: SKScene {
         } else {
             print ("Game time label Failed")
         }
-        
-//        if let RestrictionTimer:SKLabelNode = self.childNode(withName: "restrictionTimerLabel") as? SKLabelNode {
-//            restrictionTimerLabel = RestrictionTimer
-//            time.restrictionTimeInSeconds = time.restrictionTimeInSecondsSetup
-//            restrictionTimerLabel.text = ""
-//            print ("Restriction timer label inicialized")
-//        } else {
-//            print ("Restriction timer label Failed")
-//        }
-//
-//        if let restriction:SKLabelNode = self.childNode(withName: "restrictionLabel") as? SKLabelNode {
-//            restrictionLabel = restriction
-//            restrictionLabel.alpha = 0.0
-//            restrictionLabel.text = "RESTRICT IN..."
-//            print ("Restriction label inicialized")
-//        } else {
-//            print ("Restriction label Failed")
-//        }
         
         if let PlayersLeft:SKLabelNode = self.childNode(withName: "playersLeftLabel") as? SKLabelNode {
             playersLeftLabel = PlayersLeft
@@ -284,7 +263,9 @@ class GameScene: SKScene {
         
         case 49: //spacebar
             pauseLabel.text = "Game is Paused"
-            phaseLabel.text = "Game introduction"
+            if phaseLabel.text == "" {
+                phaseLabel.text = "Game introduction"
+            }
             pauseGame()
         
         case 18: //1
@@ -309,9 +290,6 @@ class GameScene: SKScene {
             print("keyDown: \(event.characters!) keyCode: \(event.keyCode)")
         }
     }
-    
-    
-    
 
 //****************************************************************************************
 // Timer functions
@@ -387,14 +365,12 @@ class GameScene: SKScene {
         }
     }
     
-    
     func timeString(time:TimeInterval) -> String {
         //        let hours = Int(time) / 3600
         let minutes = Int(time) / 60 % 60
         let seconds = Int(time) % 60
         return String(format:"%02i:%02i", minutes, seconds)
     }
-    
     
     func phaseTimerFired () {
         time.phaseTimer.invalidate()
@@ -558,10 +534,6 @@ class GameScene: SKScene {
         if roll < chance && roll2 < char.playersLeft {
             killRando()
         }
-//        let roll = Int.random(in: 0...(totalGameTime*totalGameTime))
-//        if roll < (time.gameTimeInSeconds * time.gameTimeInSeconds) {
-//            killRando()
-//        }
     }
 
     func forceKillRando() {
@@ -587,7 +559,6 @@ class GameScene: SKScene {
     }
     
     func randomBroadcast() {
-        
         let roll = Int.random(in: 0...(char.playersLeft-11))
         var roll2 = Int.random(in: 0...(char.playersLeft-11))
         let roll3 = Int.random(in: 0...23)
@@ -632,9 +603,11 @@ class GameScene: SKScene {
         if pauseIsActive == true {
             pauseLabel.alpha = 0.0
             pauseIsActive = false
+            splash.removeFromParent()
         } else {
             pauseLabel.alpha = 1.0
             pauseIsActive = true
         }
     }
+
 }

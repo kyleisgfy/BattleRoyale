@@ -10,12 +10,6 @@ import Foundation
 import SpriteKit
 import GameplayKit
 
-
-
-
-
-
-
 var teamIconPath = CGMutablePath()
 var teamIconNode = SKShapeNode()
 var teamIconPath2 = CGMutablePath()
@@ -66,16 +60,12 @@ let eventBarTwelve = SKShapeNode(rectOf: CGSize(width: (barWidth * 2), height: b
 
 let eventRadius = CGFloat(336)
 
+var splash = SKSpriteNode()
 var background = SKSpriteNode()
 var background2 = SKSpriteNode()
 
-//var backgroundGasNode = SKSpriteNode(imageNamed: "backgroundImageGas")
-//var backgroundGasCropNode = SKCropNode()
-
-//var backgroundGreenPath = CGMutablePath()
-//var backgroundGreenNode = SKShapeNode()
-
 func createIcons () {
+    
     background = SKSpriteNode(imageNamed: "backgroundImage")
     background.position = CGPoint.zero
     background.size.width = 1242
@@ -220,6 +210,14 @@ func createIcons () {
 }
 
 func createIcons2() {
+    
+    splash = SKSpriteNode(imageNamed: "splashScreen")
+    splash.position = CGPoint.zero
+    splash.size.width = 1242
+    splash.size.height = 720
+    splash.zPosition = 4
+    splash.position.x = 0
+    splash.position.y = 0
     
     background2 = SKSpriteNode(imageNamed: "backgroundImage")
     background2.position = CGPoint.zero

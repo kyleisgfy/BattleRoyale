@@ -33,6 +33,7 @@ class SecondGameScene: SKScene {
         
         createIcons2()
         
+        self.addChild(splash)
         self.addChild(background2)
         self.addChild(eventOneNode2)
         self.addChild(eventTwoNode2)

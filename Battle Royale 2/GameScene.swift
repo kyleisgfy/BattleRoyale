@@ -42,9 +42,9 @@ class GameScene: SKScene {
     
     var eventNumber = 1
     var phaseNumber = 0
-    var freeTime = 180
-    var restrictInTime = 60
-    var restrictTime = 120
+    var freeTime = 90
+    var restrictInTime = 30
+    var restrictTime = 60
     
     var totalGameTime = 5
     var timeIndicator = CGFloat(0)
@@ -53,8 +53,22 @@ class GameScene: SKScene {
     
     var chance = 5
     
+//    var alarmSound = SKAction.playSoundFileNamed("alarmSound.mp3", waitForCompletion: false)
+//    var freeTimeSound = SKAction.playSoundFileNamed("solemnVow.mp3", waitForCompletion: false)
+//    var restrictInSound = SKAction.playSoundFileNamed("darkContinent.mp3", waitForCompletion: false)
+//    var restrictSound = SKAction.playSoundFileNamed("fieldOfHeroes.mp3", waitForCompletion: false)
+    let alarmSound = SKAudioNode(fileNamed: "alarmSound.mp3")
+    let bombSound = SKAudioNode(fileNamed: "bombSound.mp3")
+    let bellSound = SKAudioNode(fileNamed: "bellSound.mp3")
+    let freeTimeSound = SKAudioNode(fileNamed: "solemnVow.mp3")
+    let restrictInSound = SKAudioNode(fileNamed: "darkContinent.mp3")
+    let restrictSound = SKAudioNode(fileNamed: "fieldOfHeroes.mp3")
+
+    
     override func sceneDidLoad() {
         createIcons()
+        
+//        playSound(sound: alarmSound)
         
         self.addChild(background)
         self.addChild(eventOneNode)
@@ -77,6 +91,21 @@ class GameScene: SKScene {
         self.addChild(eventBarTen)
         self.addChild(eventBarEleven)
         self.addChild(eventBarTwelve)
+        
+        self.addChild(freeTimeSound)
+        self.addChild(restrictInSound)
+        self.addChild(restrictSound)
+        
+        self.addChild(alarmSound)
+        self.addChild(bombSound)
+        self.addChild(bellSound)
+        
+        freeTimeSound.run(SKAction.stop())
+        restrictInSound.run(SKAction.stop())
+        restrictSound.run(SKAction.stop())
+        alarmSound.run(SKAction.stop())
+        bombSound.run(SKAction.stop())
+        bellSound.run(SKAction.stop())
         
         totalGameTime = ((freeTime * 5) + (restrictInTime * 4) + (restrictTime * 4))
         timeIndicator = (CGFloat(barWidth * 27) / CGFloat(totalGameTime))
@@ -336,6 +365,9 @@ class GameScene: SKScene {
                     eventBoarder.position.x = eventBoarder.position.x + CGFloat(timeIndicator)
             }
             randomChance()
+            runAudio()
+            runSoundFX()
+            stopFX()
             gameTimerLabel.text = timeString(time: TimeInterval(time.gameTimeInSeconds))
             if time.restrictionTimer.isValid == true {
                 if restrictionLabel.alpha == 0.0 {
@@ -607,6 +639,42 @@ class GameScene: SKScene {
         } else {
             pauseLabel.alpha = 1.0
             pauseIsActive = true
+        }
+    }
+    
+    func runAudio() {
+        if phaseNumber == 1 && time.phaseTimerInSeconds == freeTime {
+            freeTimeSound.run(SKAction.changeVolume(to: 1.0, duration: 0))
+            freeTimeSound.run(SKAction.play())
+            restrictSound.run(SKAction.changeVolume(to: 0.0, duration: 2))
+        } else if phaseNumber == 2 && time.phaseTimerInSeconds == restrictInTime {
+            restrictInSound.run(SKAction.changeVolume(to: 1.0, duration: 0))
+            restrictInSound.run(SKAction.play())
+            freeTimeSound.run(SKAction.changeVolume(to: 0.0, duration: 4))
+        } else if phaseNumber == 3 && time.phaseTimerInSeconds == restrictTime {
+            restrictSound.run(SKAction.changeVolume(to: 1.0, duration: 0))
+            restrictSound.run(SKAction.play())
+            restrictInSound.run(SKAction.changeVolume(to: 0.0, duration: 2))
+        }
+    }
+    
+    func runSoundFX() {
+        if phaseNumber == 1 && time.phaseTimerInSeconds <= 1 {
+            alarmSound.run(SKAction.play())
+        } else if phaseNumber == 2 && time.phaseTimerInSeconds <= 1 {
+            bombSound.run(SKAction.play())
+        } else if phaseNumber == 3 && time.phaseTimerInSeconds <= 1 {
+            bellSound.run(SKAction.play())
+        }
+    }
+    
+    func stopFX() {
+        if phaseNumber == 2 && time.phaseTimerInSeconds == (restrictInTime - 7) {
+            alarmSound.run(SKAction.stop())
+        } else if phaseNumber == 3 && time.phaseTimerInSeconds == (restrictTime - 10) {
+            bombSound.run(SKAction.stop())
+        } else if phaseNumber == 1 && time.phaseTimerInSeconds == (freeTime - 4) {
+            bellSound.run(SKAction.stop())
         }
     }
 

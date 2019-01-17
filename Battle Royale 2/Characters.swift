@@ -54,7 +54,8 @@ class Characters: NSObject {
         "smashed",
         "wasted",
         "defeated",
-        "banished"
+        "banished",
+        "incinerated"
     ]
     
     var NPCList = [

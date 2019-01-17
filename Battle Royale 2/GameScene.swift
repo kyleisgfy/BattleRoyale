@@ -603,7 +603,7 @@ class GameScene: SKScene {
     func randomBroadcast() {
         let roll = Int.random(in: 0...(char.playersLeft-11))
         var roll2 = Int.random(in: 0...(char.playersLeft-11))
-        let roll3 = Int.random(in: 0...23)
+        let roll3 = Int.random(in: 0...24)
         if (roll == roll2) && (roll != 99) {
             roll2 += 1
         } else if (roll == roll2) && (roll == 99) {
@@ -665,7 +665,7 @@ class GameScene: SKScene {
             restrictSound.run(SKAction.changeVolume(to: 1.0, duration: 0))
             restrictSound.run(SKAction.play())
             restrictInSound.run(SKAction.changeVolume(to: 0.0, duration: 2))
-        }
+        } 
     }
     
     func runSoundFX() {
@@ -674,6 +674,8 @@ class GameScene: SKScene {
         } else if phaseNumber == 2 && time.phaseTimerInSeconds <= 1 {
             bombSound.run(SKAction.play())
         } else if phaseNumber == 3 && time.phaseTimerInSeconds <= 1 {
+            bellSound.run(SKAction.play())
+        } else if phaseNumber == 4 && time.phaseTimerInSeconds <= 1 {
             bellSound.run(SKAction.play())
         }
     }
@@ -684,6 +686,8 @@ class GameScene: SKScene {
         } else if phaseNumber == 3 && time.phaseTimerInSeconds == (restrictTime - 10) {
             bombSound.run(SKAction.stop())
         } else if phaseNumber == 1 && time.phaseTimerInSeconds == (freeTime - 4) {
+            bellSound.run(SKAction.stop())
+        } else if phaseNumber == 4 && time.phaseTimerInSeconds == (freeTime - 4) {
             bellSound.run(SKAction.stop())
         }
     }

@@ -51,7 +51,7 @@ class GameScene: SKScene {
     
     var pauseIsActive = false
     
-    var chance = 5
+    var chance = 4
     
 //    var alarmSound = SKAction.playSoundFileNamed("alarmSound.mp3", waitForCompletion: false)
 //    var freeTimeSound = SKAction.playSoundFileNamed("solemnVow.mp3", waitForCompletion: false)
@@ -314,6 +314,16 @@ class GameScene: SKScene {
             
         case 22: //6
             characterKillRando(character: "Tokobette")
+            
+        case 33: //open bracket {
+            alarmSound.run(SKAction.changeVolume(by: -0.1, duration: 0))
+            bombSound.run(SKAction.changeVolume(by: -0.1, duration: 0))
+            bellSound.run(SKAction.changeVolume(by: -0.1, duration: 0))
+        
+        case 30: //close bracket }
+            alarmSound.run(SKAction.changeVolume(by: 0.1, duration: 0))
+            bombSound.run(SKAction.changeVolume(by: 0.1, duration: 0))
+            bellSound.run(SKAction.changeVolume(by: 0.1, duration: 0))
             
         default:
             print("keyDown: \(event.characters!) keyCode: \(event.keyCode)")

@@ -37,6 +37,10 @@ class GameScene: SKScene {
     var broadcastLineFourLabel:SKLabelNode = SKLabelNode()
     var broadcastLineFiveLabel:SKLabelNode = SKLabelNode()
     
+    var buttonNode:SKSpriteNode = SKSpriteNode()
+    
+    
+    
     var x: CGFloat = 0.0
     var y: CGFloat = 0.0
     
@@ -53,10 +57,6 @@ class GameScene: SKScene {
     
     var chance = 4
     
-//    var alarmSound = SKAction.playSoundFileNamed("alarmSound.mp3", waitForCompletion: false)
-//    var freeTimeSound = SKAction.playSoundFileNamed("solemnVow.mp3", waitForCompletion: false)
-//    var restrictInSound = SKAction.playSoundFileNamed("darkContinent.mp3", waitForCompletion: false)
-//    var restrictSound = SKAction.playSoundFileNamed("fieldOfHeroes.mp3", waitForCompletion: false)
     let alarmSound = SKAudioNode(fileNamed: "alarmSound.mp3")
     let bombSound = SKAudioNode(fileNamed: "bombSound.mp3")
     let bellSound = SKAudioNode(fileNamed: "bellSound.mp3")
@@ -67,8 +67,6 @@ class GameScene: SKScene {
     
     override func sceneDidLoad() {
         createIcons()
-        
-//        playSound(sound: alarmSound)
         
         self.addChild(background)
         self.addChild(eventOneNode)
@@ -113,6 +111,14 @@ class GameScene: SKScene {
         runGameTimer()
         runPhase()
         pauseGame()
+        
+        if let button:SKSpriteNode = self.childNode(withName: "button") as? SKSpriteNode {
+            buttonNode = button
+            print ("button inicialized")
+            buttonNode.color = .blue
+//            buttonNode.isUserInteractionEnabled = true
+            
+        }
         
         if let GameTimer:SKLabelNode = self.childNode(withName: "gameTimerLabel") as? SKLabelNode {
             gameTimerLabel = GameTimer
@@ -230,6 +236,7 @@ class GameScene: SKScene {
             eventFourNode.position = event.location(in: self)
         } else {
             print ("Event out of scope for touch position to occur.")
+            buttonSwitch()
         }
     }
     
@@ -324,6 +331,15 @@ class GameScene: SKScene {
             alarmSound.run(SKAction.changeVolume(by: 0.1, duration: 0))
             bombSound.run(SKAction.changeVolume(by: 0.1, duration: 0))
             bellSound.run(SKAction.changeVolume(by: 0.1, duration: 0))
+            
+        case 51: //delete
+            alarmSound.run(SKAction.stop())
+            bombSound.run(SKAction.stop())
+            bellSound.run(SKAction.stop())
+            
+        case 35: //question mark
+            eventBoarder.position.x = eventBoarder.position.x + (CGFloat(timeIndicator) * (CGFloat(time.phaseTimerInSeconds) - 1.0))
+            time.phaseTimerInSeconds = 0
             
         default:
             print("keyDown: \(event.characters!) keyCode: \(event.keyCode)")
@@ -689,6 +705,19 @@ class GameScene: SKScene {
             bellSound.run(SKAction.stop())
         } else if phaseNumber == 4 && time.phaseTimerInSeconds == (freeTime - 4) {
             bellSound.run(SKAction.stop())
+        }
+    }
+    
+    func buttonSwitch() {
+        if buttonNode.color == .red {
+            buttonNode.color = .blue
+            print ("blue")
+        } else if buttonNode.color == .blue {
+            buttonNode.color = .red
+            print ("red")
+        } else {
+            buttonNode.color = .red
+            print ("none")
         }
     }
 

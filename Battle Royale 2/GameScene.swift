@@ -37,10 +37,6 @@ class GameScene: SKScene {
     var broadcastLineFourLabel:SKLabelNode = SKLabelNode()
     var broadcastLineFiveLabel:SKLabelNode = SKLabelNode()
     
-    var buttonNode:SKSpriteNode = SKSpriteNode()
-    
-    
-    
     var x: CGFloat = 0.0
     var y: CGFloat = 0.0
     
@@ -67,6 +63,12 @@ class GameScene: SKScene {
     
     override func sceneDidLoad() {
         createIcons()
+        
+        var i = 0
+        while i < 6 {
+            self.addChild(characterButtons[i]!)
+            i += 1
+        }
         
         self.addChild(background)
         self.addChild(eventOneNode)
@@ -98,6 +100,9 @@ class GameScene: SKScene {
         self.addChild(bombSound)
         self.addChild(bellSound)
         
+        
+
+        
         freeTimeSound.run(SKAction.stop())
         restrictInSound.run(SKAction.stop())
         restrictSound.run(SKAction.stop())
@@ -112,13 +117,6 @@ class GameScene: SKScene {
         runPhase()
         pauseGame()
         
-        if let button:SKSpriteNode = self.childNode(withName: "button") as? SKSpriteNode {
-            buttonNode = button
-            print ("button inicialized")
-            buttonNode.color = .blue
-//            buttonNode.isUserInteractionEnabled = true
-            
-        }
         
         if let GameTimer:SKLabelNode = self.childNode(withName: "gameTimerLabel") as? SKLabelNode {
             gameTimerLabel = GameTimer
@@ -226,6 +224,30 @@ class GameScene: SKScene {
     
     override func mouseDown(with event: NSEvent) {
         self.touchDown(atPoint: event.location(in: self))
+        
+        var i = 0
+        while i < 6 {
+            if characterButtons[i]!.contains(event.location(in: self)) {
+                if buttons.buttonActive[i] == true {
+                    characterButtons[i]!.color = .gray
+                    buttons.buttonActive[i] = false
+                } else if buttons.buttonActive[1] == false {
+                    for index in characterButtons {
+                        index!.color = .gray
+                    }
+                    for index in 0...5 {
+                        buttons.buttonActive[index] = false
+                    }
+                    characterButtons[i]!.color = .red
+                    buttons.buttonActive[i] = true
+                }
+            }
+            i += 1
+        }
+        
+//        if characterButtons[0].contains(event.location(in: self)) {
+//            buttonSwitch()
+//        }
         if eventNumber == 1 && phaseNumber == 1 {
             eventOneNode.position = event.location(in: self)
         } else if eventNumber == 2 && phaseNumber == 1 {
@@ -236,7 +258,6 @@ class GameScene: SKScene {
             eventFourNode.position = event.location(in: self)
         } else {
             print ("Event out of scope for touch position to occur.")
-            buttonSwitch()
         }
     }
     
@@ -337,10 +358,12 @@ class GameScene: SKScene {
             bombSound.run(SKAction.stop())
             bellSound.run(SKAction.stop())
             
-        case 35: //question mark
+//        case 35: //"P"
+//            buttonSwitch()
+            
+        case 44: //question mark
             eventBoarder.position.x = eventBoarder.position.x + (CGFloat(timeIndicator) * (CGFloat(time.phaseTimerInSeconds) - 1.0))
             time.phaseTimerInSeconds = 0
-            
         default:
             print("keyDown: \(event.characters!) keyCode: \(event.keyCode)")
         }
@@ -708,17 +731,24 @@ class GameScene: SKScene {
         }
     }
     
-    func buttonSwitch() {
-        if buttonNode.color == .red {
-            buttonNode.color = .blue
-            print ("blue")
-        } else if buttonNode.color == .blue {
-            buttonNode.color = .red
-            print ("red")
-        } else {
-            buttonNode.color = .red
-            print ("none")
+    func buttonSelection(button: SKSpriteNode, location: Int) {
+        if buttons.buttonActive[location] == true {
+            button.color = .gray
+            buttons.buttonActive[location] = false
+        } else if buttons.buttonActive[location] == false {
+            button.color = .red
+            buttons.buttonActive[location] = true
         }
     }
+    
+//    func buttonSwitch() {
+//        if buttons.buttonActive[0] == true {
+//            buttonNode.color = .blue
+//            buttons.buttonActive[0] = false
+//        } else if buttons.buttonActive[0] == false {
+//            buttonNode.color = .red
+//            buttons.buttonActive[0] = true
+//        }
+//    }
 
 }

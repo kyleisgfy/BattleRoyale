@@ -708,8 +708,8 @@
                 <windowController id="iTX-Ky-R53" sceneMemberID="viewController">
                     <window key="window" title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" frameAutosaveName="" animationBehavior="default" id="Lbl-UP-cE0">
                         <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
-                        <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
-                        <rect key="contentRect" x="294" y="362" width="480" height="270"/>
+                        <windowPositionMask key="initialPositionMask" leftStrut="YES" bottomStrut="YES"/>
+                        <rect key="contentRect" x="1430" y="849" width="480" height="270"/>
                         <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1177"/>
                         <connections>
                             <outlet property="delegate" destination="iTX-Ky-R53" id="Mtr-NC-aaW"/>

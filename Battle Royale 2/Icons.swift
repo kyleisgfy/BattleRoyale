@@ -58,6 +58,9 @@ let eventBarTen = SKShapeNode(rectOf: CGSize(width: (barWidth * 3), height: barH
 let eventBarEleven = SKShapeNode(rectOf: CGSize(width: (barWidth * 1), height: barHeight))
 let eventBarTwelve = SKShapeNode(rectOf: CGSize(width: (barWidth * 2), height: barHeight))
 
+var characterButtons = [SKSpriteNode?](repeating: nil, count: 6)
+
+
 let eventRadius = CGFloat(336)
 
 var splash = SKSpriteNode()
@@ -65,6 +68,19 @@ var background = SKSpriteNode()
 var background2 = SKSpriteNode()
 
 func createIcons () {
+    var i = 0
+    var yLocation = 140
+    while i < 6 {
+        characterButtons[i] = SKSpriteNode()
+        characterButtons[i]!.color = .gray
+        characterButtons[i]!.zPosition = 3
+        characterButtons[i]!.size.width = 50
+        characterButtons[i]!.size.height = 50
+        characterButtons[i]!.position = CGPoint(x:-400 , y: yLocation)
+        yLocation -= 60
+        i += 1
+    }
+    
     
     background = SKSpriteNode(imageNamed: "backgroundImage")
     background.position = CGPoint.zero

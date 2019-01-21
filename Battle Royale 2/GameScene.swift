@@ -37,6 +37,13 @@ class GameScene: SKScene {
     var broadcastLineFourLabel:SKLabelNode = SKLabelNode()
     var broadcastLineFiveLabel:SKLabelNode = SKLabelNode()
     
+    var alequaLabel:SKLabelNode = SKLabelNode()
+    var tokobetteLabel:SKLabelNode = SKLabelNode()
+    var auranLabel:SKLabelNode = SKLabelNode()
+    var zinnekahnLabel:SKLabelNode = SKLabelNode()
+    var metaLabel:SKLabelNode = SKLabelNode()
+    var snaraNarkeLabel:SKLabelNode = SKLabelNode()
+    
     var x: CGFloat = 0.0
     var y: CGFloat = 0.0
     
@@ -206,6 +213,67 @@ class GameScene: SKScene {
         } else {
             print ("Broadcast line five label Failed")
         }
+        
+        if let alequa:SKLabelNode = self.childNode(withName: "alequaLabel") as? SKLabelNode {
+            alequaLabel = alequa
+            print ("Alequa Label inicialized")
+            alequaLabel.text = "Alequa"
+            alequaLabel.position.x = (characterButtons[0]!.position.x + 20)
+            alequaLabel.position.y = (characterButtons[0]!.position.y - 10)
+        } else {
+            print ("Alequa label Failed")
+        }
+        
+        if let tokobette:SKLabelNode = self.childNode(withName: "tokobetteLabel") as? SKLabelNode {
+            tokobetteLabel = tokobette
+            print ("Tokobette Label inicialized")
+            tokobetteLabel.text = "Tokobette"
+            tokobetteLabel.position.x = (characterButtons[1]!.position.x + 20)
+            tokobetteLabel.position.y = (characterButtons[1]!.position.y - 10)
+        } else {
+            print ("Tokobette label Failed")
+        }
+        
+        if let auran:SKLabelNode = self.childNode(withName: "auranLabel") as? SKLabelNode {
+            auranLabel = auran
+            print ("auran Label inicialized")
+            auranLabel.text = "Auran"
+            auranLabel.position.x = (characterButtons[2]!.position.x + 20)
+            auranLabel.position.y = (characterButtons[2]!.position.y - 10)
+        } else {
+            print ("Auran label Failed")
+        }
+        
+        if let zinnekahn:SKLabelNode = self.childNode(withName: "zinnekahnLabel") as? SKLabelNode {
+            zinnekahnLabel = zinnekahn
+            print ("Zinnekahn Label inicialized")
+            zinnekahnLabel.text = "Zinnekahn"
+            zinnekahnLabel.position.x = (characterButtons[3]!.position.x + 20)
+            zinnekahnLabel.position.y = (characterButtons[3]!.position.y - 10)
+        } else {
+            print ("Zinnekahn label Failed")
+        }
+        
+        if let meta:SKLabelNode = self.childNode(withName: "metaLabel") as? SKLabelNode {
+            metaLabel = meta
+            print ("Meta Label inicialized")
+            metaLabel.text = "Meta"
+            metaLabel.position.x = (characterButtons[4]!.position.x + 20)
+            metaLabel.position.y = (characterButtons[4]!.position.y - 10)
+        } else {
+            print ("Meta label Failed")
+        }
+        
+        if let snaraNarke:SKLabelNode = self.childNode(withName: "snaraNarkeLabel") as? SKLabelNode {
+            snaraNarkeLabel = snaraNarke
+            print ("Snara Narke Label inicialized")
+            snaraNarkeLabel.text = "Snara Narke"
+            snaraNarkeLabel.position.x = (characterButtons[5]!.position.x + 20)
+            snaraNarkeLabel.position.y = (characterButtons[5]!.position.y - 10)
+        } else {
+            print ("Snara Narke label Failed")
+        }
+        
         
          self.lastUpdateTime = 0
         }

@@ -72,7 +72,7 @@ var background2 = SKSpriteNode()
 
 func createIcons () {
     var i = 0
-    var yLocation = 140
+    var yLocation = 300
     while i < 6 {
         characterButtons[i] = SKSpriteNode()
         characterButtons[i]!.color = .gray

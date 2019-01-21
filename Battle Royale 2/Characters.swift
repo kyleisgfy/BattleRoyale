@@ -42,7 +42,10 @@ class Characters: NSObject {
     let youTubeGroup = [
         "Chocolate Rain",
         "Starwars Kid",
-        "Uma Numa"
+        "Numa Numa",
+        "Sneezing Panda",
+        "youTube5",
+        "youTube6"
     ]
     
     let harryPotterGroup = [
@@ -50,21 +53,38 @@ class Characters: NSObject {
         "Ron",
         "Hermione",
         "Nevil",
-        "Luna"
+        "Luna",
+        "grop"
     ]
     
     let beasts = [
-    "pokemon"
+    "pokemon1",
+    "pokemon2",
+    "pokemon3",
+    "pokemon4",
+    "pokemon5",
+    "pokemon6",
     ]
     
     let specialNPCs = [
-    "Evil Rick"
+    "Evil Rick",
+    "special2",
+    "special3",
+    "special4",
+    "special5",
+    "special6",
     ]
     
     let terribleFoes = [
     "Voltron",
-    "Pickle Rick"
+    "Pickle Rick",
+    "terible3",
+    "terible4",
+    "terible5",
+    "terible6",
     ]
+    
+    let blank = ["", "", "", "", "", ""]
     
     var killList = [
         "murdered",

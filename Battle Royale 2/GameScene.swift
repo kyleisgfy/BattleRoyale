@@ -469,6 +469,7 @@ class GameScene: SKScene {
             }
             i += 1
         }
+            setupSubText()
     }
     
     func subListButtonSelection(location: CGPoint) {
@@ -572,7 +573,8 @@ class GameScene: SKScene {
             
         case 36: //return
             forceKill()
-            characterKills()
+            resetButtons()
+//            characterKills()
         
         case 49: //spacebar
             pauseLabel.text = "Game is Paused"
@@ -875,11 +877,15 @@ class GameScene: SKScene {
     }
     
     func resetButtons() {
-        for index in characterButtons {
-            index!.color = .gray
-        }
-        for index in 0...5 {
-            buttons.characterButtonActive[index] = false
+        var i = 0
+        while i < 6 {
+            characterButtons[i]!.color = .gray
+            buttons.characterButtonActive[i] = false
+            typeButtons[i]!.color = .gray
+            buttons.typeListButtonActive[i] = false
+            subListButtons[i]!.color = .gray
+            buttons.subListButtonActive[i] = false
+            i += 1
         }
     }
     
@@ -972,19 +978,9 @@ class GameScene: SKScene {
         char.broadcastLineFive = "\(broadcastLineFiveLabel.text ?? "")"
     }
     
-    func characterKills() {
-        var boolCheck = 0
-        for i in 0...5 {
-            if buttons.characterButtonActive[i] == true {
-                characterKillRando(character: "\(char.characterListPlain[i])")
-                resetButtons()
-            } else {
-                boolCheck += 1
-            }
-        }
-        if boolCheck == 6 {
-            forceKillRando()
-        }
+    func characterKills(playerName: Int) {
+        characterKillRando(character: "\(char.characterListPlain[playerName])")
+        resetButtons()
     }
     
     func returnBoolNumber(array: Array<Bool>) -> Int {
@@ -994,7 +990,7 @@ class GameScene: SKScene {
             if array[i] == true {
                 number = i
                 return number
-                i += 1
+//                i += 1
             } else {
                 i += 1
             }
@@ -1003,8 +999,72 @@ class GameScene: SKScene {
     }
     
     func forceKill() {
-        let x = returnBoolNumber(array: buttons.characterButtonActive)
-        print (x)
+        let characterIndex = returnBoolNumber(array: buttons.characterButtonActive)
+        let typeIndex = returnBoolNumber(array: buttons.typeListButtonActive)
+        let subIndex = returnBoolNumber(array: buttons.subListButtonActive)
+        if characterIndex == 6 {
+            forceKillRando()
+        } else if typeIndex == 6 {
+            characterKills(playerName: characterIndex)
+        } else {
+            characterKillsType(playerName: characterIndex, type: typeIndex, subName: subIndex)
+        }
+        
+    }
+    
+    func characterKillsType(playerName: Int, type: Int, subName: Int) {
+        updateBroadcast()
+        switch type {
+        case 0:
+            broadcastLineOneLabel.text = ("\(char.characterListPlain[playerName]) killed \(char.officeGroup[subName])")
+            char.playersLeft -= 1
+        case 1:
+            broadcastLineOneLabel.text = ("\(char.characterListPlain[playerName]) killed \(char.youTubeGroup[subName])")
+            char.playersLeft -= 1
+        case 2:
+            broadcastLineOneLabel.text = ("\(char.characterListPlain[playerName]) killed \(char.harryPotterGroup[subName])")
+            char.playersLeft -= 1
+        case 3:
+            broadcastLineOneLabel.text = ("\(char.characterListPlain[playerName]) killed \(char.beasts[subName])")
+        case 4:
+            broadcastLineOneLabel.text = ("\(char.characterListPlain[playerName]) killed \(char.terribleFoes[subName])")
+        case 5:
+            broadcastLineOneLabel.text = ("\(char.characterListPlain[playerName]) killed \(char.specialNPCs[subName])")
+            char.playersLeft -= 1
+        default:
+            print ("error")
+        }
+            char.broadcastLineOne = "\(broadcastLineOneLabel.text ?? "")"
+            updatePlayersLeft()
+    }
+    
+    func setupSubText() {
+        let typeIndex = returnBoolNumber(array: buttons.typeListButtonActive)
+        switch typeIndex {
+        case 0:
+            writeSubText(array: char.officeGroup)
+        case 1:
+            writeSubText(array: char.youTubeGroup)
+        case 2:
+            writeSubText(array: char.harryPotterGroup)
+        case 3:
+            writeSubText(array: char.beasts)
+        case 4:
+            writeSubText(array: char.terribleFoes)
+        case 5:
+            writeSubText(array: char.specialNPCs)
+        default:
+            writeSubText(array: char.blank)
+        }
+    }
+    
+    func writeSubText(array: Array<String>) {
+        sub1Label.text = "\(array[0])"
+        sub2Label.text = "\(array[1])"
+        sub3Label.text = "\(array[2])"
+        sub4Label.text = "\(array[3])"
+        sub5Label.text = "\(array[4])"
+        sub6Label.text = "\(array[5])"
     }
     
     

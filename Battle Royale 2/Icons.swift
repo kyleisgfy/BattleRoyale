@@ -108,6 +108,7 @@ func createCharacterButtons() {
         while i < 6 {
             subListButtons[i] = SKSpriteNode()
             subListButtons[i]!.color = .gray
+            subListButtons[i]!.alpha = 0.0
             subListButtons[i]!.zPosition = 3
             subListButtons[i]!.size.width = 20
             subListButtons[i]!.size.height = 20

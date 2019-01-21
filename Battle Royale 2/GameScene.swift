@@ -355,7 +355,7 @@ class GameScene: SKScene {
         if let sub1:SKLabelNode = self.childNode(withName: "sub1Label") as? SKLabelNode {
             sub1Label = sub1
             print ("Sub 1 Label inicialized")
-            sub1Label.text = "1"
+            sub1Label.text = ""
             sub1Label.position.x = (subListButtons[0]!.position.x + 20)
             sub1Label.position.y = (subListButtons[0]!.position.y - 10)
         } else {
@@ -365,7 +365,7 @@ class GameScene: SKScene {
         if let sub2:SKLabelNode = self.childNode(withName: "sub2Label") as? SKLabelNode {
             sub2Label = sub2
             print ("Sub 2 Label inicialized")
-            sub2Label.text = "2"
+            sub2Label.text = ""
             sub2Label.position.x = (subListButtons[1]!.position.x + 20)
             sub2Label.position.y = (subListButtons[1]!.position.y - 10)
         } else {
@@ -375,7 +375,7 @@ class GameScene: SKScene {
         if let sub3:SKLabelNode = self.childNode(withName: "sub3Label") as? SKLabelNode {
             sub3Label = sub3
             print ("Sub 3 Label inicialized")
-            sub3Label.text = "3"
+            sub3Label.text = ""
             sub3Label.position.x = (subListButtons[2]!.position.x + 20)
             sub3Label.position.y = (subListButtons[2]!.position.y - 10)
         } else {
@@ -385,7 +385,7 @@ class GameScene: SKScene {
         if let sub4:SKLabelNode = self.childNode(withName: "sub4Label") as? SKLabelNode {
             sub4Label = sub4
             print ("Sub 4 Label inicialized")
-            sub4Label.text = "4"
+            sub4Label.text = ""
             sub4Label.position.x = (subListButtons[3]!.position.x + 20)
             sub4Label.position.y = (subListButtons[3]!.position.y - 10)
         } else {
@@ -395,7 +395,7 @@ class GameScene: SKScene {
         if let sub5:SKLabelNode = self.childNode(withName: "sub5Label") as? SKLabelNode {
             sub5Label = sub5
             print ("Sub 5 Label inicialized")
-            sub5Label.text = "5"
+            sub5Label.text = ""
             sub5Label.position.x = (subListButtons[4]!.position.x + 20)
             sub5Label.position.y = (subListButtons[4]!.position.y - 10)
         } else {
@@ -405,7 +405,7 @@ class GameScene: SKScene {
         if let sub6:SKLabelNode = self.childNode(withName: "sub6Label") as? SKLabelNode {
             sub6Label = sub6
             print ("Sub 6 Label inicialized")
-            sub6Label.text = "6"
+            sub6Label.text = ""
             sub6Label.position.x = (subListButtons[5]!.position.x + 20)
             sub6Label.position.y = (subListButtons[5]!.position.y - 10)
         } else {
@@ -456,7 +456,9 @@ class GameScene: SKScene {
                 if buttons.typeListButtonActive[i] == true {
                     typeButtons[i]!.color = .gray
                     buttons.typeListButtonActive[i] = false
+                    hideButtons(array: subListButtons as! Array<SKSpriteNode>)
                 } else if buttons.typeListButtonActive[i] == false {
+                    showButtons(array: subListButtons as! Array<SKSpriteNode>)
                     for index in typeButtons {
                         index!.color = .gray
                     }
@@ -889,6 +891,20 @@ class GameScene: SKScene {
         }
     }
     
+    func hideButtons(array: Array<SKSpriteNode>) {
+        for i in 0...5 {
+            array[i].alpha = 0.0
+        }
+    }
+    
+    func showButtons(array: Array<SKSpriteNode>) {
+        for i in 0...5 {
+            array[i].alpha = 1.0
+        }
+    }
+    
+    
+    
 //****************************************************************************************
 // functions for broadcast and label text
 //****************************************************************************************
@@ -1006,7 +1022,7 @@ class GameScene: SKScene {
             forceKillRando()
         } else if typeIndex == 6 {
             characterKills(playerName: characterIndex)
-        } else {
+        } else if typeIndex != 6 && characterIndex != 6 && subIndex != 6 {
             characterKillsType(playerName: characterIndex, type: typeIndex, subName: subIndex)
         }
         

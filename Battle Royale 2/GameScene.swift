@@ -69,7 +69,7 @@ class GameScene: SKScene {
             self.addChild(characterButtons[i]!)
             i += 1
         }
-        
+        self.addChild(clickZoneNode)
         self.addChild(background)
         self.addChild(eventOneNode)
         self.addChild(eventTwoNode)
@@ -231,7 +231,7 @@ class GameScene: SKScene {
                 if buttons.buttonActive[i] == true {
                     characterButtons[i]!.color = .gray
                     buttons.buttonActive[i] = false
-                } else if buttons.buttonActive[1] == false {
+                } else if buttons.buttonActive[i] == false {
                     for index in characterButtons {
                         index!.color = .gray
                     }
@@ -244,21 +244,20 @@ class GameScene: SKScene {
             }
             i += 1
         }
-        
-//        if characterButtons[0].contains(event.location(in: self)) {
-//            buttonSwitch()
-//        }
-        if eventNumber == 1 && phaseNumber == 1 {
-            eventOneNode.position = event.location(in: self)
-        } else if eventNumber == 2 && phaseNumber == 1 {
-            eventTwoNode.position = event.location(in: self)
-        } else if eventNumber == 3 && phaseNumber == 1 {
-            eventThreeNode.position = event.location(in: self)
-        } else if eventNumber == 4 && phaseNumber == 1 {
-            eventFourNode.position = event.location(in: self)
-        } else {
-            print ("Event out of scope for touch position to occur.")
+        if clickZoneNode.contains(event.location(in: self)) {
+            if eventNumber == 1 && phaseNumber == 1 {
+                eventOneNode.position = event.location(in: self)
+            } else if eventNumber == 2 && phaseNumber == 1 {
+                eventTwoNode.position = event.location(in: self)
+            } else if eventNumber == 3 && phaseNumber == 1 {
+                eventThreeNode.position = event.location(in: self)
+            } else if eventNumber == 4 && phaseNumber == 1 {
+                eventFourNode.position = event.location(in: self)
+            } else {
+                print ("Event out of scope for touch position to occur.")
+            }
         }
+
     }
     
     override func mouseDragged(with event: NSEvent) {
@@ -316,7 +315,8 @@ class GameScene: SKScene {
             }
             
         case 36: //return
-            forceKillRando()
+//            forceKillRando()
+            characterKills()
         
         case 49: //spacebar
             pauseLabel.text = "Game is Paused"
@@ -325,23 +325,24 @@ class GameScene: SKScene {
             }
             pauseGame()
         
-        case 18: //1
-            characterKillRando(character: "Snara Narke")
-            
-        case 19: //2
-            characterKillRando(character: "Meta")
-            
-        case 20: //3
-            characterKillRando(character: "Zinnakahn")
-            
-        case 21: //4
-            characterKillRando(character: "Auran")
-            
-        case 23: //5
-            characterKillRando(character: "Alaqua")
-            
-        case 22: //6
-            characterKillRando(character: "Tokobette")
+//        case 18: //1
+////            characterKillRando(character: "Snara Narke")
+//            characterKills()
+//
+//        case 19: //2
+//            characterKillRando(character: "Meta")
+//
+//        case 20: //3
+//            characterKillRando(character: "Zinnakahn")
+//
+//        case 21: //4
+//            characterKillRando(character: "Auran")
+//
+//        case 23: //5
+//            characterKillRando(character: "Alaqua")
+//
+//        case 22: //6
+//            characterKillRando(character: "Tokobette")
             
         case 33: //open bracket {
             alarmSound.run(SKAction.changeVolume(by: -0.1, duration: 0))
@@ -524,6 +525,7 @@ class GameScene: SKScene {
             runPhaseTimer()
         case 1:
             phaseLabel.text = "Nothing will occur for"
+            restrictInSound.run(SKAction.stop())
             if eventNumber == 1 {
                 time.phaseTimerInSeconds = freeTime
                 eventOneNode.strokeColor = .blue
@@ -548,6 +550,7 @@ class GameScene: SKScene {
             runPhaseTimer()
         case 2:
             phaseLabel.text = "Safe zone will restrict in"
+            restrictSound.run(SKAction.stop())
             time.phaseTimerInSeconds = restrictInTime
             runRestrictionTimer()
             runPhaseTimer()
@@ -578,6 +581,7 @@ class GameScene: SKScene {
             
         case 3:
             phaseLabel.text = "Safe zone is restricting"
+            freeTimeSound.run(SKAction.stop())
             time.phaseTimerInSeconds = restrictTime
             runPhaseTimer()
         default:
@@ -731,24 +735,29 @@ class GameScene: SKScene {
         }
     }
     
-    func buttonSelection(button: SKSpriteNode, location: Int) {
-        if buttons.buttonActive[location] == true {
-            button.color = .gray
-            buttons.buttonActive[location] = false
-        } else if buttons.buttonActive[location] == false {
-            button.color = .red
-            buttons.buttonActive[location] = true
+    func characterKills() {
+        var boolCheck = 0
+        for i in 0...5 {
+            if buttons.buttonActive[i] == true {
+                characterKillRando(character: "\(char.characterListPlain[i])")
+                resetButtons()
+            } else {
+                boolCheck += 1
+            }
+        }
+        if boolCheck == 6 {
+            forceKillRando()
         }
     }
     
-//    func buttonSwitch() {
-//        if buttons.buttonActive[0] == true {
-//            buttonNode.color = .blue
-//            buttons.buttonActive[0] = false
-//        } else if buttons.buttonActive[0] == false {
-//            buttonNode.color = .red
-//            buttons.buttonActive[0] = true
-//        }
-//    }
+    func resetButtons() {
+        for index in characterButtons {
+            index!.color = .gray
+        }
+        for index in 0...5 {
+            buttons.buttonActive[index] = false
+        }
+    }
+    
 
 }

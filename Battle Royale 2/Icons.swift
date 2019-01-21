@@ -15,6 +15,9 @@ var teamIconNode = SKShapeNode()
 var teamIconPath2 = CGMutablePath()
 var teamIconNode2 = SKShapeNode()
 
+var clickZone = CGMutablePath()
+var clickZoneNode = SKShapeNode()
+
 var eventOnePath = CGMutablePath()
 var eventOneNode = SKShapeNode()
 var eventTwoPath = CGMutablePath()
@@ -74,10 +77,10 @@ func createIcons () {
         characterButtons[i] = SKSpriteNode()
         characterButtons[i]!.color = .gray
         characterButtons[i]!.zPosition = 3
-        characterButtons[i]!.size.width = 50
-        characterButtons[i]!.size.height = 50
-        characterButtons[i]!.position = CGPoint(x:-400 , y: yLocation)
-        yLocation -= 60
+        characterButtons[i]!.size.width = 20
+        characterButtons[i]!.size.height = 20
+        characterButtons[i]!.position = CGPoint(x:-600 , y: yLocation)
+        yLocation -= 30
         i += 1
     }
     
@@ -103,7 +106,16 @@ func createIcons () {
     teamIconNode.position.x = 0.7
     teamIconNode.position.y = -0.7
     
-
+    clickZone.addArc(center: CGPoint.zero,
+                        radius: eventRadius,
+                        startAngle: 0,
+                        endAngle: CGFloat.pi * 2,
+                        clockwise: true)
+    clickZoneNode = SKShapeNode(path:    clickZone)
+    clickZoneNode.lineWidth = 5
+    clickZoneNode.fillColor = .clear
+    clickZoneNode.strokeColor = .clear
+    clickZoneNode.zPosition = 1
     
     eventOnePath.addArc(center: CGPoint.zero,
                         radius: eventRadius,

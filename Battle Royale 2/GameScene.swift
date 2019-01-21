@@ -63,6 +63,8 @@ class GameScene: SKScene {
     
     var eventNumber = 1
     var phaseNumber = 0
+    
+    var timeModifier = 30
     var freeTime = 90
     var restrictInTime = 30
     var restrictTime = 60
@@ -83,6 +85,10 @@ class GameScene: SKScene {
 
     
     override func sceneDidLoad() {
+        freeTime = (3 * timeModifier)
+        restrictInTime = (1 * timeModifier)
+        restrictTime = (2 * timeModifier)
+        
         createIcons()
         
         var i = 0

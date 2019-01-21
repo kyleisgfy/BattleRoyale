@@ -44,6 +44,20 @@ class GameScene: SKScene {
     var metaLabel:SKLabelNode = SKLabelNode()
     var snaraNarkeLabel:SKLabelNode = SKLabelNode()
     
+    var officeLabel:SKLabelNode = SKLabelNode()
+    var youTubeLabel:SKLabelNode = SKLabelNode()
+    var harryPotterLabel:SKLabelNode = SKLabelNode()
+    var beastsLabel:SKLabelNode = SKLabelNode()
+    var terribleFoeLabel:SKLabelNode = SKLabelNode()
+    var specialNPCLabel:SKLabelNode = SKLabelNode()
+    
+    var sub1Label:SKLabelNode = SKLabelNode()
+    var sub2Label:SKLabelNode = SKLabelNode()
+    var sub3Label:SKLabelNode = SKLabelNode()
+    var sub4Label:SKLabelNode = SKLabelNode()
+    var sub5Label:SKLabelNode = SKLabelNode()
+    var sub6Label:SKLabelNode = SKLabelNode()
+    
     var x: CGFloat = 0.0
     var y: CGFloat = 0.0
     
@@ -74,8 +88,11 @@ class GameScene: SKScene {
         var i = 0
         while i < 6 {
             self.addChild(characterButtons[i]!)
+            self.addChild(typeButtons[i]!)
+            self.addChild(subListButtons[i]!)
             i += 1
         }
+        
         self.addChild(clickZoneNode)
         self.addChild(background)
         self.addChild(eventOneNode)
@@ -107,9 +124,6 @@ class GameScene: SKScene {
         self.addChild(bombSound)
         self.addChild(bellSound)
         
-        
-
-        
         freeTimeSound.run(SKAction.stop())
         restrictInSound.run(SKAction.stop())
         restrictSound.run(SKAction.stop())
@@ -123,8 +137,12 @@ class GameScene: SKScene {
         runGameTimer()
         runPhase()
         pauseGame()
+        inicializeLabels()
         
-        
+         self.lastUpdateTime = 0
+        }
+    
+    func inicializeLabels() {
         if let GameTimer:SKLabelNode = self.childNode(withName: "gameTimerLabel") as? SKLabelNode {
             gameTimerLabel = GameTimer
             gameTimerLabel.text = ""
@@ -274,9 +292,128 @@ class GameScene: SKScene {
             print ("Snara Narke label Failed")
         }
         
-        
-         self.lastUpdateTime = 0
+        if let office:SKLabelNode = self.childNode(withName: "officeLabel") as? SKLabelNode {
+            officeLabel = office
+            print ("Office Label inicialized")
+            officeLabel.text = "Office"
+            officeLabel.position.x = (typeButtons[0]!.position.x + 20)
+            officeLabel.position.y = (typeButtons[0]!.position.y - 10)
+        } else {
+            print ("Office label Failed")
         }
+        
+        if let youTube:SKLabelNode = self.childNode(withName: "youTubeLabel") as? SKLabelNode {
+            youTubeLabel = youTube
+            print ("You Tube Label inicialized")
+            youTubeLabel.text = "You Tube"
+            youTubeLabel.position.x = (typeButtons[1]!.position.x + 20)
+            youTubeLabel.position.y = (typeButtons[1]!.position.y - 10)
+        } else {
+            print ("You Tube label Failed")
+        }
+        
+        if let harryPotter:SKLabelNode = self.childNode(withName: "harryPotterLabel") as? SKLabelNode {
+            harryPotterLabel = harryPotter
+            print ("Harry Potter Label inicialized")
+            harryPotterLabel.text = "harryPotter"
+            harryPotterLabel.position.x = (typeButtons[2]!.position.x + 20)
+            harryPotterLabel.position.y = (typeButtons[2]!.position.y - 10)
+        } else {
+            print ("Harry Potter label Failed")
+        }
+        
+        if let beasts:SKLabelNode = self.childNode(withName: "beastsLabel") as? SKLabelNode {
+            beastsLabel = beasts
+            print ("Beasts Label inicialized")
+            beastsLabel.text = "Beasts"
+            beastsLabel.position.x = (typeButtons[3]!.position.x + 20)
+            beastsLabel.position.y = (typeButtons[3]!.position.y - 10)
+        } else {
+            print ("Beasts label Failed")
+        }
+        
+        if let terribleFoe:SKLabelNode = self.childNode(withName: "terribleFoeLabel") as? SKLabelNode {
+            terribleFoeLabel = terribleFoe
+            print ("Terrible Foe Label inicialized")
+            terribleFoeLabel.text = "Terrible Foe"
+            terribleFoeLabel.position.x = (typeButtons[4]!.position.x + 20)
+            terribleFoeLabel.position.y = (typeButtons[4]!.position.y - 10)
+        } else {
+            print ("Terrible Foe label Failed")
+        }
+        
+        if let specialNPC:SKLabelNode = self.childNode(withName: "specialNPCLabel") as? SKLabelNode {
+            specialNPCLabel = specialNPC
+            print ("Special NPC Label inicialized")
+            specialNPCLabel.text = "Special NPCs"
+            specialNPCLabel.position.x = (typeButtons[5]!.position.x + 20)
+            specialNPCLabel.position.y = (typeButtons[5]!.position.y - 10)
+        } else {
+            print ("Special NPC label Failed")
+        }
+        
+        if let sub1:SKLabelNode = self.childNode(withName: "sub1Label") as? SKLabelNode {
+            sub1Label = sub1
+            print ("Sub 1 Label inicialized")
+            sub1Label.text = "1"
+            sub1Label.position.x = (subListButtons[0]!.position.x + 20)
+            sub1Label.position.y = (subListButtons[0]!.position.y - 10)
+        } else {
+            print ("Sub 1 label Failed")
+        }
+        
+        if let sub2:SKLabelNode = self.childNode(withName: "sub2Label") as? SKLabelNode {
+            sub2Label = sub2
+            print ("Sub 2 Label inicialized")
+            sub2Label.text = "2"
+            sub2Label.position.x = (subListButtons[1]!.position.x + 20)
+            sub2Label.position.y = (subListButtons[1]!.position.y - 10)
+        } else {
+            print ("Sub 2 label Failed")
+        }
+        
+        if let sub3:SKLabelNode = self.childNode(withName: "sub3Label") as? SKLabelNode {
+            sub3Label = sub3
+            print ("Sub 3 Label inicialized")
+            sub3Label.text = "3"
+            sub3Label.position.x = (subListButtons[2]!.position.x + 20)
+            sub3Label.position.y = (subListButtons[2]!.position.y - 10)
+        } else {
+            print ("Sub 3 label Failed")
+        }
+        
+        if let sub4:SKLabelNode = self.childNode(withName: "sub4Label") as? SKLabelNode {
+            sub4Label = sub4
+            print ("Sub 4 Label inicialized")
+            sub4Label.text = "4"
+            sub4Label.position.x = (subListButtons[3]!.position.x + 20)
+            sub4Label.position.y = (subListButtons[3]!.position.y - 10)
+        } else {
+            print ("Sub 4 label Failed")
+        }
+        
+        if let sub5:SKLabelNode = self.childNode(withName: "sub5Label") as? SKLabelNode {
+            sub5Label = sub5
+            print ("Sub 5 Label inicialized")
+            sub5Label.text = "5"
+            sub5Label.position.x = (subListButtons[4]!.position.x + 20)
+            sub5Label.position.y = (subListButtons[4]!.position.y - 10)
+        } else {
+            print ("Sub 5 label Failed")
+        }
+        
+        if let sub6:SKLabelNode = self.childNode(withName: "sub6Label") as? SKLabelNode {
+            sub6Label = sub6
+            print ("Sub 6 Label inicialized")
+            sub6Label.text = "6"
+            sub6Label.position.x = (subListButtons[5]!.position.x + 20)
+            sub6Label.position.y = (subListButtons[5]!.position.y - 10)
+        } else {
+            print ("Sub 6 label Failed")
+        }
+        
+    }
+    
 //****************************************************************************************
 // Keyboard and mouse input functions.
 //****************************************************************************************
@@ -290,28 +427,79 @@ class GameScene: SKScene {
     func touchUp(atPoint pos : CGPoint) {
     }
     
-    override func mouseDown(with event: NSEvent) {
-        self.touchDown(atPoint: event.location(in: self))
-        
+    func characterButtonSelection(location: CGPoint) {
         var i = 0
         while i < 6 {
-            if characterButtons[i]!.contains(event.location(in: self)) {
-                if buttons.buttonActive[i] == true {
+            if characterButtons[i]!.contains(location) {
+                if buttons.characterButtonActive[i] == true {
                     characterButtons[i]!.color = .gray
-                    buttons.buttonActive[i] = false
-                } else if buttons.buttonActive[i] == false {
+                    buttons.characterButtonActive[i] = false
+                } else if buttons.characterButtonActive[i] == false {
                     for index in characterButtons {
                         index!.color = .gray
                     }
                     for index in 0...5 {
-                        buttons.buttonActive[index] = false
+                        buttons.characterButtonActive[index] = false
                     }
                     characterButtons[i]!.color = .red
-                    buttons.buttonActive[i] = true
+                    buttons.characterButtonActive[i] = true
                 }
             }
             i += 1
         }
+    }
+    
+    func typeButtonSelection(location: CGPoint) {
+        var i = 0
+        while i < 6 {
+            if typeButtons[i]!.contains(location) {
+                if buttons.typeListButtonActive[i] == true {
+                    typeButtons[i]!.color = .gray
+                    buttons.typeListButtonActive[i] = false
+                } else if buttons.typeListButtonActive[i] == false {
+                    for index in typeButtons {
+                        index!.color = .gray
+                    }
+                    for index in 0...5 {
+                        buttons.typeListButtonActive[index] = false
+                    }
+                    typeButtons[i]!.color = .red
+                    buttons.typeListButtonActive[i] = true
+                }
+            }
+            i += 1
+        }
+    }
+    
+    func subListButtonSelection(location: CGPoint) {
+        var i = 0
+        while i < 6 {
+            if subListButtons[i]!.contains(location) {
+                if buttons.subListButtonActive[i] == true {
+                    subListButtons[i]!.color = .gray
+                    buttons.subListButtonActive[i] = false
+                } else if buttons.subListButtonActive[i] == false {
+                    for index in subListButtons {
+                        index!.color = .gray
+                    }
+                    for index in 0...5 {
+                        buttons.subListButtonActive[index] = false
+                    }
+                    subListButtons[i]!.color = .red
+                    buttons.subListButtonActive[i] = true
+                }
+            }
+            i += 1
+        }
+    }
+    
+    override func mouseDown(with event: NSEvent) {
+        self.touchDown(atPoint: event.location(in: self))
+        
+        characterButtonSelection(location: event.location(in: self))
+        typeButtonSelection(location: event.location(in: self))
+        subListButtonSelection(location: event.location(in: self))
+        
         if clickZoneNode.contains(event.location(in: self)) {
             if eventNumber == 1 && phaseNumber == 1 {
                 eventOneNode.position = event.location(in: self)
@@ -383,7 +571,7 @@ class GameScene: SKScene {
             }
             
         case 36: //return
-//            forceKillRando()
+            forceKill()
             characterKills()
         
         case 49: //spacebar
@@ -392,25 +580,6 @@ class GameScene: SKScene {
                 phaseLabel.text = "Game introduction"
             }
             pauseGame()
-        
-//        case 18: //1
-////            characterKillRando(character: "Snara Narke")
-//            characterKills()
-//
-//        case 19: //2
-//            characterKillRando(character: "Meta")
-//
-//        case 20: //3
-//            characterKillRando(character: "Zinnakahn")
-//
-//        case 21: //4
-//            characterKillRando(character: "Auran")
-//
-//        case 23: //5
-//            characterKillRando(character: "Alaqua")
-//
-//        case 22: //6
-//            characterKillRando(character: "Tokobette")
             
         case 33: //open bracket {
             alarmSound.run(SKAction.changeVolume(by: -0.1, duration: 0))
@@ -426,9 +595,6 @@ class GameScene: SKScene {
             alarmSound.run(SKAction.stop())
             bombSound.run(SKAction.stop())
             bellSound.run(SKAction.stop())
-            
-//        case 35: //"P"
-//            buttonSwitch()
             
         case 44: //question mark
             eventBoarder.position.x = eventBoarder.position.x + (CGFloat(timeIndicator) * (CGFloat(time.phaseTimerInSeconds) - 1.0))
@@ -657,13 +823,72 @@ class GameScene: SKScene {
         }
     }
     
+    func pauseGame() {
+        if pauseIsActive == true {
+            pauseLabel.alpha = 0.0
+            pauseIsActive = false
+            splash.removeFromParent()
+        } else {
+            pauseLabel.alpha = 1.0
+            pauseIsActive = true
+        }
+    }
+    
+    func runAudio() {
+        if phaseNumber == 1 && time.phaseTimerInSeconds == freeTime {
+            freeTimeSound.run(SKAction.changeVolume(to: 1.0, duration: 0))
+            freeTimeSound.run(SKAction.play())
+            restrictSound.run(SKAction.changeVolume(to: 0.0, duration: 2))
+        } else if phaseNumber == 2 && time.phaseTimerInSeconds == restrictInTime {
+            restrictInSound.run(SKAction.changeVolume(to: 1.0, duration: 0))
+            restrictInSound.run(SKAction.play())
+            freeTimeSound.run(SKAction.changeVolume(to: 0.0, duration: 4))
+        } else if phaseNumber == 3 && time.phaseTimerInSeconds == restrictTime {
+            restrictSound.run(SKAction.changeVolume(to: 1.0, duration: 0))
+            restrictSound.run(SKAction.play())
+            restrictInSound.run(SKAction.changeVolume(to: 0.0, duration: 2))
+        }
+    }
+    
+    func runSoundFX() {
+        if phaseNumber == 1 && time.phaseTimerInSeconds <= 1 {
+            alarmSound.run(SKAction.play())
+        } else if phaseNumber == 2 && time.phaseTimerInSeconds <= 1 {
+            bombSound.run(SKAction.play())
+        } else if phaseNumber == 3 && time.phaseTimerInSeconds <= 1 {
+            bellSound.run(SKAction.play())
+        } else if phaseNumber == 4 && time.phaseTimerInSeconds <= 1 {
+            bellSound.run(SKAction.play())
+        }
+    }
+    
+    func stopFX() {
+        if phaseNumber == 2 && time.phaseTimerInSeconds == (restrictInTime - 7) {
+            alarmSound.run(SKAction.stop())
+        } else if phaseNumber == 3 && time.phaseTimerInSeconds == (restrictTime - 10) {
+            bombSound.run(SKAction.stop())
+        } else if phaseNumber == 1 && time.phaseTimerInSeconds == (freeTime - 4) {
+            bellSound.run(SKAction.stop())
+        } else if phaseNumber == 4 && time.phaseTimerInSeconds == (freeTime - 4) {
+            bellSound.run(SKAction.stop())
+        }
+    }
+    
+    func resetButtons() {
+        for index in characterButtons {
+            index!.color = .gray
+        }
+        for index in 0...5 {
+            buttons.characterButtonActive[index] = false
+        }
+    }
+    
 //****************************************************************************************
 // functions for broadcast and label text
 //****************************************************************************************
     
     func updatePlayersLeft () {
         playersLeftLabel.text = "\(char.playersLeft)"
-        //        print(playersLeft)
     }
     
     func killRando() {
@@ -720,7 +945,6 @@ class GameScene: SKScene {
         } else if (roll == roll2) && (roll == 99) {
             roll2 -= 1
         }
-        
         updateBroadcast()
         broadcastLineOneLabel.text = ("\(char.NPCList[roll]) \(char.killList[roll3]) \(char.NPCList[roll2])")
         char.broadcastLineOne = "\(broadcastLineOneLabel.text ?? "")"
@@ -728,10 +952,8 @@ class GameScene: SKScene {
     }
     
     func villainKillsBroadcast() {
-        
         let roll = Int.random(in: 0...(char.playersLeft-11))
         let roll2 = Int.random(in: 0...23)
-        
         updateBroadcast()
         broadcastLineOneLabel.text = "Evil Rick \(char.killList[roll2]) \(char.NPCList[roll])"
         char.broadcastLineOne = "\(broadcastLineOneLabel.text ?? "")"
@@ -748,65 +970,12 @@ class GameScene: SKScene {
         char.broadcastLineThree = "\(broadcastLineThreeLabel.text ?? "")"
         char.broadcastLineFour = "\(broadcastLineFourLabel.text ?? "")"
         char.broadcastLineFive = "\(broadcastLineFiveLabel.text ?? "")"
-        
-        
-    }
-    
-    func pauseGame() {
-        if pauseIsActive == true {
-            pauseLabel.alpha = 0.0
-            pauseIsActive = false
-            splash.removeFromParent()
-        } else {
-            pauseLabel.alpha = 1.0
-            pauseIsActive = true
-        }
-    }
-    
-    func runAudio() {
-        if phaseNumber == 1 && time.phaseTimerInSeconds == freeTime {
-            freeTimeSound.run(SKAction.changeVolume(to: 1.0, duration: 0))
-            freeTimeSound.run(SKAction.play())
-            restrictSound.run(SKAction.changeVolume(to: 0.0, duration: 2))
-        } else if phaseNumber == 2 && time.phaseTimerInSeconds == restrictInTime {
-            restrictInSound.run(SKAction.changeVolume(to: 1.0, duration: 0))
-            restrictInSound.run(SKAction.play())
-            freeTimeSound.run(SKAction.changeVolume(to: 0.0, duration: 4))
-        } else if phaseNumber == 3 && time.phaseTimerInSeconds == restrictTime {
-            restrictSound.run(SKAction.changeVolume(to: 1.0, duration: 0))
-            restrictSound.run(SKAction.play())
-            restrictInSound.run(SKAction.changeVolume(to: 0.0, duration: 2))
-        } 
-    }
-    
-    func runSoundFX() {
-        if phaseNumber == 1 && time.phaseTimerInSeconds <= 1 {
-            alarmSound.run(SKAction.play())
-        } else if phaseNumber == 2 && time.phaseTimerInSeconds <= 1 {
-            bombSound.run(SKAction.play())
-        } else if phaseNumber == 3 && time.phaseTimerInSeconds <= 1 {
-            bellSound.run(SKAction.play())
-        } else if phaseNumber == 4 && time.phaseTimerInSeconds <= 1 {
-            bellSound.run(SKAction.play())
-        }
-    }
-    
-    func stopFX() {
-        if phaseNumber == 2 && time.phaseTimerInSeconds == (restrictInTime - 7) {
-            alarmSound.run(SKAction.stop())
-        } else if phaseNumber == 3 && time.phaseTimerInSeconds == (restrictTime - 10) {
-            bombSound.run(SKAction.stop())
-        } else if phaseNumber == 1 && time.phaseTimerInSeconds == (freeTime - 4) {
-            bellSound.run(SKAction.stop())
-        } else if phaseNumber == 4 && time.phaseTimerInSeconds == (freeTime - 4) {
-            bellSound.run(SKAction.stop())
-        }
     }
     
     func characterKills() {
         var boolCheck = 0
         for i in 0...5 {
-            if buttons.buttonActive[i] == true {
+            if buttons.characterButtonActive[i] == true {
                 characterKillRando(character: "\(char.characterListPlain[i])")
                 resetButtons()
             } else {
@@ -818,14 +987,27 @@ class GameScene: SKScene {
         }
     }
     
-    func resetButtons() {
-        for index in characterButtons {
-            index!.color = .gray
+    func returnBoolNumber(array: Array<Bool>) -> Int {
+        var i = 0
+        var number = 6
+        while i < 6 {
+            if array[i] == true {
+                number = i
+                return number
+                i += 1
+            } else {
+                i += 1
+            }
         }
-        for index in 0...5 {
-            buttons.buttonActive[index] = false
-        }
+        return number
     }
+    
+    func forceKill() {
+        let x = returnBoolNumber(array: buttons.characterButtonActive)
+        print (x)
+    }
+    
+    
     
 
 }

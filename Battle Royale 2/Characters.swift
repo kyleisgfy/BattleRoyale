@@ -30,6 +30,42 @@ class Characters: NSObject {
         "Snara Narke"
     ]
     
+    let officeGroup = [
+        "Michael Skarn",
+        "Angela",
+        "Moes",
+        "Dwight",
+        "Creed",
+        "Andy"
+    ]
+    
+    let youTubeGroup = [
+        "Chocolate Rain",
+        "Starwars Kid",
+        "Uma Numa"
+    ]
+    
+    let harryPotterGroup = [
+        "Boy Who Lived",
+        "Ron",
+        "Hermione",
+        "Nevil",
+        "Luna"
+    ]
+    
+    let beasts = [
+    "pokemon"
+    ]
+    
+    let specialNPCs = [
+    "Evil Rick"
+    ]
+    
+    let terribleFoes = [
+    "Voltron",
+    "Pickle Rick"
+    ]
+    
     var killList = [
         "murdered",
         "skewered",

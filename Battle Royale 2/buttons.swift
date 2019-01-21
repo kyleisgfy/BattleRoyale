@@ -11,5 +11,7 @@ import Foundation
 var buttons: buttonsClass = buttonsClass()
 
 class buttonsClass: NSObject {
-    var buttonActive = [false, false, false, false, false, false]
+    var characterButtonActive = [false, false, false, false, false, false]
+    var typeListButtonActive = [false, false, false, false, false, false]
+    var subListButtonActive = [false, false, false, false, false, false]
 }

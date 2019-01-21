@@ -62,6 +62,8 @@ let eventBarEleven = SKShapeNode(rectOf: CGSize(width: (barWidth * 1), height: b
 let eventBarTwelve = SKShapeNode(rectOf: CGSize(width: (barWidth * 2), height: barHeight))
 
 var characterButtons = [SKSpriteNode?](repeating: nil, count: 6)
+var typeButtons = [SKSpriteNode?](repeating: nil, count: 6)
+var subListButtons = [SKSpriteNode?](repeating: nil, count: 6)
 
 
 let eventRadius = CGFloat(336)
@@ -70,7 +72,7 @@ var splash = SKSpriteNode()
 var background = SKSpriteNode()
 var background2 = SKSpriteNode()
 
-func createIcons () {
+func createCharacterButtons() {
     var i = 0
     var yLocation = 300
     while i < 6 {
@@ -83,7 +85,43 @@ func createIcons () {
         yLocation -= 30
         i += 1
     }
+}
     
+    func createTypeButtons() {
+        var i = 0
+        var yLocation = 80
+        while i < 6 {
+            typeButtons[i] = SKSpriteNode()
+            typeButtons[i]!.color = .gray
+            typeButtons[i]!.zPosition = 3
+            typeButtons[i]!.size.width = 20
+            typeButtons[i]!.size.height = 20
+            typeButtons[i]!.position = CGPoint(x:-600 , y: yLocation)
+            yLocation -= 30
+            i += 1
+        }
+    }
+    
+    func createSubListButtons() {
+        var i = 0
+        var yLocation = -120
+        while i < 6 {
+            subListButtons[i] = SKSpriteNode()
+            subListButtons[i]!.color = .gray
+            subListButtons[i]!.zPosition = 3
+            subListButtons[i]!.size.width = 20
+            subListButtons[i]!.size.height = 20
+            subListButtons[i]!.position = CGPoint(x:-600 , y: yLocation)
+            yLocation -= 30
+            i += 1
+        }
+    }
+    
+
+func createIcons() {
+    createCharacterButtons()
+    createTypeButtons()
+    createSubListButtons()
     
     background = SKSpriteNode(imageNamed: "backgroundImage")
     background.position = CGPoint.zero
@@ -325,4 +363,5 @@ func createIcons2() {
     poisonGasNode2.strokeColor = .green
     poisonGasNode2.alpha = 0.2
     poisonGasNode2.zPosition = 1
-}
+    }
+

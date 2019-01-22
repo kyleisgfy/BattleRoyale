@@ -20,8 +20,6 @@ class GameScene: SKScene {
     var gameTimerLabel:SKLabelNode = SKLabelNode()
     var restrictionTimerLabel:SKLabelNode = SKLabelNode()
     
-    var restrictionLabel:SKLabelNode = SKLabelNode()
-    
     var playersLeftLabel:SKLabelNode = SKLabelNode()
     
     var pauseLabel:SKLabelNode = SKLabelNode()
@@ -664,7 +662,6 @@ class GameScene: SKScene {
             if time.restrictionTimeInSeconds <= 0 {
                 time.restrictionTimer.invalidate()
                 restrictionTimerLabel.text = ""
-//                restrictionLabel.alpha = 0.0
             }
             restrictionTimerLabel.text = timeString(time: TimeInterval(time.restrictionTimeInSeconds))
         } else {
@@ -682,13 +679,6 @@ class GameScene: SKScene {
             runAudio()
             runSoundFX()
             gameTimerLabel.text = timeString(time: TimeInterval(time.gameTimeInSeconds))
-//            if time.restrictionTimer.isValid == true {
-//                if restrictionLabel.alpha == 0.0 {
-//                    restrictionLabel.alpha = 1.0
-//                } else {
-//                    restrictionLabel.alpha = 0.0
-//                }
-//            }
             restrictTheScreen()
         }
     }
@@ -788,7 +778,8 @@ class GameScene: SKScene {
             runPhaseTimer()
         case 1:
             phaseLabel.text = "Nothing will occur for"
-            restrictionLabel.text = ""
+            time.restrictionTimeString = ("")
+            time.restrictionLabelString = ("")
             restrictInSound.run(SKAction.stop())
             if eventNumber == 1 {
                 time.phaseTimerInSeconds = freeTime
@@ -814,7 +805,7 @@ class GameScene: SKScene {
             runPhaseTimer()
         case 2:
             phaseLabel.text = "Safe zone will restrict in"
-            restrictionLabel.text = "RESTRICT IN..."
+            time.restrictionLabelString = ("RESTRICT IN...")
             restrictSound.run(SKAction.stop())
             superHero.run(SKAction.stop())
             time.phaseTimerInSeconds = restrictInTime
@@ -847,7 +838,7 @@ class GameScene: SKScene {
             
         case 3:
             phaseLabel.text = "Safe zone is restricting"
-            restrictionLabel.text = "RESTRICTING"
+            time.restrictionLabelString = ("RESTRICTING")
             freeTimeSound.run(SKAction.stop())
             time.phaseTimerInSeconds = restrictTime
             runPhaseTimer()

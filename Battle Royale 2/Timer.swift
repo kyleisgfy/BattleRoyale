@@ -23,6 +23,7 @@ class Time: NSObject {
     var restrictionTimeInSeconds = 5
     var restrictionTimeInSecondsSetup = 5
     var restrictionTimeString = ""
+    var restrictionLabelString = ""
 
 }
 

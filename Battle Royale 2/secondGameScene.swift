@@ -33,7 +33,6 @@ class SecondGameScene: SKScene {
         
         createIcons2()
         
-//        self.addChild(splash)
         self.addChild(splashBackground)
         self.addChild(splashLogo)
         self.addChild(splashText)
@@ -59,7 +58,7 @@ class SecondGameScene: SKScene {
         
         if let restriction2:SKLabelNode = self.childNode(withName: "restrictionLabel2") as? SKLabelNode {
             restrictionLabel2 = restriction2
-            restrictionLabel2.alpha = 0.0
+            restrictionLabel2.alpha = 1.0
             restrictionLabel2.text = "RESTRICT IN..."
             print ("Restriction label inicialized")
         } else {
@@ -138,20 +137,17 @@ class SecondGameScene: SKScene {
     }
     
     func updateSecondView() {
-//        teamIconNode2.position.x = teamIconNode.position.x
-//        teamIconNode2.position.y = teamIconNode.position.y
         playersLeftLabel2.text = ("\(char.playersLeft)")
         restrictionTimerLabel2.text = time.restrictionTimeString
+        restrictionLabel2.text = time.restrictionLabelString
         broadcastLineOneLabel2.text = char.broadcastLineOne
         broadcastLineTwoLabel2.text = char.broadcastLineTwo
         broadcastLineThreeLabel2.text = char.broadcastLineThree
         broadcastLineFourLabel2.text = char.broadcastLineFour
         broadcastLineFiveLabel2.text = char.broadcastLineFive
         if time.restrictionTimer.isValid {
-            restrictionLabel2.alpha = 1.0
             restrictionTimerLabel2.alpha = 1.0
         } else {
-            restrictionLabel2.alpha = 0.0
             restrictionTimerLabel2.alpha = 0.0
         }
     }

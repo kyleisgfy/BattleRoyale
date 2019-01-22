@@ -65,6 +65,7 @@ class GameScene: SKScene {
     var phaseNumber = 0
     
     var timeModifier = 30
+    
     var freeTime = 90
     var restrictInTime = 30
     var restrictTime = 60
@@ -833,11 +834,18 @@ class GameScene: SKScene {
         }
     }
     
+    func gameIntro() {
+        let x = 5
+    }
+    
     func pauseGame() {
         if pauseIsActive == true {
             pauseLabel.alpha = 0.0
             pauseIsActive = false
-            splash.removeFromParent()
+//            splash.removeFromParent()
+            splashBackground.removeFromParent()
+            splashLogo.removeFromParent()
+            splashText.removeFromParent()
         } else {
             pauseLabel.alpha = 1.0
             pauseIsActive = true

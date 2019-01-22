@@ -68,7 +68,11 @@ var subListButtons = [SKSpriteNode?](repeating: nil, count: 6)
 
 let eventRadius = CGFloat(336)
 
-var splash = SKSpriteNode()
+//var splash = SKSpriteNode()
+var splashBackground = SKSpriteNode()
+var splashLogo = SKSpriteNode()
+var splashText = SKSpriteNode()
+
 var background = SKSpriteNode()
 var background2 = SKSpriteNode()
 
@@ -278,13 +282,37 @@ func createIcons() {
 
 func createIcons2() {
     
-    splash = SKSpriteNode(imageNamed: "splashScreen")
-    splash.position = CGPoint.zero
-    splash.size.width = 1242
-    splash.size.height = 720
-    splash.zPosition = 4
-    splash.position.x = 0
-    splash.position.y = 0
+//    splash = SKSpriteNode(imageNamed: "splashScreen")
+//    splash.position = CGPoint.zero
+//    splash.size.width = 1242
+//    splash.size.height = 720
+//    splash.zPosition = 4
+//    splash.position.x = 0
+//    splash.position.y = 0
+    
+    splashBackground = SKSpriteNode(imageNamed: "splashBackground")
+    splashBackground.position = CGPoint.zero
+    splashBackground.size.width = 1242
+    splashBackground.size.height = 720
+    splashBackground.zPosition = 4
+    splashBackground.position.x = 0
+    splashBackground.position.y = 0
+    
+    splashLogo = SKSpriteNode(imageNamed: "splashLogo")
+    splashLogo.position = CGPoint.zero
+    splashLogo.size.width = 655
+    splashLogo.size.height = 655
+    splashLogo.zPosition = 5
+    splashLogo.position.x = 0
+    splashLogo.position.y = 0
+    
+    splashText = SKSpriteNode(imageNamed: "splashText")
+    splashText.position = CGPoint.zero
+    splashText.size.width = 926
+    splashText.size.height = 242
+    splashText.zPosition = 6
+    splashText.position.x = 0
+    splashText.position.y = 0
     
     background2 = SKSpriteNode(imageNamed: "backgroundImage")
     background2.position = CGPoint.zero

@@ -33,7 +33,10 @@ class SecondGameScene: SKScene {
         
         createIcons2()
         
-        self.addChild(splash)
+//        self.addChild(splash)
+        self.addChild(splashBackground)
+        self.addChild(splashLogo)
+        self.addChild(splashText)
         self.addChild(background2)
         self.addChild(eventOneNode2)
         self.addChild(eventTwoNode2)
@@ -41,6 +44,8 @@ class SecondGameScene: SKScene {
         self.addChild(eventFourNode2)
         self.addChild(teamIconNode2)
         self.addChild(poisonGasNode2)
+        
+        splashLogo.alpha = 0.1
         
         if let RestrictionTimer2:SKLabelNode = self.childNode(withName: "restrictionTimerLabel2") as? SKLabelNode {
             restrictionTimerLabel2 = RestrictionTimer2

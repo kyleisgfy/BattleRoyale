@@ -46,6 +46,7 @@ class SecondGameScene: SKScene {
         self.addChild(poisonGasNode2)
         
         splashLogo.alpha = 0.1
+        teamIconNode2.alpha = 0.0
         
         if let RestrictionTimer2:SKLabelNode = self.childNode(withName: "restrictionTimerLabel2") as? SKLabelNode {
             restrictionTimerLabel2 = RestrictionTimer2
@@ -137,8 +138,8 @@ class SecondGameScene: SKScene {
     }
     
     func updateSecondView() {
-        teamIconNode2.position.x = teamIconNode.position.x
-        teamIconNode2.position.y = teamIconNode.position.y
+//        teamIconNode2.position.x = teamIconNode.position.x
+//        teamIconNode2.position.y = teamIconNode.position.y
         playersLeftLabel2.text = ("\(char.playersLeft)")
         restrictionTimerLabel2.text = time.restrictionTimeString
         broadcastLineOneLabel2.text = char.broadcastLineOne

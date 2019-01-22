@@ -17,6 +17,9 @@
 		B1B216FB21F005FD0058B23A /* bombSound.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B1B216FA21F005FD0058B23A /* bombSound.mp3 */; };
 		B1B216FD21F006040058B23A /* bellSound.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B1B216FC21F006040058B23A /* bellSound.mp3 */; };
 		B1B216FF21F4ED7E0058B23A /* buttons.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1B216FE21F4ED7E0058B23A /* buttons.swift */; };
+		B1B2170121F6FC8C0058B23A /* introSound.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B1B2170021F6FC8C0058B23A /* introSound.mp3 */; };
+		B1B2170321F6FFBE0058B23A /* weirderThings.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B1B2170221F6FFBE0058B23A /* weirderThings.mp3 */; };
+		B1B2170521F709050058B23A /* superHero.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B1B2170421F709050058B23A /* superHero.mp3 */; };
 		B1BB70E721B25057001F7293 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1BB70E621B25057001F7293 /* AppDelegate.swift */; };
 		B1BB70E921B25057001F7293 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = B1BB70E821B25057001F7293 /* GameScene.sks */; };
 		B1BB70EB21B25057001F7293 /* Actions.sks in Resources */ = {isa = PBXBuildFile; fileRef = B1BB70EA21B25057001F7293 /* Actions.sks */; };
@@ -59,6 +62,9 @@
 		B1B216FA21F005FD0058B23A /* bombSound.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = bombSound.mp3; sourceTree = "<group>"; };
 		B1B216FC21F006040058B23A /* bellSound.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = bellSound.mp3; sourceTree = "<group>"; };
 		B1B216FE21F4ED7E0058B23A /* buttons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = buttons.swift; sourceTree = "<group>"; };
+		B1B2170021F6FC8C0058B23A /* introSound.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = introSound.mp3; sourceTree = "<group>"; };
+		B1B2170221F6FFBE0058B23A /* weirderThings.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = weirderThings.mp3; sourceTree = "<group>"; };
+		B1B2170421F709050058B23A /* superHero.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = superHero.mp3; sourceTree = "<group>"; };
 		B1BB70E321B25057001F7293 /* Battle Royale 2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Battle Royale 2.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B1BB70E621B25057001F7293 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B1BB70E821B25057001F7293 /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
@@ -142,6 +148,9 @@
 				B105A72A21E30D6B005F9EA6 /* secondViewController.swift */,
 				B1BB70F021B25059001F7293 /* Assets.xcassets */,
 				B1BB70F221B25059001F7293 /* Main.storyboard */,
+				B1B2170021F6FC8C0058B23A /* introSound.mp3 */,
+				B1B2170421F709050058B23A /* superHero.mp3 */,
+				B1B2170221F6FFBE0058B23A /* weirderThings.mp3 */,
 				B1B216F221EFF7E40058B23A /* alarmSound.mp3 */,
 				B1B216FA21F005FD0058B23A /* bombSound.mp3 */,
 				B1B216FC21F006040058B23A /* bellSound.mp3 */,
@@ -281,11 +290,14 @@
 				B1B216F321EFF7E40058B23A /* alarmSound.mp3 in Resources */,
 				B1BB70E921B25057001F7293 /* GameScene.sks in Resources */,
 				B1BB70F121B25059001F7293 /* Assets.xcassets in Resources */,
+				B1B2170321F6FFBE0058B23A /* weirderThings.mp3 in Resources */,
 				B1B216FD21F006040058B23A /* bellSound.mp3 in Resources */,
 				B1BB70EB21B25057001F7293 /* Actions.sks in Resources */,
 				B105A73121E31DF4005F9EA6 /* SecondGameScene.sks in Resources */,
+				B1B2170521F709050058B23A /* superHero.mp3 in Resources */,
 				B1B216F721EFF9800058B23A /* solemnVow.mp3 in Resources */,
 				B1BB70F421B25059001F7293 /* Main.storyboard in Resources */,
+				B1B2170121F6FC8C0058B23A /* introSound.mp3 in Resources */,
 				B1B216FB21F005FD0058B23A /* bombSound.mp3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

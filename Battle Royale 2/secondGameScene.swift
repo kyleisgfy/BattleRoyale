@@ -28,6 +28,7 @@ class SecondGameScene: SKScene {
     var broadcastLineThreeLabel2:SKLabelNode = SKLabelNode()
     var broadcastLineFourLabel2:SKLabelNode = SKLabelNode()
     var broadcastLineFiveLabel2:SKLabelNode = SKLabelNode()
+//    var broadcastLineSixLabel2:SKLabelNode = SKLabelNode()
     
     override func sceneDidLoad() {
         
@@ -121,11 +122,14 @@ class SecondGameScene: SKScene {
             print ("Broadcast line five label Failed")
         }
         
-//        broadcastLineOneLabel2.text = "1"
-//        broadcastLineTwoLabel2.text = "2"
-//        broadcastLineThreeLabel2.text = "3"
-//        broadcastLineFourLabel2.text = "4"
-//        broadcastLineFiveLabel2.text = "5"
+//        if let BroadcastSix2:SKLabelNode = self.childNode(withName: "broadcastLineSixLabel2") as? SKLabelNode {
+//            broadcastLineSixLabel2 = BroadcastSix2
+//            print ("Broadcast line six inicialized")
+//            broadcastLineSixLabel2.text = ""
+//        } else {
+//            print ("Broadcast line six label Failed")
+//        }
+        
         
         self.lastUpdateTime = 0
     }
@@ -153,8 +157,9 @@ class SecondGameScene: SKScene {
         broadcastLineThreeLabel2.text = char.broadcastLineThree
         broadcastLineFourLabel2.text = char.broadcastLineFour
         broadcastLineFiveLabel2.text = char.broadcastLineFive
-//        writeBroadcast()
+        
 //        moveBroadcast()
+//        writeBroadcast()
 //        alphaBroadcast()
         
         
@@ -165,10 +170,22 @@ class SecondGameScene: SKScene {
         }
     }
     
+//    func writeBroadcast() {
+//        if broadcastLineOneLabel2.position.y == 200 {
+//            broadcastLineOneLabel2.text = char.broadcastLineOne
+//        } else if broadcastLineTwoLabel2.position.y == 200 {
+//            broadcastLineTwoLabel2.text = char.broadcastLineOne
+//        } else if broadcastLineThreeLabel2.position.y == 200 {
+//            broadcastLineThreeLabel2.text = char.broadcastLineOne
+//        } else if broadcastLineFourLabel2.position.y == 200 {
+//            broadcastLineFourLabel2.text = char.broadcastLineOne
+//        } else if broadcastLineFiveLabel2.position.y == 200 {
+//            broadcastLineFiveLabel2.text = char.broadcastLineOne
+//        }
+//    }
+//
 //    func moveBroadcast() {
 //        if broadcastLineOneLabel2.text != char.broadcastLineOne {
-//            let move = SKAction.moveBy(x: 0.0, y: -25, duration: 0.2)
-//            let moveBack = SKAction.moveBy(x: 0.0, y: 25, duration: 0.0)
 //
 //            broadcastLineOneLabel2.run(SKAction.moveTo(y: broadcastLineTwoLabel2.position.y, duration: 0.2))
 //            broadcastLineTwoLabel2.run(SKAction.moveTo(y: broadcastLineThreeLabel2.position.y, duration: 0.2))
@@ -185,20 +202,8 @@ class SecondGameScene: SKScene {
 //        broadcastLineFourLabel2.alpha = ((broadcastLineFourLabel2.position.y - 100) / 100)
 //        broadcastLineFiveLabel2.alpha = ((broadcastLineFiveLabel2.position.y - 100) / 100)
 //    }
-//
-//    func writeBroadcast() {
-//        if broadcastLineOneLabel2.position.y == 100 {
-//            broadcastLineOneLabel2.text = char.broadcastLineOne
-//        } else if broadcastLineTwoLabel2.position.y == 100 {
-//            broadcastLineTwoLabel2.text = char.broadcastLineOne
-//        } else if broadcastLineThreeLabel2.position.y == 100 {
-//            broadcastLineThreeLabel2.text = char.broadcastLineOne
-//        } else if broadcastLineFourLabel2.position.y == 100 {
-//            broadcastLineFourLabel2.text = char.broadcastLineOne
-//        } else if broadcastLineFiveLabel2.position.y == 100 {
-//            broadcastLineFiveLabel2.text = char.broadcastLineOne
-//        }
-//    }
+
+    
 
 }
 

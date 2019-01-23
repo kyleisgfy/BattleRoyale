@@ -20,6 +20,7 @@
 		B1B2170121F6FC8C0058B23A /* introSound.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B1B2170021F6FC8C0058B23A /* introSound.mp3 */; };
 		B1B2170321F6FFBE0058B23A /* weirderThings.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B1B2170221F6FFBE0058B23A /* weirderThings.mp3 */; };
 		B1B2170521F709050058B23A /* superHero.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B1B2170421F709050058B23A /* superHero.mp3 */; };
+		B1B2170B21F8F6720058B23A /* MagicParticle.sks in Resources */ = {isa = PBXBuildFile; fileRef = B1B2170A21F8F6720058B23A /* MagicParticle.sks */; };
 		B1BB70E721B25057001F7293 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1BB70E621B25057001F7293 /* AppDelegate.swift */; };
 		B1BB70E921B25057001F7293 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = B1BB70E821B25057001F7293 /* GameScene.sks */; };
 		B1BB70EB21B25057001F7293 /* Actions.sks in Resources */ = {isa = PBXBuildFile; fileRef = B1BB70EA21B25057001F7293 /* Actions.sks */; };
@@ -65,6 +66,7 @@
 		B1B2170021F6FC8C0058B23A /* introSound.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = introSound.mp3; sourceTree = "<group>"; };
 		B1B2170221F6FFBE0058B23A /* weirderThings.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = weirderThings.mp3; sourceTree = "<group>"; };
 		B1B2170421F709050058B23A /* superHero.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = superHero.mp3; sourceTree = "<group>"; };
+		B1B2170A21F8F6720058B23A /* MagicParticle.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = MagicParticle.sks; sourceTree = "<group>"; };
 		B1BB70E321B25057001F7293 /* Battle Royale 2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Battle Royale 2.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B1BB70E621B25057001F7293 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B1BB70E821B25057001F7293 /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
@@ -139,6 +141,7 @@
 				B105A73021E31DF4005F9EA6 /* SecondGameScene.sks */,
 				B1BB70EA21B25057001F7293 /* Actions.sks */,
 				B1BB70EC21B25057001F7293 /* GameScene.swift */,
+				B1B2170A21F8F6720058B23A /* MagicParticle.sks */,
 				B105A73221E31FCC005F9EA6 /* secondGameScene.swift */,
 				B1BB711821B656CA001F7293 /* Icons.swift */,
 				B1BB711A21B6609A001F7293 /* Timer.swift */,
@@ -286,6 +289,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B1B216F521EFF97B0058B23A /* darkContinent.mp3 in Resources */,
+				B1B2170B21F8F6720058B23A /* MagicParticle.sks in Resources */,
 				B1B216F921EFF9870058B23A /* fieldOfHeroes.mp3 in Resources */,
 				B1B216F321EFF7E40058B23A /* alarmSound.mp3 in Resources */,
 				B1BB70E921B25057001F7293 /* GameScene.sks in Resources */,

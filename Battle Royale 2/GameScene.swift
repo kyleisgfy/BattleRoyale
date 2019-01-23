@@ -56,6 +56,11 @@ class GameScene: SKScene {
     var sub5Label:SKLabelNode = SKLabelNode()
     var sub6Label:SKLabelNode = SKLabelNode()
     
+    var testRadius = CGFloat(100)
+    var testNode = SKShapeNode()
+    
+    
+    
     var x: CGFloat = 0.0
     var y: CGFloat = 0.0
     
@@ -135,6 +140,18 @@ class GameScene: SKScene {
         self.addChild(alarmSound)
         self.addChild(bombSound)
         self.addChild(bellSound)
+        
+        if let topRightEmitter = SKEmitterNode(fileNamed: "MagicParticle.sks") {
+            topRightEmitter.position = CGPoint(x: 0, y: 0)
+            topRightEmitter.zPosition = 4
+//            addChild(topRightEmitter)
+        }
+
+        
+
+        
+        
+        
         
         introSound.run(SKAction.stop())
         firstSong.run(SKAction.stop())
@@ -664,8 +681,30 @@ class GameScene: SKScene {
         time.restrictionTimeString = "\(restrictionTimerLabel.text ?? "")"
     }
     
+    func drawCircle() {
+        testNode.removeFromParent()
+        let testPath = CGMutablePath()
+        testPath.addArc(center: CGPoint.zero,
+                        radius: testRadius,
+                        startAngle: 0,
+                        endAngle: CGFloat.pi * 2,
+                        clockwise: true)
+        
+        
+        testNode = SKShapeNode(path: testPath)
+        testNode.lineWidth = 3
+        testNode.fillColor = .clear
+        testNode.strokeColor = .white
+        testNode.zPosition = 4
+        testNode.position.x = 0.0
+        testNode.position.y = 0.0
+        addChild(testNode)
+    }
+    
     @objc func updateGameTimer() {
         if pauseIsActive == false {
+            drawCircle()
+            testRadius -= 1
             time.gameTimeInSeconds += 1     //This will decrement(count down)the seconds.
             if eventBoarder.position.x < CGFloat(barWidth * 27 / 2) {
                     eventBoarder.position.x = eventBoarder.position.x + CGFloat(timeIndicator)
@@ -1132,8 +1171,6 @@ class GameScene: SKScene {
         sub5Label.text = "\(array[4])"
         sub6Label.text = "\(array[5])"
     }
-    
-    
     
 
 }

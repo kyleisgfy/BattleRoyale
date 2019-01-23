@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import SpriteKit
 
 var char: Characters = Characters ()
 
@@ -19,7 +20,6 @@ class Characters: NSObject {
     var broadcastLineThree = ""
     var broadcastLineFour = ""
     var broadcastLineFive = ""
-    
     
     let characterListPlain = [
         "Alaqua",

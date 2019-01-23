@@ -85,9 +85,6 @@ class GameScene: SKScene {
     let restrictInSound = SKAudioNode(fileNamed: "darkContinent.mp3")
     let restrictSound = SKAudioNode(fileNamed: "fieldOfHeroes.mp3")
     
-    
-
-    
     override func sceneDidLoad() {
         freeTime = (3 * timeModifier)
         restrictInTime = (1 * timeModifier)

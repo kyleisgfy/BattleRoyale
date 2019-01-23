@@ -121,6 +121,12 @@ class SecondGameScene: SKScene {
             print ("Broadcast line five label Failed")
         }
         
+//        broadcastLineOneLabel2.text = "1"
+//        broadcastLineTwoLabel2.text = "2"
+//        broadcastLineThreeLabel2.text = "3"
+//        broadcastLineFourLabel2.text = "4"
+//        broadcastLineFiveLabel2.text = "5"
+        
         self.lastUpdateTime = 0
     }
     
@@ -138,17 +144,62 @@ class SecondGameScene: SKScene {
     
     func updateSecondView() {
         playersLeftLabel2.text = ("\(char.playersLeft)")
+        
         restrictionTimerLabel2.text = time.restrictionTimeString
         restrictionLabel2.text = time.restrictionLabelString
+        
         broadcastLineOneLabel2.text = char.broadcastLineOne
         broadcastLineTwoLabel2.text = char.broadcastLineTwo
         broadcastLineThreeLabel2.text = char.broadcastLineThree
         broadcastLineFourLabel2.text = char.broadcastLineFour
         broadcastLineFiveLabel2.text = char.broadcastLineFive
+//        writeBroadcast()
+//        moveBroadcast()
+//        alphaBroadcast()
+        
+        
         if time.restrictionTimer.isValid {
             restrictionTimerLabel2.alpha = 1.0
         } else {
             restrictionTimerLabel2.alpha = 0.0
         }
     }
+    
+//    func moveBroadcast() {
+//        if broadcastLineOneLabel2.text != char.broadcastLineOne {
+//            let move = SKAction.moveBy(x: 0.0, y: -25, duration: 0.2)
+//            let moveBack = SKAction.moveBy(x: 0.0, y: 25, duration: 0.0)
+//
+//            broadcastLineOneLabel2.run(SKAction.moveTo(y: broadcastLineTwoLabel2.position.y, duration: 0.2))
+//            broadcastLineTwoLabel2.run(SKAction.moveTo(y: broadcastLineThreeLabel2.position.y, duration: 0.2))
+//            broadcastLineThreeLabel2.run(SKAction.moveTo(y: broadcastLineFourLabel2.position.y, duration: 0.2))
+//            broadcastLineFourLabel2.run(SKAction.moveTo(y: broadcastLineFiveLabel2.position.y, duration: 0.2))
+//            broadcastLineFiveLabel2.run(SKAction.moveTo(y: broadcastLineOneLabel2.position.y, duration: 0.2))
+//        }
+//
+//    }
+//    func alphaBroadcast() {
+//        broadcastLineOneLabel2.alpha = ((broadcastLineOneLabel2.position.y - 100) / 100)
+//        broadcastLineTwoLabel2.alpha = ((broadcastLineTwoLabel2.position.y - 100) / 100)
+//        broadcastLineThreeLabel2.alpha = ((broadcastLineThreeLabel2.position.y - 100) / 100)
+//        broadcastLineFourLabel2.alpha = ((broadcastLineFourLabel2.position.y - 100) / 100)
+//        broadcastLineFiveLabel2.alpha = ((broadcastLineFiveLabel2.position.y - 100) / 100)
+//    }
+//
+//    func writeBroadcast() {
+//        if broadcastLineOneLabel2.position.y == 100 {
+//            broadcastLineOneLabel2.text = char.broadcastLineOne
+//        } else if broadcastLineTwoLabel2.position.y == 100 {
+//            broadcastLineTwoLabel2.text = char.broadcastLineOne
+//        } else if broadcastLineThreeLabel2.position.y == 100 {
+//            broadcastLineThreeLabel2.text = char.broadcastLineOne
+//        } else if broadcastLineFourLabel2.position.y == 100 {
+//            broadcastLineFourLabel2.text = char.broadcastLineOne
+//        } else if broadcastLineFiveLabel2.position.y == 100 {
+//            broadcastLineFiveLabel2.text = char.broadcastLineOne
+//        }
+//    }
+
 }
+
+

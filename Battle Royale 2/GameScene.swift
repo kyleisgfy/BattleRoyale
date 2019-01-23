@@ -62,7 +62,7 @@ class GameScene: SKScene {
     var eventNumber = 0
     var phaseNumber = 0
     
-    var timeModifier = 100
+    var timeModifier = 30
     
     var freeTime = 3
     var restrictInTime = 1
@@ -84,12 +84,16 @@ class GameScene: SKScene {
     let freeTimeSound = SKAudioNode(fileNamed: "solemnVow.mp3")
     let restrictInSound = SKAudioNode(fileNamed: "darkContinent.mp3")
     let restrictSound = SKAudioNode(fileNamed: "fieldOfHeroes.mp3")
+    
+    
 
     
     override func sceneDidLoad() {
         freeTime = (3 * timeModifier)
         restrictInTime = (1 * timeModifier)
         restrictTime = (2 * timeModifier)
+        totalGameTime = ((freeTime * 5) + (restrictInTime * 4) + (restrictTime * 4))
+        timeIndicator = (CGFloat(barWidth * 27) / CGFloat(totalGameTime))
         
         createIcons()
         
@@ -143,11 +147,6 @@ class GameScene: SKScene {
         alarmSound.run(SKAction.stop())
         bombSound.run(SKAction.stop())
         bellSound.run(SKAction.stop())
-        
-
-        
-        totalGameTime = ((freeTime * 5) + (restrictInTime * 4) + (restrictTime * 4))
-        timeIndicator = (CGFloat(barWidth * 27) / CGFloat(totalGameTime))
         
         runGameTimer()
         runPhase()
@@ -623,7 +622,6 @@ class GameScene: SKScene {
             bellSound.run(SKAction.stop())
             
         case 44: //question mark
-            teamIconNode2.alpha = 1.0
             eventBoarder.position.x = eventBoarder.position.x + (CGFloat(timeIndicator) * (CGFloat(time.phaseTimerInSeconds) - 1.0))
             time.phaseTimerInSeconds = 0
             time.restrictionTimeInSeconds = 0
@@ -701,10 +699,10 @@ class GameScene: SKScene {
     }
     
     func timeString(time:TimeInterval) -> String {
-        //        let hours = Int(time) / 3600
+                let hours = Int(time) / 3600
         let minutes = Int(time) / 60 % 60
         let seconds = Int(time) % 60
-        return String(format:"%02i:%02i", minutes, seconds)
+        return String(format:"%02i:%02i:%02i", hours, minutes, seconds)
     }
     
     func phaseTimerFired () {
@@ -777,6 +775,7 @@ class GameScene: SKScene {
             time.phaseTimerInSeconds = freeTime
             runPhaseTimer()
         case 1:
+            teamIconNode2.alpha = 1.0
             phaseLabel.text = "Nothing will occur for"
             time.restrictionTimeString = ("")
             time.restrictionLabelString = ("")
@@ -866,7 +865,7 @@ class GameScene: SKScene {
         let splashBackgroundFade = SKAction.fadeOut(withDuration: 3)
         splashBackground.run(SKAction.sequence([wait5, splashBackgroundFade]))
         
-        let logoMove = SKAction.move(to: CGPoint(x: -420, y: -180), duration: 1)
+        let logoMove = SKAction.move(to: CGPoint(x: -450, y: -180), duration: 1)
         let logoScale = SKAction.scale(to: 0.4 , duration: 1)
         let logoGroup = SKAction.group([logoMove, logoScale])
         let wait3 = SKAction.wait(forDuration: 3)

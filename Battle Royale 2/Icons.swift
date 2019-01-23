@@ -282,14 +282,6 @@ func createIcons() {
 
 func createIcons2() {
     
-//    splash = SKSpriteNode(imageNamed: "splashScreen")
-//    splash.position = CGPoint.zero
-//    splash.size.width = 1242
-//    splash.size.height = 720
-//    splash.zPosition = 4
-//    splash.position.x = 0
-//    splash.position.y = 0
-    
     splashBackground = SKSpriteNode(imageNamed: "splashBackground")
     splashBackground.position = CGPoint.zero
     splashBackground.size.width = 1242

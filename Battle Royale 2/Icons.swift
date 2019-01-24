@@ -65,6 +65,8 @@ var characterButtons = [SKSpriteNode?](repeating: nil, count: 6)
 var typeButtons = [SKSpriteNode?](repeating: nil, count: 6)
 var subListButtons = [SKSpriteNode?](repeating: nil, count: 6)
 
+var safeZone = SKSpriteNode()
+
 
 let eventRadius = CGFloat(336)
 
@@ -128,6 +130,12 @@ func createIcons() {
     createTypeButtons()
     createSubListButtons()
     
+    safeZone = SKSpriteNode(imageNamed: "safeZone")
+    safeZone.size.width = 1436
+    safeZone.size.height = 1436
+    safeZone.zPosition = 2
+    
+    
     background = SKSpriteNode(imageNamed: "backgroundImage")
     background.position = CGPoint.zero
     background.size.width = 1242
@@ -145,7 +153,7 @@ func createIcons() {
     teamIconNode.lineWidth = 0
     teamIconNode.fillColor = .red
     teamIconNode.strokeColor = .clear
-    teamIconNode.zPosition = 2
+    teamIconNode.zPosition = 4
     teamIconNode.position.x = 0.7
     teamIconNode.position.y = -0.7
     
@@ -169,7 +177,7 @@ func createIcons() {
     eventOneNode.lineWidth = 5
     eventOneNode.fillColor = .clear
     eventOneNode.strokeColor = .clear
-    eventOneNode.zPosition = 1
+    eventOneNode.zPosition = 4
     
     eventTwoPath.addArc(center: CGPoint.zero,
                         radius: (eventRadius/2),
@@ -180,7 +188,7 @@ func createIcons() {
     eventTwoNode.lineWidth = 5
     eventTwoNode.fillColor = .clear
     eventTwoNode.strokeColor = .clear
-    eventTwoNode.zPosition = 1
+    eventTwoNode.zPosition = 4
     
     eventThreePath.addArc(center: CGPoint.zero,
                         radius: (eventRadius/4),
@@ -191,7 +199,7 @@ func createIcons() {
     eventThreeNode.lineWidth = 5
     eventThreeNode.fillColor = .clear
     eventThreeNode.strokeColor = .clear
-    eventThreeNode.zPosition = 1
+    eventThreeNode.zPosition = 4
     
     eventFourPath.addArc(center: CGPoint.zero,
                         radius: (eventRadius/8),
@@ -202,7 +210,7 @@ func createIcons() {
     eventFourNode.lineWidth = 5
     eventFourNode.fillColor = .clear
     eventFourNode.strokeColor = .clear
-    eventFourNode.zPosition = 1
+    eventFourNode.zPosition = 4
     
     poisonGasPath.addArc(center: CGPoint.zero,
                          radius: (poisonGasRadius),

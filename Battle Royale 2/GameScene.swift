@@ -56,10 +56,10 @@ class GameScene: SKScene {
     var sub5Label:SKLabelNode = SKLabelNode()
     var sub6Label:SKLabelNode = SKLabelNode()
     
-    var testRadius = CGFloat(718)
-    var currentRadius = CGFloat(0)
-    var nextRadius = CGFloat(0)
-    var testNode = SKShapeNode()
+    var inicialSize = CGFloat(1436)
+    var currentSize = CGFloat(0)
+    var nextSize = CGFloat(0)
+    
     var eventLocation = CGPoint(x: 0, y: 0)
     var nextEventLocation = CGPoint(x: 0, y: 0)
     
@@ -101,8 +101,8 @@ class GameScene: SKScene {
         totalGameTime = ((freeTime * 5) + (restrictInTime * 4) + (restrictTime * 4))
         timeIndicator = (CGFloat(barWidth * 27) / CGFloat(totalGameTime))
         
-        currentRadius = testRadius
-        nextRadius = (testRadius/2)
+        currentSize = inicialSize
+        nextSize = (inicialSize/2)
         
         createIcons()
         
@@ -115,6 +115,7 @@ class GameScene: SKScene {
         }
         
         self.addChild(clickZoneNode)
+        self.addChild(safeZone)
         self.addChild(background)
         self.addChild(eventOneNode)
         self.addChild(eventTwoNode)
@@ -787,8 +788,8 @@ class GameScene: SKScene {
     }
     
     func setRadius() {
-        testRadius = currentRadius
-        nextRadius = (testRadius / 2)
+        inicialSize = currentSize
+        nextSize = (inicialSize / 2)
         x = ((nextEventLocation.x - eventLocation.x) / CGFloat((restrictTime)))
         y = ((nextEventLocation.y - eventLocation.y) / CGFloat((restrictTime)))
     }
@@ -796,28 +797,13 @@ class GameScene: SKScene {
     func restrictTheScreen() {
         if pauseIsActive == false {
             if phaseNumber == 3 {
-                testNode.removeFromParent()
-                let testPath = CGMutablePath()
-                currentRadius = (currentRadius - ((testRadius - nextRadius) / CGFloat(restrictTime)))
-                testPath.addArc(center: CGPoint.zero,
-                                radius: currentRadius,
-                                startAngle: 0,
-                                endAngle: CGFloat.pi * 2,
-                                clockwise: true)
                 
-                
-                testNode = SKShapeNode(path: testPath)
-                testNode.lineWidth = 3
-                testNode.fillColor = .clear
-                testNode.strokeColor = .white
-                testNode.zPosition = 4
+                currentSize = (currentSize - ((inicialSize - nextSize) / CGFloat(restrictTime)))
+                safeZone.size.width = currentSize
+                safeZone.size.height = currentSize
                 eventLocation.x = eventLocation.x + x
                 eventLocation.y = eventLocation.y + y
-//                print (eventLocation)
-//                testNode.position.x = eventLocation.x
-//                testNode.position.y = eventLocation.y
-                testNode.position = eventLocation
-                addChild(testNode)
+                safeZone.position = eventLocation
             }
         }
         

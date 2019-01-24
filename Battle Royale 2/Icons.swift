@@ -66,7 +66,7 @@ var typeButtons = [SKSpriteNode?](repeating: nil, count: 6)
 var subListButtons = [SKSpriteNode?](repeating: nil, count: 6)
 
 var safeZone = SKSpriteNode()
-
+var safeZone2 = SKSpriteNode()
 
 let eventRadius = CGFloat(336)
 
@@ -80,6 +80,10 @@ var background2 = SKSpriteNode()
 
 let cropImage = SKSpriteNode(imageNamed: "backgroundImage")
 let cropNode = SKCropNode()
+
+let cropImage2 = SKSpriteNode(imageNamed: "backgroundImage")
+let cropNode2 = SKCropNode()
+
 
 func createCharacterButtons() {
     var i = 0
@@ -132,6 +136,8 @@ func createIcons() {
     createCharacterButtons()
     createTypeButtons()
     createSubListButtons()
+    
+    cropNode.addChild(cropImage)
     
     cropNode.position = CGPoint(x: 0, y: 0)
     cropNode.zPosition = 2
@@ -303,11 +309,26 @@ func createIcons() {
 
 func createIcons2() {
     
+    cropNode2.addChild(cropImage2)
+    
+    cropNode2.position = CGPoint(x: 0, y: 0)
+    cropNode2.zPosition = 2
+    
+    cropImage2.size.width = 1242
+    cropImage2.size.height = 720
+    
+    safeZone2 = SKSpriteNode(imageNamed: "safeZone")
+    safeZone2.size.width = 1436
+    safeZone2.size.height = 1436
+    safeZone2.zPosition = 2
+    
+    cropNode2.maskNode = safeZone2
+    
     splashBackground = SKSpriteNode(imageNamed: "splashBackground")
     splashBackground.position = CGPoint.zero
     splashBackground.size.width = 1242
     splashBackground.size.height = 720
-    splashBackground.zPosition = 4
+    splashBackground.zPosition = 6
     splashBackground.position.x = 0
     splashBackground.position.y = 0
     
@@ -315,7 +336,7 @@ func createIcons2() {
     splashLogo.position = CGPoint.zero
     splashLogo.size.width = 655
     splashLogo.size.height = 655
-    splashLogo.zPosition = 5
+    splashLogo.zPosition = 7
     splashLogo.position.x = 0
     splashLogo.position.y = 0
     
@@ -323,7 +344,7 @@ func createIcons2() {
     splashText.position = CGPoint.zero
     splashText.size.width = 926
     splashText.size.height = 242
-    splashText.zPosition = 6
+    splashText.zPosition = 8
     splashText.position.x = 0
     splashText.position.y = 0
     
@@ -344,7 +365,7 @@ func createIcons2() {
     teamIconNode2.lineWidth = 0
     teamIconNode2.fillColor = .red
     teamIconNode2.strokeColor = .clear
-    teamIconNode2.zPosition = 2
+    teamIconNode2.zPosition = 4
     teamIconNode2.position.x = 0.7
     teamIconNode2.position.y = -0.7
     
@@ -359,7 +380,7 @@ func createIcons2() {
     eventOneNode2.alpha = 1.0
     eventOneNode2.fillColor = .clear
     eventOneNode2.strokeColor = .clear
-    eventOneNode2.zPosition = 1
+    eventOneNode2.zPosition = 3
     
     eventTwoPath2.addArc(center: CGPoint.zero,
                          radius: (eventRadius/2),
@@ -370,7 +391,7 @@ func createIcons2() {
     eventTwoNode2.lineWidth = 5
     eventTwoNode2.fillColor = .clear
     eventTwoNode2.strokeColor = .clear
-    eventTwoNode2.zPosition = 1
+    eventTwoNode2.zPosition = 3
     
     eventThreePath2.addArc(center: CGPoint.zero,
                            radius: (eventRadius/4),
@@ -381,7 +402,7 @@ func createIcons2() {
     eventThreeNode2.lineWidth = 5
     eventThreeNode2.fillColor = .clear
     eventThreeNode2.strokeColor = .clear
-    eventThreeNode2.zPosition = 1
+    eventThreeNode2.zPosition = 3
     
     eventFourPath2.addArc(center: CGPoint.zero,
                           radius: (eventRadius/8),
@@ -392,18 +413,18 @@ func createIcons2() {
     eventFourNode2.lineWidth = 5
     eventFourNode2.fillColor = .clear
     eventFourNode2.strokeColor = .clear
-    eventFourNode2.zPosition = 1
+    eventFourNode2.zPosition = 3
     
-    poisonGasPath2.addArc(center: CGPoint.zero,
-                          radius: (poisonGasRadius),
-                          startAngle: 0,
-                          endAngle: CGFloat.pi * 2,
-                          clockwise: true)
-    poisonGasNode2 = SKShapeNode(path:    poisonGasPath2)
-    poisonGasNode2.lineWidth = 0
-    poisonGasNode2.fillColor = .clear
-    poisonGasNode2.strokeColor = .green
-    poisonGasNode2.alpha = 0.2
-    poisonGasNode2.zPosition = 1
+//    poisonGasPath2.addArc(center: CGPoint.zero,
+//                          radius: (poisonGasRadius),
+//                          startAngle: 0,
+//                          endAngle: CGFloat.pi * 2,
+//                          clockwise: true)
+//    poisonGasNode2 = SKShapeNode(path:    poisonGasPath2)
+//    poisonGasNode2.lineWidth = 0
+//    poisonGasNode2.fillColor = .clear
+//    poisonGasNode2.strokeColor = .green
+//    poisonGasNode2.alpha = 0.2
+//    poisonGasNode2.zPosition = 3
     }
 

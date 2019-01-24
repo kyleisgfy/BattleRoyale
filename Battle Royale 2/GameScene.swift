@@ -147,7 +147,8 @@ class GameScene: SKScene {
         self.addChild(alarmSound)
         self.addChild(bombSound)
         self.addChild(bellSound)
-        cropNode.addChild(cropImage)
+        
+
         self.addChild(cropNode)
         
         poisonGas = SKEmitterNode(fileNamed: "MyParticle1")!
@@ -686,25 +687,9 @@ class GameScene: SKScene {
         time.restrictionTimeString = "\(restrictionTimerLabel.text ?? "")"
     }
     
-//    func drawCircle() {
-//        testNode.removeFromParent()
-//        let testPath = CGMutablePath()
-//        testPath.addArc(center: CGPoint.zero,
-//                        radius: testRadius,
-//                        startAngle: 0,
-//                        endAngle: CGFloat.pi * 2,
-//                        clockwise: true)
-//
-//
-//        testNode = SKShapeNode(path: testPath)
-//        testNode.lineWidth = 3
-//        testNode.fillColor = .clear
-//        testNode.strokeColor = .white
-//        testNode.zPosition = 4
-//        testNode.position.x = 0.0
-//        testNode.position.y = 0.0
-//        addChild(testNode)
-//    }
+    func nodeToSecondView() {
+        
+    }
     
     @objc func updateGameTimer() {
         if pauseIsActive == false {
@@ -772,13 +757,13 @@ class GameScene: SKScene {
 // functions for the phase and the restriction of the screen
 //****************************************************************************************
     
-    func copyCircle(circle2: SKShapeNode, circle: SKShapeNode) {
-        circle2.alpha = circle.alpha
-        circle2.strokeColor = circle.strokeColor
-        circle2.lineWidth = circle.lineWidth
-        circle2.position.x = circle.position.x
-        circle2.position.y = circle.position.y
-    }
+//    func copyCircle(circle2: SKShapeNode, circle: SKShapeNode) {
+//        circle2.alpha = circle.alpha
+//        circle2.strokeColor = circle.strokeColor
+//        circle2.lineWidth = circle.lineWidth
+//        circle2.position.x = circle.position.x
+//        circle2.position.y = circle.position.y
+//    }
     
     func setRadius() {
         inicialSize = currentSize
@@ -797,6 +782,9 @@ class GameScene: SKScene {
                 eventLocation.x = eventLocation.x + x
                 eventLocation.y = eventLocation.y + y
                 safeZone.position = eventLocation
+                
+                safeZone2.size = safeZone.size
+                safeZone2.position = safeZone.position
             }
         }
         
@@ -875,30 +863,28 @@ class GameScene: SKScene {
             time.phaseTimerInSeconds = restrictInTime
             runRestrictionTimer()
             runPhaseTimer()
-//            if eventNumber == 1 {
-//                poisonGasNode.position = eventOneNode.position
-//                eventOneNode2.position.x = eventOneNode.position.x
-//                eventOneNode2.position.y = eventOneNode.position.y
-//                eventOneNode2.strokeColor = eventOneNode.strokeColor
-//            } else if eventNumber == 2 {
-//                eventTwoNode2.position.x = eventTwoNode.position.x
-//                eventTwoNode2.position.y = eventTwoNode.position.y
-//                eventTwoNode2.strokeColor = eventTwoNode.strokeColor
-//                x = ((eventOneNode.position.x - eventTwoNode.position.x) / CGFloat((-1 * restrictTime)))
-//                y = ((eventOneNode.position.y - eventTwoNode.position.y) / CGFloat((-1 * restrictTime)))
-//            } else if eventNumber == 3 {
-//                eventThreeNode2.position.x = eventThreeNode.position.x
-//                eventThreeNode2.position.y = eventThreeNode.position.y
-//                eventThreeNode2.strokeColor = eventThreeNode.strokeColor
-//                x = ((eventTwoNode.position.x - eventThreeNode.position.x) / CGFloat((-1 * restrictTime)))
-//                y = ((eventTwoNode.position.y - eventThreeNode.position.y) / CGFloat((-1 * restrictTime)))
-//            } else if eventNumber == 4 {
-//                eventFourNode2.position.x = eventFourNode.position.x
-//                eventFourNode2.position.y = eventFourNode.position.y
-//                eventFourNode2.strokeColor = eventFourNode.strokeColor
-//                x = ((eventThreeNode.position.x - eventFourNode.position.x) / CGFloat((-1 * restrictTime)))
-//                y = ((eventThreeNode.position.y - eventFourNode.position.y) / CGFloat((-1 * restrictTime)))
-//            }
+            if eventNumber == 1 {
+                poisonGasNode.position = eventOneNode.position
+                eventOneNode2.position.x = eventOneNode.position.x
+                eventOneNode2.position.y = eventOneNode.position.y
+                eventOneNode2.strokeColor = eventOneNode.strokeColor
+                eventOneNode2.alpha = 1.0
+            } else if eventNumber == 2 {
+                eventTwoNode2.position.x = eventTwoNode.position.x
+                eventTwoNode2.position.y = eventTwoNode.position.y
+                eventTwoNode2.strokeColor = eventTwoNode.strokeColor
+                eventTwoNode2.alpha = 1.0
+            } else if eventNumber == 3 {
+                eventThreeNode2.position.x = eventThreeNode.position.x
+                eventThreeNode2.position.y = eventThreeNode.position.y
+                eventThreeNode2.strokeColor = eventThreeNode.strokeColor
+                eventThreeNode2.alpha = 1.0
+            } else if eventNumber == 4 {
+                eventFourNode2.position.x = eventFourNode.position.x
+                eventFourNode2.position.y = eventFourNode.position.y
+                eventFourNode2.strokeColor = eventFourNode.strokeColor
+                eventFourNode2.alpha = 1.0
+            }
             
         case 3:
             phaseLabel.text = "Safe zone is restricting"

@@ -30,6 +30,8 @@ class SecondGameScene: SKScene {
     var broadcastLineFiveLabel2:SKLabelNode = SKLabelNode()
 //    var broadcastLineSixLabel2:SKLabelNode = SKLabelNode()
     
+    var poisonGas2 = SKEmitterNode()
+    
     override func sceneDidLoad() {
         
         createIcons2()
@@ -44,6 +46,11 @@ class SecondGameScene: SKScene {
         self.addChild(eventFourNode2)
         self.addChild(teamIconNode2)
         self.addChild(poisonGasNode2)
+        self.addChild(cropNode2)
+        
+        poisonGas2 = SKEmitterNode(fileNamed: "MyParticle1")!
+        poisonGas2.position = CGPoint(x: 0, y: 0)
+        addChild(poisonGas2)
         
         splashLogo.alpha = 0.1
         teamIconNode2.alpha = 0.0
@@ -147,6 +154,8 @@ class SecondGameScene: SKScene {
     }
     
     func updateSecondView() {
+        
+        
         playersLeftLabel2.text = ("\(char.playersLeft)")
         
         restrictionTimerLabel2.text = time.restrictionTimeString

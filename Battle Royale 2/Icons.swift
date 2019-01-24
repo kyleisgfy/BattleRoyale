@@ -78,6 +78,9 @@ var splashText = SKSpriteNode()
 var background = SKSpriteNode()
 var background2 = SKSpriteNode()
 
+let cropImage = SKSpriteNode(imageNamed: "backgroundImage")
+let cropNode = SKCropNode()
+
 func createCharacterButtons() {
     var i = 0
     var yLocation = 300
@@ -130,10 +133,20 @@ func createIcons() {
     createTypeButtons()
     createSubListButtons()
     
+    cropNode.position = CGPoint(x: 0, y: 0)
+    cropNode.zPosition = 2
+    
+    cropImage.size.width = 1242
+    cropImage.size.height = 720
+    
     safeZone = SKSpriteNode(imageNamed: "safeZone")
     safeZone.size.width = 1436
     safeZone.size.height = 1436
     safeZone.zPosition = 2
+    
+    cropNode.maskNode = safeZone
+    
+    
     
     
     background = SKSpriteNode(imageNamed: "backgroundImage")

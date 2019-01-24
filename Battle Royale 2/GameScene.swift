@@ -115,7 +115,7 @@ class GameScene: SKScene {
         }
         
         self.addChild(clickZoneNode)
-        self.addChild(safeZone)
+//        self.addChild(safeZone)
         self.addChild(background)
         self.addChild(eventOneNode)
         self.addChild(eventTwoNode)
@@ -148,11 +148,14 @@ class GameScene: SKScene {
         self.addChild(alarmSound)
         self.addChild(bombSound)
         self.addChild(bellSound)
+        cropNode.addChild(cropImage)
+        self.addChild(cropNode)
         
-        if let topRightEmitter = SKEmitterNode(fileNamed: "MagicParticle.sks") {
-            topRightEmitter.position = CGPoint(x: 0, y: 0)
-            topRightEmitter.zPosition = 4
-//            addChild(topRightEmitter)
+        
+        if let poisonGas = SKEmitterNode(fileNamed: "MyParticle") {
+            poisonGas.position = CGPoint(x: 0, y: 0)
+            poisonGas.zPosition = 1
+            addChild(poisonGas)
         }
 
         

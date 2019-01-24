@@ -63,7 +63,7 @@ class GameScene: SKScene {
     var eventLocation = CGPoint(x: 0, y: 0)
     var nextEventLocation = CGPoint(x: 0, y: 0)
     
-    
+    var poisonGas = SKEmitterNode()
     
     var x: CGFloat = 0.0
     var y: CGFloat = 0.0
@@ -115,7 +115,6 @@ class GameScene: SKScene {
         }
         
         self.addChild(clickZoneNode)
-//        self.addChild(safeZone)
         self.addChild(background)
         self.addChild(eventOneNode)
         self.addChild(eventTwoNode)
@@ -151,18 +150,9 @@ class GameScene: SKScene {
         cropNode.addChild(cropImage)
         self.addChild(cropNode)
         
-        
-        if let poisonGas = SKEmitterNode(fileNamed: "MyParticle") {
-            poisonGas.position = CGPoint(x: 0, y: 0)
-            poisonGas.zPosition = 4
-            addChild(poisonGas)
-        }
-
-        
-
-        
-        
-        
+        poisonGas = SKEmitterNode(fileNamed: "MyParticle1")!
+        poisonGas.position = CGPoint(x: 0, y: 0)
+        addChild(poisonGas)
         
         introSound.run(SKAction.stop())
         firstSong.run(SKAction.stop())

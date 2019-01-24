@@ -154,7 +154,7 @@ class GameScene: SKScene {
         
         if let poisonGas = SKEmitterNode(fileNamed: "MyParticle") {
             poisonGas.position = CGPoint(x: 0, y: 0)
-            poisonGas.zPosition = 1
+            poisonGas.zPosition = 4
             addChild(poisonGas)
         }
 

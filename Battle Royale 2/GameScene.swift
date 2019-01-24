@@ -56,8 +56,12 @@ class GameScene: SKScene {
     var sub5Label:SKLabelNode = SKLabelNode()
     var sub6Label:SKLabelNode = SKLabelNode()
     
-    var testRadius = CGFloat(100)
+    var testRadius = CGFloat(718)
+    var currentRadius = CGFloat(0)
+    var nextRadius = CGFloat(0)
     var testNode = SKShapeNode()
+    var eventLocation = CGPoint(x: 0, y: 0)
+    var nextEventLocation = CGPoint(x: 0, y: 0)
     
     
     
@@ -96,6 +100,9 @@ class GameScene: SKScene {
         restrictTime = (2 * timeModifier)
         totalGameTime = ((freeTime * 5) + (restrictInTime * 4) + (restrictTime * 4))
         timeIndicator = (CGFloat(barWidth * 27) / CGFloat(totalGameTime))
+        
+        currentRadius = testRadius
+        nextRadius = (testRadius/2)
         
         createIcons()
         
@@ -532,6 +539,10 @@ class GameScene: SKScene {
         subListButtonSelection(location: event.location(in: self))
         
         if clickZoneNode.contains(event.location(in: self)) {
+            if phaseNumber == 1 {
+                nextEventLocation = event.location(in: self)
+            }
+ 
             if eventNumber == 1 && phaseNumber == 1 {
                 eventOneNode.position = event.location(in: self)
             } else if eventNumber == 2 && phaseNumber == 1 {
@@ -681,30 +692,28 @@ class GameScene: SKScene {
         time.restrictionTimeString = "\(restrictionTimerLabel.text ?? "")"
     }
     
-    func drawCircle() {
-        testNode.removeFromParent()
-        let testPath = CGMutablePath()
-        testPath.addArc(center: CGPoint.zero,
-                        radius: testRadius,
-                        startAngle: 0,
-                        endAngle: CGFloat.pi * 2,
-                        clockwise: true)
-        
-        
-        testNode = SKShapeNode(path: testPath)
-        testNode.lineWidth = 3
-        testNode.fillColor = .clear
-        testNode.strokeColor = .white
-        testNode.zPosition = 4
-        testNode.position.x = 0.0
-        testNode.position.y = 0.0
-        addChild(testNode)
-    }
+//    func drawCircle() {
+//        testNode.removeFromParent()
+//        let testPath = CGMutablePath()
+//        testPath.addArc(center: CGPoint.zero,
+//                        radius: testRadius,
+//                        startAngle: 0,
+//                        endAngle: CGFloat.pi * 2,
+//                        clockwise: true)
+//
+//
+//        testNode = SKShapeNode(path: testPath)
+//        testNode.lineWidth = 3
+//        testNode.fillColor = .clear
+//        testNode.strokeColor = .white
+//        testNode.zPosition = 4
+//        testNode.position.x = 0.0
+//        testNode.position.y = 0.0
+//        addChild(testNode)
+//    }
     
     @objc func updateGameTimer() {
         if pauseIsActive == false {
-            drawCircle()
-            testRadius -= 1
             time.gameTimeInSeconds += 1     //This will decrement(count down)the seconds.
             if eventBoarder.position.x < CGFloat(barWidth * 27 / 2) {
                     eventBoarder.position.x = eventBoarder.position.x + CGFloat(timeIndicator)
@@ -743,10 +752,14 @@ class GameScene: SKScene {
     
     func phaseTimerFired () {
         time.phaseTimer.invalidate()
+        if phaseNumber == 2 {
+            setRadius()
+        }
         if phaseNumber == 1 || phaseNumber == 2 || phaseNumber == 0 {
             phaseNumber += 1
             print ("\(eventNumber).\(phaseNumber)")
         } else if phaseNumber == 3 && eventNumber != 4 {
+            
             phaseNumber = 1
             eventNumber += 1
             print ("\(eventNumber).\(phaseNumber)")
@@ -773,36 +786,73 @@ class GameScene: SKScene {
         circle2.position.y = circle.position.y
     }
     
+    func setRadius() {
+        testRadius = currentRadius
+        nextRadius = (testRadius / 2)
+        x = ((nextEventLocation.x - eventLocation.x) / CGFloat((restrictTime)))
+        y = ((nextEventLocation.y - eventLocation.y) / CGFloat((restrictTime)))
+    }
+    
     func restrictTheScreen() {
         if pauseIsActive == false {
-            if phaseNumber == 3 && eventNumber == 1 {
-                poisonGasNode.lineWidth += 2 * ((poisonGasRadius - eventRadius) / CGFloat(restrictTime))
-                copyCircle(circle2: poisonGasNode2, circle: poisonGasNode)
-            } else if phaseNumber == 3 && eventNumber == 2 {
-                eventOneNode.alpha = 0.2
-                eventOneNode.strokeColor = .green
-                eventOneNode.lineWidth += (eventRadius / CGFloat(restrictTime))
-                eventOneNode.position.x = eventOneNode.position.x + x
-                eventOneNode.position.y = eventOneNode.position.y + y
-                copyCircle(circle2: eventOneNode2, circle: eventOneNode)
-            } else if phaseNumber == 3 && eventNumber == 3 {
-                eventTwoNode.alpha = 0.2
-                eventTwoNode.strokeColor = .green
-                eventTwoNode.lineWidth += (eventRadius / 2) / CGFloat(restrictTime)
-                eventTwoNode.position.x = eventTwoNode.position.x + x
-                eventTwoNode.position.y = eventTwoNode.position.y + y
-                copyCircle(circle2: eventTwoNode2, circle: eventTwoNode)
-            } else if phaseNumber == 3 && eventNumber == 4 {
-                eventThreeNode.alpha = 0.2
-                eventThreeNode.strokeColor = .green
-                eventThreeNode.lineWidth += (eventRadius / 4) / CGFloat(restrictTime)
-                eventThreeNode.position.x = eventThreeNode.position.x + x
-                eventThreeNode.position.y = eventThreeNode.position.y + y
-                copyCircle(circle2: eventThreeNode2, circle: eventThreeNode)
+            if phaseNumber == 3 {
+                testNode.removeFromParent()
+                let testPath = CGMutablePath()
+                currentRadius = (currentRadius - ((testRadius - nextRadius) / CGFloat(restrictTime)))
+                testPath.addArc(center: CGPoint.zero,
+                                radius: currentRadius,
+                                startAngle: 0,
+                                endAngle: CGFloat.pi * 2,
+                                clockwise: true)
+                
+                
+                testNode = SKShapeNode(path: testPath)
+                testNode.lineWidth = 3
+                testNode.fillColor = .clear
+                testNode.strokeColor = .white
+                testNode.zPosition = 4
+                eventLocation.x = eventLocation.x + x
+                eventLocation.y = eventLocation.y + y
+//                print (eventLocation)
+//                testNode.position.x = eventLocation.x
+//                testNode.position.y = eventLocation.y
+                testNode.position = eventLocation
+                addChild(testNode)
             }
-        } else {
         }
+        
     }
+    
+//    func restrictTheScreenOld() {
+//        if pauseIsActive == false {
+//            if phaseNumber == 3 && eventNumber == 1 {
+//                poisonGasNode.lineWidth += 2 * ((poisonGasRadius - eventRadius) / CGFloat(restrictTime))
+////                copyCircle(circle2: poisonGasNode2, circle: poisonGasNode)
+//            } else if phaseNumber == 3 && eventNumber == 2 {
+//                eventOneNode.alpha = 0.2
+//                eventOneNode.strokeColor = .green
+//                eventOneNode.lineWidth += (eventRadius / CGFloat(restrictTime))
+//                eventOneNode.position.x = eventOneNode.position.x + x
+//                eventOneNode.position.y = eventOneNode.position.y + y
+//                copyCircle(circle2: eventOneNode2, circle: eventOneNode)
+//            } else if phaseNumber == 3 && eventNumber == 3 {
+//                eventTwoNode.alpha = 0.2
+//                eventTwoNode.strokeColor = .green
+//                eventTwoNode.lineWidth += (eventRadius / 2) / CGFloat(restrictTime)
+//                eventTwoNode.position.x = eventTwoNode.position.x + x
+//                eventTwoNode.position.y = eventTwoNode.position.y + y
+//                copyCircle(circle2: eventTwoNode2, circle: eventTwoNode)
+//            } else if phaseNumber == 3 && eventNumber == 4 {
+//                eventThreeNode.alpha = 0.2
+//                eventThreeNode.strokeColor = .green
+//                eventThreeNode.lineWidth += (eventRadius / 4) / CGFloat(restrictTime)
+//                eventThreeNode.position.x = eventThreeNode.position.x + x
+//                eventThreeNode.position.y = eventThreeNode.position.y + y
+//                copyCircle(circle2: eventThreeNode2, circle: eventThreeNode)
+//            }
+//        } else {
+//        }
+//    }
     
     func runPhase() {
         switch phaseNumber {
@@ -846,30 +896,30 @@ class GameScene: SKScene {
             time.phaseTimerInSeconds = restrictInTime
             runRestrictionTimer()
             runPhaseTimer()
-            if eventNumber == 1 {
-                poisonGasNode.position = eventOneNode.position
-                eventOneNode2.position.x = eventOneNode.position.x
-                eventOneNode2.position.y = eventOneNode.position.y
-                eventOneNode2.strokeColor = eventOneNode.strokeColor
-            } else if eventNumber == 2 {
-                eventTwoNode2.position.x = eventTwoNode.position.x
-                eventTwoNode2.position.y = eventTwoNode.position.y
-                eventTwoNode2.strokeColor = eventTwoNode.strokeColor
-                x = ((eventOneNode.position.x - eventTwoNode.position.x) / CGFloat((-1 * restrictTime)))
-                y = ((eventOneNode.position.y - eventTwoNode.position.y) / CGFloat((-1 * restrictTime)))
-            } else if eventNumber == 3 {
-                eventThreeNode2.position.x = eventThreeNode.position.x
-                eventThreeNode2.position.y = eventThreeNode.position.y
-                eventThreeNode2.strokeColor = eventThreeNode.strokeColor
-                x = ((eventTwoNode.position.x - eventThreeNode.position.x) / CGFloat((-1 * restrictTime)))
-                y = ((eventTwoNode.position.y - eventThreeNode.position.y) / CGFloat((-1 * restrictTime)))
-            } else if eventNumber == 4 {
-                eventFourNode2.position.x = eventFourNode.position.x
-                eventFourNode2.position.y = eventFourNode.position.y
-                eventFourNode2.strokeColor = eventFourNode.strokeColor
-                x = ((eventThreeNode.position.x - eventFourNode.position.x) / CGFloat((-1 * restrictTime)))
-                y = ((eventThreeNode.position.y - eventFourNode.position.y) / CGFloat((-1 * restrictTime)))
-            }
+//            if eventNumber == 1 {
+//                poisonGasNode.position = eventOneNode.position
+//                eventOneNode2.position.x = eventOneNode.position.x
+//                eventOneNode2.position.y = eventOneNode.position.y
+//                eventOneNode2.strokeColor = eventOneNode.strokeColor
+//            } else if eventNumber == 2 {
+//                eventTwoNode2.position.x = eventTwoNode.position.x
+//                eventTwoNode2.position.y = eventTwoNode.position.y
+//                eventTwoNode2.strokeColor = eventTwoNode.strokeColor
+//                x = ((eventOneNode.position.x - eventTwoNode.position.x) / CGFloat((-1 * restrictTime)))
+//                y = ((eventOneNode.position.y - eventTwoNode.position.y) / CGFloat((-1 * restrictTime)))
+//            } else if eventNumber == 3 {
+//                eventThreeNode2.position.x = eventThreeNode.position.x
+//                eventThreeNode2.position.y = eventThreeNode.position.y
+//                eventThreeNode2.strokeColor = eventThreeNode.strokeColor
+//                x = ((eventTwoNode.position.x - eventThreeNode.position.x) / CGFloat((-1 * restrictTime)))
+//                y = ((eventTwoNode.position.y - eventThreeNode.position.y) / CGFloat((-1 * restrictTime)))
+//            } else if eventNumber == 4 {
+//                eventFourNode2.position.x = eventFourNode.position.x
+//                eventFourNode2.position.y = eventFourNode.position.y
+//                eventFourNode2.strokeColor = eventFourNode.strokeColor
+//                x = ((eventThreeNode.position.x - eventFourNode.position.x) / CGFloat((-1 * restrictTime)))
+//                y = ((eventThreeNode.position.y - eventFourNode.position.y) / CGFloat((-1 * restrictTime)))
+//            }
             
         case 3:
             phaseLabel.text = "Safe zone is restricting"

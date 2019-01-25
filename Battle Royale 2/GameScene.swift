@@ -16,6 +16,22 @@ class GameScene: SKScene {
     var graphs = [String : GKGraph]()
     private var lastUpdateTime : TimeInterval = 0
     
+    var inicialSize = CGFloat(1436)
+    var currentSize = CGFloat(0)
+    var nextSize = CGFloat(0)
+    
+    var timeModifier = 30
+    var freeTime = 3
+    var restrictInTime = 1
+    var restrictTime = 2
+    
+    var chance = 2
+    
+    let alarmSoundVolume = Float(1.0)
+    let bombSoundVolume = Float(1.0)
+    let bellSoundVolume = Float(1.0)
+    let introVolume = Float(1.0)
+    
     
     var gameTimerLabel:SKLabelNode = SKLabelNode()
     var restrictionTimerLabel:SKLabelNode = SKLabelNode()
@@ -56,10 +72,6 @@ class GameScene: SKScene {
     var sub5Label:SKLabelNode = SKLabelNode()
     var sub6Label:SKLabelNode = SKLabelNode()
     
-    var inicialSize = CGFloat(1436)
-    var currentSize = CGFloat(0)
-    var nextSize = CGFloat(0)
-    
     var eventLocation = CGPoint(x: 0, y: 0)
     var nextEventLocation = CGPoint(x: 0, y: 0)
     
@@ -71,19 +83,13 @@ class GameScene: SKScene {
     var eventNumber = 0
     var phaseNumber = 0
     
-    var timeModifier = 30
-    
-    var freeTime = 3
-    var restrictInTime = 1
-    var restrictTime = 2
-    
-    var totalGameTime = 5
+    var totalGameTime = 0
     var timeIndicator = CGFloat(0)
     
     var pauseIsActive = false
     var skipRestrictionBool = false
     
-    var chance = 2
+
     
     let introSound = SKAudioNode(fileNamed: "introSound.mp3")
     let alarmSound = SKAudioNode(fileNamed: "alarmSound.mp3")
@@ -94,11 +100,6 @@ class GameScene: SKScene {
     let freeTimeSound = SKAudioNode(fileNamed: "solemnVow.mp3")
     let restrictInSound = SKAudioNode(fileNamed: "darkContinent.mp3")
     let restrictSound = SKAudioNode(fileNamed: "fieldOfHeroes.mp3")
-    
-    let alarmSoundVolume = Float(1.0)
-    let bombSoundVolume = Float(1.0)
-    let bellSoundVolume = Float(1.0)
-    let introVolume = Float(1.0)
     
     override func sceneDidLoad() {
         freeTime = (3 * timeModifier)
@@ -496,7 +497,7 @@ class GameScene: SKScene {
                     typeButtons[i]!.color = .gray
                     buttons.typeListButtonActive[i] = false
                     hideButtons(array: subListButtons as! Array<SKSpriteNode>)
-                } else if buttons.typeListButtonActive[i] == false {
+                } else if buttons.typeListButtonActive[i] == false && buttons.typeListButtonsDead[i] == false {
                     showButtons(array: subListButtons as! Array<SKSpriteNode>)
                     for index in typeButtons {
                         index!.color = .gray
@@ -510,7 +511,8 @@ class GameScene: SKScene {
             }
             i += 1
         }
-            setupSubText()
+        setupSubText()
+        killTypeButtons()
     }
     
     func killSubButtons() {
@@ -522,7 +524,22 @@ class GameScene: SKScene {
                 }
             }
         }
-        
+    }
+    
+    func killTypeButtons() {
+        for type in 0...5 {
+//        let type = returnBoolNumber(array: buttons.typeListButtonActive)
+            var check = 0
+            for i in 0...5 {
+                if buttons.subListButtonsDead[type][i] == true {
+                    check += 1
+                }
+            }
+            if check == 6 {
+                buttons.typeListButtonsDead[type] = true
+                typeButtons[type]?.color = .black
+            }
+        }
     }
     
     func subListButtonSelection(location: CGPoint) {
@@ -897,6 +914,7 @@ class GameScene: SKScene {
             let wait4 = SKAction.wait(forDuration: 4)
             restrictSound.run(SKAction.changeVolume(to: 0.0, duration: 2))
             bellSound.run(SKAction.sequence([playSoundFX, wait4, stopSoundFX]))
+            time.restrictionLabelString = ""
             
             super.run(SKAction.play())
             
@@ -1237,6 +1255,7 @@ class GameScene: SKScene {
         subLabel.color = .black
         subListButtons[index]!.color = .black
         buttons.subListButtonsDead[type][index] = true
+        killTypeButtons()
     }
     
     

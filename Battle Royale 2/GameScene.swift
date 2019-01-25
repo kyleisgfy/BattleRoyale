@@ -81,6 +81,7 @@ class GameScene: SKScene {
     var timeIndicator = CGFloat(0)
     
     var pauseIsActive = false
+    var skipRestrictionBool = false
     
     var chance = 2
     
@@ -650,6 +651,11 @@ class GameScene: SKScene {
             eventBoarder.position.x = eventBoarder.position.x + (CGFloat(timeIndicator) * (CGFloat(time.phaseTimerInSeconds) - 1.0))
             time.phaseTimerInSeconds = 0
             time.restrictionTimeInSeconds = 0
+            if phaseNumber == 3 {
+                skipRestriction()
+                skipRestrictionBool = true
+            }
+            
         default:
             print("keyDown: \(event.characters!) keyCode: \(event.keyCode)")
         }
@@ -767,7 +773,7 @@ class GameScene: SKScene {
     
     func restrictTheScreen() {
         if pauseIsActive == false {
-            if phaseNumber == 3 {
+            if phaseNumber == 3 && skipRestrictionBool == false {
                 
                 currentSize = (currentSize - ((inicialSize - nextSize) / CGFloat(restrictTime)))
                 safeZone.size.width = currentSize
@@ -778,8 +784,23 @@ class GameScene: SKScene {
                 
                 safeZone2.size = safeZone.size
                 safeZone2.position = safeZone.position
+            } else if skipRestrictionBool == true {
+                skipRestrictionBool = false
             }
         }
+        
+    }
+    
+    func skipRestriction() {
+        currentSize = nextSize
+        eventLocation = nextEventLocation
+        
+        safeZone.size.width = currentSize
+        safeZone.size.height = currentSize
+        safeZone.position = eventLocation
+        
+        safeZone2.size = safeZone.size
+        safeZone2.position = safeZone.position
         
     }
     

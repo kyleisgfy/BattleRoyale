@@ -68,7 +68,7 @@ var subListButtons = [SKSpriteNode?](repeating: nil, count: 6)
 var safeZone = SKSpriteNode()
 var safeZone2 = SKSpriteNode()
 
-let eventRadius = CGFloat(336)
+let eventRadius = CGFloat(359)
 
 //var splash = SKSpriteNode()
 var splashBackground = SKSpriteNode()

@@ -469,6 +469,7 @@ class GameScene: SKScene {
         var i = 0
         while i < 6 {
             if characterButtons[i]!.contains(location) {
+                
                 if buttons.characterButtonActive[i] == true {
                     characterButtons[i]!.color = .gray
                     buttons.characterButtonActive[i] = false
@@ -512,14 +513,27 @@ class GameScene: SKScene {
             setupSubText()
     }
     
+    func killSubButtons() {
+        let type = returnBoolNumber(array: buttons.typeListButtonActive)
+        if type < 6 {
+            for i in 0...5 {
+                if buttons.subListButtonsDead[type][i] == true {
+                    subListButtons[i]!.color = .black
+                }
+            }
+        }
+        
+    }
+    
     func subListButtonSelection(location: CGPoint) {
         var i = 0
+        let type = returnBoolNumber(array: buttons.typeListButtonActive)
         while i < 6 {
             if subListButtons[i]!.contains(location) {
                 if buttons.subListButtonActive[i] == true {
                     subListButtons[i]!.color = .gray
                     buttons.subListButtonActive[i] = false
-                } else if buttons.subListButtonActive[i] == false {
+                } else if buttons.subListButtonActive[i] == false && buttons.subListButtonsDead[type][i] == false {
                     for index in subListButtons {
                         index!.color = .gray
                     }
@@ -530,6 +544,7 @@ class GameScene: SKScene {
                     buttons.subListButtonActive[i] = true
                 }
             }
+            killSubButtons()
             i += 1
         }
     }
@@ -621,7 +636,7 @@ class GameScene: SKScene {
             
         case 36: //return
             forceKill()
-            resetButtons()
+            resetCharacterButtons()
 
         case 49: //spacebar
             if eventNumber == 0 {
@@ -976,13 +991,31 @@ class GameScene: SKScene {
         introSound.run(SKAction.changeVolume(to: introVolume, duration: 0))
     }
     
-    func resetButtons() {
+    func resetAllButtons() {
         var i = 0
         while i < 6 {
             characterButtons[i]!.color = .gray
             buttons.characterButtonActive[i] = false
             typeButtons[i]!.color = .gray
             buttons.typeListButtonActive[i] = false
+            subListButtons[i]!.color = .gray
+            buttons.subListButtonActive[i] = false
+            i += 1
+        }
+    }
+    
+    func resetCharacterButtons() {
+        var i = 0
+        while i < 6 {
+            characterButtons[i]!.color = .gray
+            buttons.characterButtonActive[i] = false
+            i += 1
+        }
+    }
+    
+    func resetSubListButtons() {
+        var i = 0
+        while i < 6 {
             subListButtons[i]!.color = .gray
             buttons.subListButtonActive[i] = false
             i += 1
@@ -1094,7 +1127,7 @@ class GameScene: SKScene {
     
     func characterKills(playerName: Int) {
         characterKillRando(character: "\(char.characterListPlain[playerName])")
-        resetButtons()
+        resetCharacterButtons()
     }
     
     func returnBoolNumber(array: Array<Bool>) -> Int {
@@ -1122,6 +1155,22 @@ class GameScene: SKScene {
             characterKills(playerName: characterIndex)
         } else if typeIndex != 6 && characterIndex != 6 && subIndex != 6 {
             characterKillsType(playerName: characterIndex, type: typeIndex, subName: subIndex)
+            switch subIndex {
+            case 0:
+                subDied(subLabel: sub1Label, type: typeIndex, index: subIndex)
+            case 1:
+                subDied(subLabel: sub2Label, type: typeIndex, index: subIndex)
+            case 2:
+                subDied(subLabel: sub3Label, type: typeIndex, index: subIndex)
+            case 3:
+                subDied(subLabel: sub4Label, type: typeIndex, index: subIndex)
+            case 4:
+                subDied(subLabel: sub5Label, type: typeIndex, index: subIndex)
+            case 5:
+                subDied(subLabel: sub6Label, type: typeIndex, index: subIndex)
+            default:
+                print ("error: force kill")
+            }
         }
     }
     
@@ -1155,6 +1204,8 @@ class GameScene: SKScene {
     
     func setupSubText() {
         let typeIndex = returnBoolNumber(array: buttons.typeListButtonActive)
+        resetSubListButtons()
+        killSubButtons()
         switch typeIndex {
         case 0:
             writeSubText(array: char.officeGroup)
@@ -1182,8 +1233,10 @@ class GameScene: SKScene {
         sub6Label.text = "\(array[5])"
     }
     
-    func subDied(subLabel: SKLabelNode) {
+    func subDied(subLabel: SKLabelNode, type: Int, index: Int) {
         subLabel.color = .black
+        subListButtons[index]!.color = .black
+        buttons.subListButtonsDead[type][index] = true
     }
     
     

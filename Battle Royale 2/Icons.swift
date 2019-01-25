@@ -231,17 +231,17 @@ func createIcons() {
     eventFourNode.strokeColor = .clear
     eventFourNode.zPosition = 4
     
-    poisonGasPath.addArc(center: CGPoint.zero,
-                         radius: (poisonGasRadius),
-                         startAngle: 0,
-                         endAngle: CGFloat.pi * 2,
-                         clockwise: true)
-    poisonGasNode = SKShapeNode(path:    poisonGasPath)
-    poisonGasNode.lineWidth = 0
-    poisonGasNode.fillColor = .clear
-    poisonGasNode.strokeColor = .green
-    poisonGasNode.alpha = 0.2
-    poisonGasNode.zPosition = 1
+//    poisonGasPath.addArc(center: CGPoint.zero,
+//                         radius: (poisonGasRadius),
+//                         startAngle: 0,
+//                         endAngle: CGFloat.pi * 2,
+//                         clockwise: true)
+//    poisonGasNode = SKShapeNode(path:    poisonGasPath)
+//    poisonGasNode.lineWidth = 0
+//    poisonGasNode.fillColor = .clear
+//    poisonGasNode.strokeColor = .green
+//    poisonGasNode.alpha = 0.2
+//    poisonGasNode.zPosition = 1
     
     let totalBarLength = (barWidth * 27)
     let firstEvent = CGFloat((barWidth) * 3)

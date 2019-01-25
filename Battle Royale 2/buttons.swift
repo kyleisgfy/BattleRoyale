@@ -14,4 +14,13 @@ class buttonsClass: NSObject {
     var characterButtonActive = [false, false, false, false, false, false]
     var typeListButtonActive = [false, false, false, false, false, false]
     var subListButtonActive = [false, false, false, false, false, false]
+    var typeListButtonsDead = [false, false, false, false, false, false]
+    var subListButtonsDead =  [[false, false, false, false, false, false],
+                               [false, false, false, false, false, false],
+                               [false, false, false, false, false, false],
+                               [false, false, false, false, false, false],
+                               [false, false, false, false, false, false],
+                               [false, false, false, false, false, false], 
+                               [false, false, false, false, false, false]
+                               ]
 }

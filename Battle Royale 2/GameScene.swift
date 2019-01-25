@@ -94,6 +94,11 @@ class GameScene: SKScene {
     let restrictInSound = SKAudioNode(fileNamed: "darkContinent.mp3")
     let restrictSound = SKAudioNode(fileNamed: "fieldOfHeroes.mp3")
     
+    let alarmSoundVolume = Float(1.0)
+    let bombSoundVolume = Float(1.0)
+    let bellSoundVolume = Float(1.0)
+    let introVolume = Float(1.0)
+    
     override func sceneDidLoad() {
         freeTime = (3 * timeModifier)
         restrictInTime = (1 * timeModifier)
@@ -163,6 +168,8 @@ class GameScene: SKScene {
         alarmSound.run(SKAction.stop())
         bombSound.run(SKAction.stop())
         bellSound.run(SKAction.stop())
+        
+        setFXVolume()
         
         runGameTimer()
         runPhase()
@@ -637,9 +644,7 @@ class GameScene: SKScene {
             bellSound.run(SKAction.changeVolume(by: 0.1, duration: 0))
             
         case 51: //delete
-            alarmSound.run(SKAction.stop())
-            bombSound.run(SKAction.stop())
-            bellSound.run(SKAction.stop())
+            stopFX()
             
         case 44: //question mark
             eventBoarder.position.x = eventBoarder.position.x + (CGFloat(timeIndicator) * (CGFloat(time.phaseTimerInSeconds) - 1.0))
@@ -753,18 +758,6 @@ class GameScene: SKScene {
         runPhase()
     }
     
-//****************************************************************************************
-// functions for the phase and the restriction of the screen
-//****************************************************************************************
-    
-//    func copyCircle(circle2: SKShapeNode, circle: SKShapeNode) {
-//        circle2.alpha = circle.alpha
-//        circle2.strokeColor = circle.strokeColor
-//        circle2.lineWidth = circle.lineWidth
-//        circle2.position.x = circle.position.x
-//        circle2.position.y = circle.position.y
-//    }
-    
     func setRadius() {
         inicialSize = currentSize
         nextSize = (inicialSize / 2)
@@ -789,37 +782,6 @@ class GameScene: SKScene {
         }
         
     }
-    
-//    func restrictTheScreenOld() {
-//        if pauseIsActive == false {
-//            if phaseNumber == 3 && eventNumber == 1 {
-//                poisonGasNode.lineWidth += 2 * ((poisonGasRadius - eventRadius) / CGFloat(restrictTime))
-////                copyCircle(circle2: poisonGasNode2, circle: poisonGasNode)
-//            } else if phaseNumber == 3 && eventNumber == 2 {
-//                eventOneNode.alpha = 0.2
-//                eventOneNode.strokeColor = .green
-//                eventOneNode.lineWidth += (eventRadius / CGFloat(restrictTime))
-//                eventOneNode.position.x = eventOneNode.position.x + x
-//                eventOneNode.position.y = eventOneNode.position.y + y
-//                copyCircle(circle2: eventOneNode2, circle: eventOneNode)
-//            } else if phaseNumber == 3 && eventNumber == 3 {
-//                eventTwoNode.alpha = 0.2
-//                eventTwoNode.strokeColor = .green
-//                eventTwoNode.lineWidth += (eventRadius / 2) / CGFloat(restrictTime)
-//                eventTwoNode.position.x = eventTwoNode.position.x + x
-//                eventTwoNode.position.y = eventTwoNode.position.y + y
-//                copyCircle(circle2: eventTwoNode2, circle: eventTwoNode)
-//            } else if phaseNumber == 3 && eventNumber == 4 {
-//                eventThreeNode.alpha = 0.2
-//                eventThreeNode.strokeColor = .green
-//                eventThreeNode.lineWidth += (eventRadius / 4) / CGFloat(restrictTime)
-//                eventThreeNode.position.x = eventThreeNode.position.x + x
-//                eventThreeNode.position.y = eventThreeNode.position.y + y
-//                copyCircle(circle2: eventThreeNode2, circle: eventThreeNode)
-//            }
-//        } else {
-//        }
-//    }
     
     func runPhase() {
         switch phaseNumber {
@@ -892,6 +854,16 @@ class GameScene: SKScene {
             freeTimeSound.run(SKAction.stop())
             time.phaseTimerInSeconds = restrictTime
             runPhaseTimer()
+        case 4:
+            print ("End Game")
+            let playSoundFX = SKAction.play()
+            let stopSoundFX = SKAction.stop()
+            let wait4 = SKAction.wait(forDuration: 4)
+            restrictSound.run(SKAction.changeVolume(to: 0.0, duration: 2))
+            bellSound.run(SKAction.sequence([playSoundFX, wait4, stopSoundFX]))
+            
+            super.run(SKAction.play())
+            
         default:
             print ("Phase number is out of scope to move forward.")
         }
@@ -965,21 +937,22 @@ class GameScene: SKScene {
             bombSound.run(SKAction.sequence([playSoundFX, wait8, stopSoundFX]))
         } else if phaseNumber == 3 && time.phaseTimerInSeconds <= 1 {
             bellSound.run(SKAction.sequence([playSoundFX, wait4, stopSoundFX]))
-        } else if phaseNumber == 4 && time.phaseTimerInSeconds <= 1 {
-            bellSound.run(SKAction.sequence([playSoundFX, wait4, stopSoundFX]))
-        }
+        } //else if phaseNumber == 4 && time.phaseTimerInSeconds <= 1 {
+//            bellSound.run(SKAction.sequence([playSoundFX, wait4, stopSoundFX]))
+//        }
     }
     
     func stopFX() {
-        if phaseNumber == 2 && time.phaseTimerInSeconds == (restrictInTime - 7) {
-            alarmSound.run(SKAction.stop())
-        } else if phaseNumber == 3 && time.phaseTimerInSeconds == (restrictTime - 8) {
-            bombSound.run(SKAction.stop())
-        } else if phaseNumber == 1 && time.phaseTimerInSeconds == (freeTime - 4) {
-            bellSound.run(SKAction.stop())
-        } else if phaseNumber == 4 && time.phaseTimerInSeconds == (freeTime - 4) {
-            bellSound.run(SKAction.stop())
-        }
+        alarmSound.run(SKAction.stop())
+        bombSound.run(SKAction.stop())
+        bellSound.run(SKAction.stop())
+    }
+    
+    func setFXVolume() {
+        alarmSound.run(SKAction.changeVolume(to: alarmSoundVolume, duration: 0))
+        bombSound.run(SKAction.changeVolume(to: bombSoundVolume, duration: 0))
+        bellSound.run(SKAction.changeVolume(to: bellSoundVolume, duration: 0))
+        introSound.run(SKAction.changeVolume(to: introVolume, duration: 0))
     }
     
     func resetButtons() {
@@ -1129,8 +1102,9 @@ class GameScene: SKScene {
         } else if typeIndex != 6 && characterIndex != 6 && subIndex != 6 {
             characterKillsType(playerName: characterIndex, type: typeIndex, subName: subIndex)
         }
-        
     }
+    
+
     
     func characterKillsType(playerName: Int, type: Int, subName: Int) {
         updateBroadcast()
@@ -1186,6 +1160,12 @@ class GameScene: SKScene {
         sub5Label.text = "\(array[4])"
         sub6Label.text = "\(array[5])"
     }
+    
+    func subDied(subLabel: SKLabelNode) {
+        subLabel.color = .black
+    }
+    
+    
     
 
 }

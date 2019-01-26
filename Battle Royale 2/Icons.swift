@@ -70,7 +70,6 @@ var safeZone2 = SKSpriteNode()
 
 let eventRadius = CGFloat(359)
 
-//var splash = SKSpriteNode()
 var splashBackground = SKSpriteNode()
 var splashLogo = SKSpriteNode()
 var splashText = SKSpriteNode()
@@ -84,12 +83,10 @@ let cropNode = SKCropNode()
 let cropImage2 = SKSpriteNode(imageNamed: "backgroundImage")
 let cropNode2 = SKCropNode()
 
-//var textBackgroundPath = CGMutablePath()
 let textBackgroundNode = SKSpriteNode()
 let textNodeTab = SKSpriteNode()
-let buttonLabelBackgroundSize = CGSize(width: 200, height: 620)
+let buttonLabelBackgroundSize = CGSize(width: 200, height: 420)
 var textTabOpen = true
-
 
 func createCharacterButtons() {
     var i = 0
@@ -140,32 +137,16 @@ func createSubListButtons() {
 func setTextBackground() {
     textBackgroundNode.size = buttonLabelBackgroundSize
     textBackgroundNode.alpha = 0.5
-    textBackgroundNode.zPosition = 5
+    textBackgroundNode.zPosition = 3
     textBackgroundNode.color = .black
-    textBackgroundNode.position = CGPoint(x: -521, y: 15)
+    textBackgroundNode.position = CGPoint(x: -521, y: 115)
     
     textNodeTab.size = CGSize(width: 30, height: 100)
     textNodeTab.alpha = 0.5
-    textNodeTab.zPosition = 5
+    textNodeTab.zPosition = 3
     textNodeTab.color = .black
     textNodeTab.position = CGPoint(x: -406,y: 235)
-
 }
-
-//func setTextBackground(label: SKLabelNode, i: Int, size: CGSize) {
-//    textBackgroundNode[i] = SKSpriteNode()
-//    textBackgroundNode[i]!.size = size
-//    textBackgroundNode[i]!.alpha = 0.5
-//    textBackgroundNode[i]!.zPosition = 5
-//    textBackgroundNode[i]!.color = .black
-//    textBackgroundNode[i]!.position = label.position
-//
-//}
-
-
-
-
-    
 
 func createIcons() {
     createCharacterButtons()
@@ -186,9 +167,6 @@ func createIcons() {
     safeZone.zPosition = 2
     
     cropNode.maskNode = safeZone
-    
-    
-    
     
     background = SKSpriteNode(imageNamed: "backgroundImage")
     background.position = CGPoint.zero
@@ -265,18 +243,6 @@ func createIcons() {
     eventFourNode.fillColor = .clear
     eventFourNode.strokeColor = .clear
     eventFourNode.zPosition = 4
-    
-//    poisonGasPath.addArc(center: CGPoint.zero,
-//                         radius: (poisonGasRadius),
-//                         startAngle: 0,
-//                         endAngle: CGFloat.pi * 2,
-//                         clockwise: true)
-//    poisonGasNode = SKShapeNode(path:    poisonGasPath)
-//    poisonGasNode.lineWidth = 0
-//    poisonGasNode.fillColor = .clear
-//    poisonGasNode.strokeColor = .green
-//    poisonGasNode.alpha = 0.2
-//    poisonGasNode.zPosition = 1
     
     let totalBarLength = (barWidth * 27)
     let firstEvent = CGFloat((barWidth) * 3)

@@ -499,8 +499,10 @@ class GameScene: SKScene {
                     typeButtons[i]!.color = .gray
                     buttons.typeListButtonActive[i] = false
                     hideButtons(array: subListButtons as! Array<SKSpriteNode>)
+                    shrinkButtonTab()
                 } else if buttons.typeListButtonActive[i] == false && buttons.typeListButtonsDead[i] == false {
                     showButtons(array: subListButtons as! Array<SKSpriteNode>)
+                    growButtonTab()
                     for index in typeButtons {
                         index!.color = .gray
                     }
@@ -1056,6 +1058,16 @@ class GameScene: SKScene {
         for i in 0...5 {
             array[i].alpha = 1.0
         }
+    }
+    
+    func shrinkButtonTab() {
+        textBackgroundNode.size.height = textBackgroundNode.size.height - 200
+        textBackgroundNode.position.y = textBackgroundNode.position.y + 100
+    }
+    
+    func growButtonTab() {
+        textBackgroundNode.size.height = textBackgroundNode.size.height + 200
+        textBackgroundNode.position.y = textBackgroundNode.position.y - 100
     }
     
     

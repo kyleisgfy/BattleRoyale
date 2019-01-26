@@ -84,6 +84,12 @@ let cropNode = SKCropNode()
 let cropImage2 = SKSpriteNode(imageNamed: "backgroundImage")
 let cropNode2 = SKCropNode()
 
+//var textBackgroundPath = CGMutablePath()
+let textBackgroundNode = SKSpriteNode()
+let textNodeTab = SKSpriteNode()
+let buttonLabelBackgroundSize = CGSize(width: 200, height: 620)
+var textTabOpen = true
+
 
 func createCharacterButtons() {
     var i = 0
@@ -100,36 +106,65 @@ func createCharacterButtons() {
     }
 }
     
-    func createTypeButtons() {
-        var i = 0
-        var yLocation = 80
-        while i < 6 {
-            typeButtons[i] = SKSpriteNode()
-            typeButtons[i]!.color = .gray
-            typeButtons[i]!.zPosition = 3
-            typeButtons[i]!.size.width = 20
-            typeButtons[i]!.size.height = 20
-            typeButtons[i]!.position = CGPoint(x:-600 , y: yLocation)
-            yLocation -= 30
-            i += 1
-        }
+func createTypeButtons() {
+    var i = 0
+    var yLocation = 80
+    while i < 6 {
+        typeButtons[i] = SKSpriteNode()
+        typeButtons[i]!.color = .gray
+        typeButtons[i]!.zPosition = 3
+        typeButtons[i]!.size.width = 20
+        typeButtons[i]!.size.height = 20
+        typeButtons[i]!.position = CGPoint(x:-600 , y: yLocation)
+        yLocation -= 30
+        i += 1
     }
+}
     
-    func createSubListButtons() {
-        var i = 0
-        var yLocation = -120
-        while i < 6 {
-            subListButtons[i] = SKSpriteNode()
-            subListButtons[i]!.color = .gray
-            subListButtons[i]!.alpha = 0.0
-            subListButtons[i]!.zPosition = 3
-            subListButtons[i]!.size.width = 20
-            subListButtons[i]!.size.height = 20
-            subListButtons[i]!.position = CGPoint(x:-600 , y: yLocation)
-            yLocation -= 30
-            i += 1
-        }
+func createSubListButtons() {
+    var i = 0
+    var yLocation = -120
+    while i < 6 {
+        subListButtons[i] = SKSpriteNode()
+        subListButtons[i]!.color = .gray
+        subListButtons[i]!.alpha = 0.0
+        subListButtons[i]!.zPosition = 3
+        subListButtons[i]!.size.width = 20
+        subListButtons[i]!.size.height = 20
+        subListButtons[i]!.position = CGPoint(x:-600 , y: yLocation)
+        yLocation -= 30
+        i += 1
     }
+}
+
+func setTextBackground() {
+    textBackgroundNode.size = buttonLabelBackgroundSize
+    textBackgroundNode.alpha = 0.5
+    textBackgroundNode.zPosition = 5
+    textBackgroundNode.color = .black
+    textBackgroundNode.position = CGPoint(x: -521, y: 15)
+    
+    textNodeTab.size = CGSize(width: 30, height: 100)
+    textNodeTab.alpha = 0.5
+    textNodeTab.zPosition = 5
+    textNodeTab.color = .black
+    textNodeTab.position = CGPoint(x: -406,y: 235)
+
+}
+
+//func setTextBackground(label: SKLabelNode, i: Int, size: CGSize) {
+//    textBackgroundNode[i] = SKSpriteNode()
+//    textBackgroundNode[i]!.size = size
+//    textBackgroundNode[i]!.alpha = 0.5
+//    textBackgroundNode[i]!.zPosition = 5
+//    textBackgroundNode[i]!.color = .black
+//    textBackgroundNode[i]!.position = label.position
+//
+//}
+
+
+
+
     
 
 func createIcons() {
@@ -193,7 +228,7 @@ func createIcons() {
                         endAngle: CGFloat.pi * 2,
                         clockwise: true)
     eventOneNode = SKShapeNode(path:    eventOnePath)
-    eventOneNode.lineWidth = 5
+    eventOneNode.lineWidth = 3
     eventOneNode.fillColor = .clear
     eventOneNode.strokeColor = .clear
     eventOneNode.zPosition = 4
@@ -204,7 +239,7 @@ func createIcons() {
                         endAngle: CGFloat.pi * 2,
                         clockwise: true)
     eventTwoNode = SKShapeNode(path:    eventTwoPath)
-    eventTwoNode.lineWidth = 5
+    eventTwoNode.lineWidth = 3
     eventTwoNode.fillColor = .clear
     eventTwoNode.strokeColor = .clear
     eventTwoNode.zPosition = 4
@@ -215,7 +250,7 @@ func createIcons() {
                         endAngle: CGFloat.pi * 2,
                         clockwise: true)
     eventThreeNode = SKShapeNode(path:    eventThreePath)
-    eventThreeNode.lineWidth = 5
+    eventThreeNode.lineWidth = 3
     eventThreeNode.fillColor = .clear
     eventThreeNode.strokeColor = .clear
     eventThreeNode.zPosition = 4
@@ -226,7 +261,7 @@ func createIcons() {
                         endAngle: CGFloat.pi * 2,
                         clockwise: true)
     eventFourNode = SKShapeNode(path:    eventFourPath)
-    eventFourNode.lineWidth = 5
+    eventFourNode.lineWidth = 3
     eventFourNode.fillColor = .clear
     eventFourNode.strokeColor = .clear
     eventFourNode.zPosition = 4

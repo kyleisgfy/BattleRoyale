@@ -89,8 +89,6 @@ class GameScene: SKScene {
     var pauseIsActive = false
     var skipRestrictionBool = false
     
-
-    
     let introSound = SKAudioNode(fileNamed: "introSound.mp3")
     let alarmSound = SKAudioNode(fileNamed: "alarmSound.mp3")
     let bombSound = SKAudioNode(fileNamed: "bombSound.mp3")
@@ -161,6 +159,10 @@ class GameScene: SKScene {
         poisonGas = SKEmitterNode(fileNamed: "MyParticle1")!
         poisonGas.position = CGPoint(x: 0, y: 0)
         addChild(poisonGas)
+        
+        setTextBackground()
+        self.addChild(textBackgroundNode)
+        self.addChild(textNodeTab)
         
         introSound.run(SKAction.stop())
         firstSong.run(SKAction.stop())
@@ -572,6 +574,10 @@ class GameScene: SKScene {
         characterButtonSelection(location: event.location(in: self))
         typeButtonSelection(location: event.location(in: self))
         subListButtonSelection(location: event.location(in: self))
+        
+        if textNodeTab.contains(event.location(in: self)) {
+            moveButtonTab()
+        }
         
         if clickZoneNode.contains(event.location(in: self)) {
             if phaseNumber == 1 {
@@ -1258,7 +1264,75 @@ class GameScene: SKScene {
         killTypeButtons()
     }
     
+//    func setAllTextBackgrounds() {
+//        setTextBackground(label: alequaLabel, i: 0, size: buttonLabelBackgroundSize)
+//        self.addChild(textBackgroundNode[0]!)
+//    }
     
+    func moveButtonTab() {
+        let moveValue = CGFloat(190)
+        if textTabOpen == true {
+            textBackgroundNode.run(SKAction.moveBy(x: (-1 * moveValue), y: 0, duration: 0.5))
+            textNodeTab.run(SKAction.moveBy(x: (-1 * moveValue), y: 0, duration: 0.5))
+            for i in 0...5 {
+                characterButtons[i]?.run(SKAction.moveBy(x: (-1 * moveValue), y: 0, duration: 0.5))
+                typeButtons[i]?.run(SKAction.moveBy(x: (-1 * moveValue), y: 0, duration: 0.5))
+                subListButtons[i]?.run(SKAction.moveBy(x: (-1 * moveValue), y: 0, duration: 0.5))
+            }
+            alequaLabel.run(SKAction.moveBy(x: (-1 * moveValue), y: 0, duration: 0.5))
+            tokobetteLabel.run(SKAction.moveBy(x: (-1 * moveValue), y: 0, duration: 0.5))
+            auranLabel.run(SKAction.moveBy(x: (-1 * moveValue), y: 0, duration: 0.5))
+            zinnekahnLabel.run(SKAction.moveBy(x: (-1 * moveValue), y: 0, duration: 0.5))
+            metaLabel.run(SKAction.moveBy(x: (-1 * moveValue), y: 0, duration: 0.5))
+            snaraNarkeLabel.run(SKAction.moveBy(x: (-1 * moveValue), y: 0, duration: 0.5))
+            
+            officeLabel.run(SKAction.moveBy(x: (-1 * moveValue), y: 0, duration: 0.5))
+            youTubeLabel.run(SKAction.moveBy(x: (-1 * moveValue), y: 0, duration: 0.5))
+            harryPotterLabel.run(SKAction.moveBy(x: (-1 * moveValue), y: 0, duration: 0.5))
+            beastsLabel.run(SKAction.moveBy(x: (-1 * moveValue), y: 0, duration: 0.5))
+            terribleFoeLabel.run(SKAction.moveBy(x: (-1 * moveValue), y: 0, duration: 0.5))
+            specialNPCLabel.run(SKAction.moveBy(x: (-1 * moveValue), y: 0, duration: 0.5))
+            
+            sub1Label.run(SKAction.moveBy(x: (-1 * moveValue), y: 0, duration: 0.5))
+            sub2Label.run(SKAction.moveBy(x: (-1 * moveValue), y: 0, duration: 0.5))
+            sub3Label.run(SKAction.moveBy(x: (-1 * moveValue), y: 0, duration: 0.5))
+            sub4Label.run(SKAction.moveBy(x: (-1 * moveValue), y: 0, duration: 0.5))
+            sub5Label.run(SKAction.moveBy(x: (-1 * moveValue), y: 0, duration: 0.5))
+            sub6Label.run(SKAction.moveBy(x: (-1 * moveValue), y: 0, duration: 0.5))
+            
+            textTabOpen = false
+        } else if textTabOpen == false {
+            textBackgroundNode.run(SKAction.moveBy(x: moveValue, y: 0, duration: 0.5))
+            textNodeTab.run(SKAction.moveBy(x: moveValue, y: 0, duration: 0.5))
+            for i in 0...5 {
+                characterButtons[i]?.run(SKAction.moveBy(x: moveValue, y: 0, duration: 0.5))
+                typeButtons[i]?.run(SKAction.moveBy(x: moveValue, y: 0, duration: 0.5))
+                subListButtons[i]?.run(SKAction.moveBy(x: moveValue, y: 0, duration: 0.5))
+            }
+            alequaLabel.run(SKAction.moveBy(x: moveValue, y: 0, duration: 0.5))
+            tokobetteLabel.run(SKAction.moveBy(x: moveValue, y: 0, duration: 0.5))
+            auranLabel.run(SKAction.moveBy(x: moveValue, y: 0, duration: 0.5))
+            zinnekahnLabel.run(SKAction.moveBy(x: moveValue, y: 0, duration: 0.5))
+            metaLabel.run(SKAction.moveBy(x: moveValue, y: 0, duration: 0.5))
+            snaraNarkeLabel.run(SKAction.moveBy(x: moveValue, y: 0, duration: 0.5))
+            
+            officeLabel.run(SKAction.moveBy(x: moveValue, y: 0, duration: 0.5))
+            youTubeLabel.run(SKAction.moveBy(x: moveValue, y: 0, duration: 0.5))
+            harryPotterLabel.run(SKAction.moveBy(x: moveValue, y: 0, duration: 0.5))
+            beastsLabel.run(SKAction.moveBy(x: moveValue, y: 0, duration: 0.5))
+            terribleFoeLabel.run(SKAction.moveBy(x: moveValue, y: 0, duration: 0.5))
+            specialNPCLabel.run(SKAction.moveBy(x: moveValue, y: 0, duration: 0.5))
+            
+            sub1Label.run(SKAction.moveBy(x: moveValue, y: 0, duration: 0.5))
+            sub2Label.run(SKAction.moveBy(x: moveValue, y: 0, duration: 0.5))
+            sub3Label.run(SKAction.moveBy(x: moveValue, y: 0, duration: 0.5))
+            sub4Label.run(SKAction.moveBy(x: moveValue, y: 0, duration: 0.5))
+            sub5Label.run(SKAction.moveBy(x: moveValue, y: 0, duration: 0.5))
+            sub6Label.run(SKAction.moveBy(x: moveValue, y: 0, duration: 0.5))
+            textTabOpen = true
+        }
+        
+    }
     
 
 }

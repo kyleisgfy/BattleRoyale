@@ -44,7 +44,7 @@ var poisonGasRadius = CGFloat(876)
 
 let barHeight = 5
 let barWidth = 35
-let barY = CGFloat(330)
+let barY = CGFloat(340)
 
 let eventBoarder = SKShapeNode(rectOf: CGSize(width: (2), height: (barHeight + 10)))
 let eventBarZero = SKShapeNode(rectOf: CGSize(width: (barWidth * 3), height: barHeight))
@@ -84,8 +84,10 @@ let cropImage2 = SKSpriteNode(imageNamed: "backgroundImage")
 let cropNode2 = SKCropNode()
 
 let textBackgroundNode = SKSpriteNode()
+var textBackgroundBorderNode = SKSpriteNode()
 let textNodeTab = SKSpriteNode()
-let buttonLabelBackgroundSize = CGSize(width: 200, height: 420)
+var textNodeTabBorder = SKSpriteNode()
+let buttonLabelBackgroundSize = CGSize(width: 210, height: 420)
 var textTabOpen = true
 
 func createCharacterButtons() {
@@ -94,7 +96,8 @@ func createCharacterButtons() {
     while i < 6 {
         characterButtons[i] = SKSpriteNode()
         characterButtons[i]!.color = .gray
-        characterButtons[i]!.zPosition = 3
+        characterButtons[i]!.alpha = 0.5
+        characterButtons[i]!.zPosition = 4
         characterButtons[i]!.size.width = 20
         characterButtons[i]!.size.height = 20
         characterButtons[i]!.position = CGPoint(x:-600 , y: yLocation)
@@ -109,7 +112,8 @@ func createTypeButtons() {
     while i < 6 {
         typeButtons[i] = SKSpriteNode()
         typeButtons[i]!.color = .gray
-        typeButtons[i]!.zPosition = 3
+        typeButtons[i]!.alpha = 0.5
+        typeButtons[i]!.zPosition = 4
         typeButtons[i]!.size.width = 20
         typeButtons[i]!.size.height = 20
         typeButtons[i]!.position = CGPoint(x:-600 , y: yLocation)
@@ -125,7 +129,7 @@ func createSubListButtons() {
         subListButtons[i] = SKSpriteNode()
         subListButtons[i]!.color = .gray
         subListButtons[i]!.alpha = 0.0
-        subListButtons[i]!.zPosition = 3
+        subListButtons[i]!.zPosition = 4
         subListButtons[i]!.size.width = 20
         subListButtons[i]!.size.height = 20
         subListButtons[i]!.position = CGPoint(x:-600 , y: yLocation)
@@ -136,16 +140,33 @@ func createSubListButtons() {
 
 func setTextBackground() {
     textBackgroundNode.size = buttonLabelBackgroundSize
-    textBackgroundNode.alpha = 0.5
+    textBackgroundNode.alpha = 0.3
     textBackgroundNode.zPosition = 3
-    textBackgroundNode.color = .black
-    textBackgroundNode.position = CGPoint(x: -521, y: 115)
+    textBackgroundNode.color = .white
+    textBackgroundNode.position = CGPoint(x: -516, y: 115)
     
     textNodeTab.size = CGSize(width: 30, height: 100)
-    textNodeTab.alpha = 0.5
+    textNodeTab.alpha = 0.3
     textNodeTab.zPosition = 3
-    textNodeTab.color = .black
-    textNodeTab.position = CGPoint(x: -406,y: 235)
+    textNodeTab.color = .white
+    textNodeTab.position = CGPoint(x: -396,y: 235)
+    
+    textBackgroundBorderNode.size.width = textBackgroundNode.size.width + 5
+    textBackgroundBorderNode.size.height = textBackgroundNode.size.height + 10
+    textBackgroundBorderNode.position.y = textBackgroundNode.position.y
+    textBackgroundBorderNode.position.x = textBackgroundNode.position.x + 2.5
+    textBackgroundBorderNode.color = .black
+    textBackgroundBorderNode.alpha = 0.9
+    textBackgroundBorderNode.zPosition = 3
+    
+    textNodeTabBorder.size.width = textNodeTab.size.width + 5
+    textNodeTabBorder.size.height = textNodeTab.size.height + 10
+    textNodeTabBorder.position.y = textNodeTab.position.y
+    textNodeTabBorder.position.x = textNodeTab.position.x + 2.5
+    textNodeTabBorder.color = .black
+    textNodeTabBorder.alpha = 0.9
+    textNodeTabBorder.zPosition = 3
+    
 }
 
 func createIcons() {
@@ -154,7 +175,6 @@ func createIcons() {
     createSubListButtons()
     
     cropNode.addChild(cropImage)
-    
     cropNode.position = CGPoint(x: 0, y: 0)
     cropNode.zPosition = 2
     
@@ -253,7 +273,7 @@ func createIcons() {
     eventBoarder.fillColor = .black
     eventBoarder.strokeColor = .black
     eventBoarder.zPosition = 4
-    eventBoarder.position = CGPoint(x: 0 - (totalBarLength / 2) , y: 330)
+    eventBoarder.position = CGPoint(x: 0 - (totalBarLength / 2) , y: Int(barY))
     
     eventBarZero.fillColor = .white
     eventBarZero.zPosition = 3

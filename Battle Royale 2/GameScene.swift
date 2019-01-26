@@ -27,10 +27,10 @@ class GameScene: SKScene {
     
     var chance = 2
     
-    let alarmSoundVolume = Float(1.0)
-    let bombSoundVolume = Float(1.0)
-    let bellSoundVolume = Float(1.0)
-    let introVolume = Float(1.0)
+    let alarmSoundVolume = Float(0.3)
+    let bombSoundVolume = Float(0.5)
+    let bellSoundVolume = Float(0.8)
+    let introVolume = Float(0.05)
     
     
     var gameTimerLabel:SKLabelNode = SKLabelNode()
@@ -163,6 +163,8 @@ class GameScene: SKScene {
         setTextBackground()
         self.addChild(textBackgroundNode)
         self.addChild(textNodeTab)
+        self.addChild(textBackgroundBorderNode)
+        self.addChild(textNodeTabBorder)
         
         introSound.run(SKAction.stop())
         firstSong.run(SKAction.stop())
@@ -179,6 +181,8 @@ class GameScene: SKScene {
         runPhase()
         pauseGame()
         inicializeLabels()
+        
+        moveButtonTab()
         
          self.lastUpdateTime = 0
         }
@@ -695,6 +699,8 @@ class GameScene: SKScene {
                 skipRestriction()
                 skipRestrictionBool = true
             }
+        case 6:
+            moveButtonTab()
             
         default:
             print("keyDown: \(event.characters!) keyCode: \(event.keyCode)")
@@ -922,6 +928,8 @@ class GameScene: SKScene {
             let wait4 = SKAction.wait(forDuration: 4)
             restrictSound.run(SKAction.changeVolume(to: 0.0, duration: 2))
             bellSound.run(SKAction.sequence([playSoundFX, wait4, stopSoundFX]))
+            superHero.run(SKAction.changeVolume(to: 1.0, duration: 0))
+            superHero.run(SKAction.play())
             time.restrictionLabelString = ""
             
             super.run(SKAction.play())
@@ -1056,18 +1064,22 @@ class GameScene: SKScene {
     
     func showButtons(array: Array<SKSpriteNode>) {
         for i in 0...5 {
-            array[i].alpha = 1.0
+            array[i].alpha = 0.5
         }
     }
     
     func shrinkButtonTab() {
         textBackgroundNode.size.height = textBackgroundNode.size.height - 200
         textBackgroundNode.position.y = textBackgroundNode.position.y + 100
+        textBackgroundBorderNode.size.height = textBackgroundBorderNode.size.height - 200
+        textBackgroundBorderNode.position.y = textBackgroundBorderNode.position.y + 100
     }
     
     func growButtonTab() {
         textBackgroundNode.size.height = textBackgroundNode.size.height + 200
         textBackgroundNode.position.y = textBackgroundNode.position.y - 100
+        textBackgroundBorderNode.size.height = textBackgroundBorderNode.size.height + 200
+        textBackgroundBorderNode.position.y = textBackgroundBorderNode.position.y - 100
     }
     
     
@@ -1282,10 +1294,13 @@ class GameScene: SKScene {
 //    }
     
     func moveButtonTab() {
-        let moveValue = CGFloat(190)
+        let moveValue = CGFloat(200)
         if textTabOpen == true {
             textBackgroundNode.run(SKAction.moveBy(x: (-1 * moveValue), y: 0, duration: 0.5))
             textNodeTab.run(SKAction.moveBy(x: (-1 * moveValue), y: 0, duration: 0.5))
+            textBackgroundBorderNode.run(SKAction.moveBy(x: (-1 * moveValue), y: 0, duration: 0.5))
+            textNodeTabBorder.run(SKAction.moveBy(x: (-1 * moveValue), y: 0, duration: 0.5))
+            
             for i in 0...5 {
                 characterButtons[i]?.run(SKAction.moveBy(x: (-1 * moveValue), y: 0, duration: 0.5))
                 typeButtons[i]?.run(SKAction.moveBy(x: (-1 * moveValue), y: 0, duration: 0.5))
@@ -1316,6 +1331,8 @@ class GameScene: SKScene {
         } else if textTabOpen == false {
             textBackgroundNode.run(SKAction.moveBy(x: moveValue, y: 0, duration: 0.5))
             textNodeTab.run(SKAction.moveBy(x: moveValue, y: 0, duration: 0.5))
+            textBackgroundBorderNode.run(SKAction.moveBy(x: moveValue, y: 0, duration: 0.5))
+            textNodeTabBorder.run(SKAction.moveBy(x: moveValue, y: 0, duration: 0.5))
             for i in 0...5 {
                 characterButtons[i]?.run(SKAction.moveBy(x: moveValue, y: 0, duration: 0.5))
                 typeButtons[i]?.run(SKAction.moveBy(x: moveValue, y: 0, duration: 0.5))

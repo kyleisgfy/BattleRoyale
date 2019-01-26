@@ -28,7 +28,6 @@ class SecondGameScene: SKScene {
     var broadcastLineThreeLabel2:SKLabelNode = SKLabelNode()
     var broadcastLineFourLabel2:SKLabelNode = SKLabelNode()
     var broadcastLineFiveLabel2:SKLabelNode = SKLabelNode()
-//    var broadcastLineSixLabel2:SKLabelNode = SKLabelNode()
     
     var poisonGas2 = SKEmitterNode()
     
@@ -128,16 +127,6 @@ class SecondGameScene: SKScene {
         } else {
             print ("Broadcast line five label Failed")
         }
-        
-//        if let BroadcastSix2:SKLabelNode = self.childNode(withName: "broadcastLineSixLabel2") as? SKLabelNode {
-//            broadcastLineSixLabel2 = BroadcastSix2
-//            print ("Broadcast line six inicialized")
-//            broadcastLineSixLabel2.text = ""
-//        } else {
-//            print ("Broadcast line six label Failed")
-//        }
-        
-        
         self.lastUpdateTime = 0
     }
     
@@ -167,53 +156,12 @@ class SecondGameScene: SKScene {
         broadcastLineFourLabel2.text = char.broadcastLineFour
         broadcastLineFiveLabel2.text = char.broadcastLineFive
         
-//        moveBroadcast()
-//        writeBroadcast()
-//        alphaBroadcast()
-        
-        
         if time.restrictionTimer.isValid {
             restrictionTimerLabel2.alpha = 1.0
         } else {
             restrictionTimerLabel2.alpha = 0.0
         }
     }
-    
-//    func writeBroadcast() {
-//        if broadcastLineOneLabel2.position.y == 200 {
-//            broadcastLineOneLabel2.text = char.broadcastLineOne
-//        } else if broadcastLineTwoLabel2.position.y == 200 {
-//            broadcastLineTwoLabel2.text = char.broadcastLineOne
-//        } else if broadcastLineThreeLabel2.position.y == 200 {
-//            broadcastLineThreeLabel2.text = char.broadcastLineOne
-//        } else if broadcastLineFourLabel2.position.y == 200 {
-//            broadcastLineFourLabel2.text = char.broadcastLineOne
-//        } else if broadcastLineFiveLabel2.position.y == 200 {
-//            broadcastLineFiveLabel2.text = char.broadcastLineOne
-//        }
-//    }
-//
-//    func moveBroadcast() {
-//        if broadcastLineOneLabel2.text != char.broadcastLineOne {
-//
-//            broadcastLineOneLabel2.run(SKAction.moveTo(y: broadcastLineTwoLabel2.position.y, duration: 0.2))
-//            broadcastLineTwoLabel2.run(SKAction.moveTo(y: broadcastLineThreeLabel2.position.y, duration: 0.2))
-//            broadcastLineThreeLabel2.run(SKAction.moveTo(y: broadcastLineFourLabel2.position.y, duration: 0.2))
-//            broadcastLineFourLabel2.run(SKAction.moveTo(y: broadcastLineFiveLabel2.position.y, duration: 0.2))
-//            broadcastLineFiveLabel2.run(SKAction.moveTo(y: broadcastLineOneLabel2.position.y, duration: 0.2))
-//        }
-//
-//    }
-//    func alphaBroadcast() {
-//        broadcastLineOneLabel2.alpha = ((broadcastLineOneLabel2.position.y - 100) / 100)
-//        broadcastLineTwoLabel2.alpha = ((broadcastLineTwoLabel2.position.y - 100) / 100)
-//        broadcastLineThreeLabel2.alpha = ((broadcastLineThreeLabel2.position.y - 100) / 100)
-//        broadcastLineFourLabel2.alpha = ((broadcastLineFourLabel2.position.y - 100) / 100)
-//        broadcastLineFiveLabel2.alpha = ((broadcastLineFiveLabel2.position.y - 100) / 100)
-//    }
-
-    
-
 }
 
 

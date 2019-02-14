@@ -66,6 +66,7 @@ var typeButtons = [SKSpriteNode?](repeating: nil, count: 6)
 var subListButtons = [SKSpriteNode?](repeating: nil, count: 6)
 
 var createPlayerButton = SKShapeNode(rectOf: CGSize(width: 200, height: 50))
+var startGameButton = SKShapeNode(rectOf: CGSize(width: 200, height: 50))
 
 var safeZone = SKSpriteNode()
 var safeZone2 = SKSpriteNode()
@@ -99,7 +100,7 @@ func createCharacterButtons() {
         characterButtons[i] = SKSpriteNode()
         characterButtons[i]!.color = .gray
         characterButtons[i]!.alpha = 0.5
-        characterButtons[i]!.zPosition = 4
+        characterButtons[i]!.zPosition = 9
         characterButtons[i]!.size.width = 20
         characterButtons[i]!.size.height = 20
         characterButtons[i]!.position = CGPoint(x:-600 , y: yLocation)
@@ -115,7 +116,7 @@ func createTypeButtons() {
         typeButtons[i] = SKSpriteNode()
         typeButtons[i]!.color = .gray
         typeButtons[i]!.alpha = 0.5
-        typeButtons[i]!.zPosition = 4
+        typeButtons[i]!.zPosition = 9
         typeButtons[i]!.size.width = 20
         typeButtons[i]!.size.height = 20
         typeButtons[i]!.position = CGPoint(x:-600 , y: yLocation)
@@ -131,7 +132,7 @@ func createSubListButtons() {
         subListButtons[i] = SKSpriteNode()
         subListButtons[i]!.color = .gray
         subListButtons[i]!.alpha = 0.0
-        subListButtons[i]!.zPosition = 4
+        subListButtons[i]!.zPosition = 9
         subListButtons[i]!.size.width = 20
         subListButtons[i]!.size.height = 20
         subListButtons[i]!.position = CGPoint(x:-600 , y: yLocation)
@@ -143,13 +144,13 @@ func createSubListButtons() {
 func setTextBackground() {
     textBackgroundNode.size = buttonLabelBackgroundSize
     textBackgroundNode.alpha = 0.3
-    textBackgroundNode.zPosition = 3
+    textBackgroundNode.zPosition = 8
     textBackgroundNode.color = .white
     textBackgroundNode.position = CGPoint(x: -516, y: 115)
     
     textNodeTab.size = CGSize(width: 30, height: 100)
     textNodeTab.alpha = 0.3
-    textNodeTab.zPosition = 3
+    textNodeTab.zPosition = 8
     textNodeTab.color = .white
     textNodeTab.position = CGPoint(x: -396,y: 235)
     
@@ -159,7 +160,7 @@ func setTextBackground() {
     textBackgroundBorderNode.position.x = textBackgroundNode.position.x + 2.5
     textBackgroundBorderNode.color = .black
     textBackgroundBorderNode.alpha = 0.9
-    textBackgroundBorderNode.zPosition = 3
+    textBackgroundBorderNode.zPosition = 8
     
     textNodeTabBorder.size.width = textNodeTab.size.width + 5
     textNodeTabBorder.size.height = textNodeTab.size.height + 10
@@ -167,7 +168,7 @@ func setTextBackground() {
     textNodeTabBorder.position.x = textNodeTab.position.x + 2.5
     textNodeTabBorder.color = .black
     textNodeTabBorder.alpha = 0.9
-    textNodeTabBorder.zPosition = 3
+    textNodeTabBorder.zPosition = 8
     
 }
 
@@ -345,11 +346,17 @@ func createIcons() {
     splashLogo.position.x = 0
     splashLogo.position.y = 0
     
-    createPlayerButton.fillColor = .gray
+    createPlayerButton.fillColor = .blue
     createPlayerButton.strokeColor = .clear
-    createPlayerButton.zPosition = 10
+    createPlayerButton.zPosition = 8
     createPlayerButton.position.x = 0
     createPlayerButton.position.y = -200
+    
+    startGameButton.fillColor = .blue
+    startGameButton.strokeColor = .clear
+    startGameButton.zPosition = 8
+    startGameButton.position.x = 0
+    startGameButton.position.y = -300
     
     
 }

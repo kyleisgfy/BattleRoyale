@@ -99,10 +99,8 @@ class GameScene: SKScene {
     let restrictInSound = SKAudioNode(fileNamed: "darkContinent.mp3")
     let restrictSound = SKAudioNode(fileNamed: "fieldOfHeroes.mp3")
     
-    var playerCreationIsActive = false
-    var newPlayer = ""
-    var newPlayerLabel = SKLabelNode()
-//    var createPlayerLabel = [SKLabelNode?](repeating: nil, count: 6)
+    var playerCreationIsActive = true
+    var editingCharacterNames = false
     
     
     
@@ -168,9 +166,7 @@ class GameScene: SKScene {
         self.addChild(splashBackground)
         self.addChild(splashLogo)
         
-        self.addChild(createPlayerButton)
         self.addChild(startGameButton)
-        self.addChild(newPlayerLabel)
         
         
         
@@ -192,6 +188,7 @@ class GameScene: SKScene {
         alarmSound.run(SKAction.stop())
         bombSound.run(SKAction.stop())
         bellSound.run(SKAction.stop())
+        superHero.run(SKAction.stop())
         
         setFXVolume()
         
@@ -486,11 +483,6 @@ class GameScene: SKScene {
         } else {
             print ("Sub 6 label Failed")
         }
-        
-        newPlayerLabel.position.x = 0
-        newPlayerLabel.position.y = 0
-        newPlayerLabel.zPosition = 10
-        newPlayerLabel.fontColor = .black
     }
     
 //****************************************************************************************
@@ -526,6 +518,19 @@ class GameScene: SKScene {
                 }
             }
             i += 1
+        }
+    }
+    
+    func characterEditSelection(location: CGPoint) {
+        var i = 0
+        while i < 6 {
+            if characterButtons[i]!.contains(location) {
+                buttons.editCharacter = i
+                char.characterListPlain[i] = ""
+                characterButtons[i]!.color = .blue
+                editingCharacterNames = true
+            }
+        i += 1
         }
     }
     
@@ -608,18 +613,9 @@ class GameScene: SKScene {
         }
     }
     
-    func createPlayerButtonSelection(location: CGPoint) {
-        if createPlayerButton.contains(location) && char.playerNumber < 6 {
-            playerCreationIsActive = true
-            char.playerNumber += 1
-            createPlayerButton.fillColor = .clear
-        }
-    }
-    
     func startGameButtonSelection(location: CGPoint) {
         if startGameButton.contains(location) {
             animateStart()
-            createPlayerButton.removeFromParent()
             startGameButton.removeFromParent()
         }
         
@@ -628,11 +624,16 @@ class GameScene: SKScene {
     override func mouseDown(with event: NSEvent) {
         self.touchDown(atPoint: event.location(in: self))
         
-        createPlayerButtonSelection(location: event.location(in: self))
+        if playerCreationIsActive == true && editingCharacterNames == false {
+            characterEditSelection(location: event.location(in: self))
+        }
+        
         startGameButtonSelection(location: event.location(in: self))
-        characterButtonSelection(location: event.location(in: self))
-        typeButtonSelection(location: event.location(in: self))
-        subListButtonSelection(location: event.location(in: self))
+        if playerCreationIsActive == false {
+            typeButtonSelection(location: event.location(in: self))
+            subListButtonSelection(location: event.location(in: self))
+        }
+    
         
         if textNodeTab.contains(event.location(in: self)) {
             moveButtonTab()
@@ -668,104 +669,106 @@ class GameScene: SKScene {
     
     override func keyDown(with event: NSEvent) {
         let keycode = event.keyCode
-        if playerCreationIsActive == true {
+        if editingCharacterNames == true {
             if keycode == 36 {
+                characterButtons[buttons.editCharacter]!.color = .gray
                 createPlayerEnd()
             }
-            newPlayer = newPlayer + (event.characters!)
-//            print (newPlayer)
-            newPlayerLabel.text = newPlayer
+            char.characterListPlain[buttons.editCharacter] = char.characterListPlain[buttons.editCharacter] + (event.characters!)
+            updatePlayerButtonText()
             
         }
         let move = CGFloat(28.9)
-        switch keycode {
-            
-        case 126: //up arrow
-            if teamIconNode.position.y < 317 {
-                teamIconNode.position.y = teamIconNode.position.y + move
-                teamIconNode2.run(SKAction.move(by: CGVector(dx: 0.0, dy: move), duration: 0.2))
-            }
-            
-        case 125: //down arrow
-            if teamIconNode.position.y > -317 {
-                teamIconNode.position.y = teamIconNode.position.y - move
-                teamIconNode2.run(SKAction.move(by: CGVector(dx: 0.0, dy: (move * -1)), duration: 0.2))
-            }
-            
-        case 124: //right arrow
-            if teamIconNode.position.x < 576 {
-                teamIconNode.position.x = teamIconNode.position.x + move
-                teamIconNode2.run(SKAction.move(by: CGVector(dx: move, dy: 0.0), duration: 0.2))
-            }
-
-        case 123: //left arrow
-            if teamIconNode.position.x > -576 {
-                teamIconNode.position.x = teamIconNode.position.x - move
-                teamIconNode2.run(SKAction.move(by: CGVector(dx: (move * -1), dy: 0.0), duration: 0.2))
-            }
-
-            
-        case 27: //minus key
-            if phaseNumber == 1 || phaseNumber == 0 {
-                if time.phaseTimerInSeconds >= 60 {
-                    time.phaseTimerInSeconds -= 60
-                    eventBoarder.position.x = eventBoarder.position.x + CGFloat((60 * timeIndicator))
+        if playerCreationIsActive == false {
+            switch keycode {
+                
+            case 126: //up arrow
+                if teamIconNode.position.y < 317 {
+                    teamIconNode.position.y = teamIconNode.position.y + move
+                    teamIconNode2.run(SKAction.move(by: CGVector(dx: 0.0, dy: move), duration: 0.2))
                 }
-            } else {
-                print ("cannot decrease time")
-            }
-            
-        case 24: //plus key
-            if phaseNumber == 0 || phaseNumber == 1 {
-                if time.phaseTimerInSeconds <= freeTime - 120 {
-                    time.phaseTimerInSeconds += 120
-                    eventBoarder.position.x = eventBoarder.position.x - CGFloat((120 * timeIndicator))
+                
+            case 125: //down arrow
+                if teamIconNode.position.y > -317 {
+                    teamIconNode.position.y = teamIconNode.position.y - move
+                    teamIconNode2.run(SKAction.move(by: CGVector(dx: 0.0, dy: (move * -1)), duration: 0.2))
                 }
-            } else {
-                print ("cannot increase time")
+                
+            case 124: //right arrow
+                if teamIconNode.position.x < 576 {
+                    teamIconNode.position.x = teamIconNode.position.x + move
+                    teamIconNode2.run(SKAction.move(by: CGVector(dx: move, dy: 0.0), duration: 0.2))
+                }
+                
+            case 123: //left arrow
+                if teamIconNode.position.x > -576 {
+                    teamIconNode.position.x = teamIconNode.position.x - move
+                    teamIconNode2.run(SKAction.move(by: CGVector(dx: (move * -1), dy: 0.0), duration: 0.2))
+                }
+                
+                
+            case 27: //minus key
+                if phaseNumber == 1 || phaseNumber == 0 {
+                    if time.phaseTimerInSeconds >= 60 {
+                        time.phaseTimerInSeconds -= 60
+                        eventBoarder.position.x = eventBoarder.position.x + CGFloat((60 * timeIndicator))
+                    }
+                } else {
+                    print ("cannot decrease time")
+                }
+                
+            case 24: //plus key
+                if phaseNumber == 0 || phaseNumber == 1 {
+                    if time.phaseTimerInSeconds <= freeTime - 120 {
+                        time.phaseTimerInSeconds += 120
+                        eventBoarder.position.x = eventBoarder.position.x - CGFloat((120 * timeIndicator))
+                    }
+                } else {
+                    print ("cannot increase time")
+                }
+                
+            case 36: //return
+                forceKill()
+                resetCharacterButtons()
+                
+            case 49: //spacebar
+                if eventNumber == 0 {
+                    gameIntro()
+                    eventNumber += 1
+                }
+                pauseLabel.text = "Game is Paused"
+                if phaseLabel.text == "" {
+                    phaseLabel.text = "Game introduction"
+                }
+                pauseGame()
+                
+            case 33: //open bracket {
+                alarmSound.run(SKAction.changeVolume(by: -0.1, duration: 0))
+                bombSound.run(SKAction.changeVolume(by: -0.1, duration: 0))
+                bellSound.run(SKAction.changeVolume(by: -0.1, duration: 0))
+                
+            case 30: //close bracket }
+                alarmSound.run(SKAction.changeVolume(by: 0.1, duration: 0))
+                bombSound.run(SKAction.changeVolume(by: 0.1, duration: 0))
+                bellSound.run(SKAction.changeVolume(by: 0.1, duration: 0))
+                
+            case 51: //delete
+                stopFX()
+                
+            case 44: //question mark
+                eventBoarder.position.x = eventBoarder.position.x + (CGFloat(timeIndicator) * (CGFloat(time.phaseTimerInSeconds) - 1.0))
+                time.phaseTimerInSeconds = 0
+                time.restrictionTimeInSeconds = 0
+                if phaseNumber == 3 {
+                    skipRestriction()
+                    skipRestrictionBool = true
+                }
+            case 6:
+                moveButtonTab()
+                
+            default:
+                print("keyDown: \(event.characters!) keyCode: \(event.keyCode)")
             }
-            
-        case 36: //return
-            forceKill()
-            resetCharacterButtons()
-
-        case 49: //spacebar
-            if eventNumber == 0 {
-                gameIntro()
-                eventNumber += 1
-            }
-            pauseLabel.text = "Game is Paused"
-            if phaseLabel.text == "" {
-                phaseLabel.text = "Game introduction"
-            }
-            pauseGame()
-            
-        case 33: //open bracket {
-            alarmSound.run(SKAction.changeVolume(by: -0.1, duration: 0))
-            bombSound.run(SKAction.changeVolume(by: -0.1, duration: 0))
-            bellSound.run(SKAction.changeVolume(by: -0.1, duration: 0))
-        
-        case 30: //close bracket }
-            alarmSound.run(SKAction.changeVolume(by: 0.1, duration: 0))
-            bombSound.run(SKAction.changeVolume(by: 0.1, duration: 0))
-            bellSound.run(SKAction.changeVolume(by: 0.1, duration: 0))
-            
-        case 51: //delete
-            stopFX()
-            
-        case 44: //question mark
-            eventBoarder.position.x = eventBoarder.position.x + (CGFloat(timeIndicator) * (CGFloat(time.phaseTimerInSeconds) - 1.0))
-            time.phaseTimerInSeconds = 0
-            time.restrictionTimeInSeconds = 0
-            if phaseNumber == 3 {
-                skipRestriction()
-                skipRestrictionBool = true
-            }
-        case 6:
-            moveButtonTab()
-            
-        default:
-            print("keyDown: \(event.characters!) keyCode: \(event.keyCode)")
         }
     }
 
@@ -1014,17 +1017,17 @@ class GameScene: SKScene {
         let splashTextScale = SKAction.scale(by: 10, duration: 5)
         let splashTextFade = SKAction.fadeOut(withDuration: 2)
         let splashGroup = SKAction.group([splashTextScale, splashTextFade])
-        splashText.run(SKAction.sequence([wait5, splashGroup]))
+        splashText2.run(SKAction.sequence([wait5, splashGroup]))
         
         
         let splashBackgroundFade = SKAction.fadeOut(withDuration: 3)
-        splashBackground.run(SKAction.sequence([wait5, splashBackgroundFade]))
+        splashBackground2.run(SKAction.sequence([wait5, splashBackgroundFade]))
         
         let logoMove = SKAction.move(to: CGPoint(x: -450, y: -180), duration: 1)
         let logoScale = SKAction.scale(to: 0.4 , duration: 1)
         let logoGroup = SKAction.group([logoMove, logoScale])
         let wait3 = SKAction.wait(forDuration: 3)
-        splashLogo.run(SKAction.sequence([wait5, wait3, logoGroup]))
+        splashLogo2.run(SKAction.sequence([wait5, wait3, logoGroup]))
         
         
     }
@@ -1350,11 +1353,6 @@ class GameScene: SKScene {
         killTypeButtons()
     }
     
-//    func setAllTextBackgrounds() {
-//        setTextBackground(label: alequaLabel, i: 0, size: buttonLabelBackgroundSize)
-//        self.addChild(textBackgroundNode[0]!)
-//    }
-    
     func moveButtonTab() {
         let moveValue = CGFloat(200)
         if textTabOpen == true {
@@ -1425,43 +1423,25 @@ class GameScene: SKScene {
         
     }
     
-    func createPlayerStart() {
-//        char.playerNumber += 1
-        playerCreationIsActive = true
-        
-        
-    }
-    
     func createPlayerEnd() {
-        let i = (char.playerNumber - 1)
-        char.characterListPlain[i] = newPlayer
         updatePlayerButtonText()
-        newPlayer = ""
-        playerCreationIsActive = false
-        newPlayerLabel.text = newPlayer
-        if char.playerNumber < 6 {
-            createPlayerButton.fillColor = .blue
-        } else {
-            createPlayerButton.fillColor = .lightGray
-        }
-        
-        
+        editingCharacterNames = false
     }
     
     func updatePlayerButtonText() {
-        switch char.playerNumber {
+        switch buttons.editCharacter {
+        case 0:
+            alequaLabel.text = char.characterListPlain[buttons.editCharacter]
         case 1:
-            alequaLabel.text = newPlayer
+            tokobetteLabel.text = char.characterListPlain[buttons.editCharacter]
         case 2:
-            tokobetteLabel.text = newPlayer
+            auranLabel.text = char.characterListPlain[buttons.editCharacter]
         case 3:
-            auranLabel.text = newPlayer
+            zinnekahnLabel.text = char.characterListPlain[buttons.editCharacter]
         case 4:
-            zinnekahnLabel.text = newPlayer
+            metaLabel.text = char.characterListPlain[buttons.editCharacter]
         case 5:
-            metaLabel.text = newPlayer
-        case 6:
-            snaraNarkeLabel.text = newPlayer
+            snaraNarkeLabel.text = char.characterListPlain[buttons.editCharacter]
         default:
             print ("error")
         }
@@ -1470,6 +1450,8 @@ class GameScene: SKScene {
     func animateStart() {
         splashBackground.run(SKAction.fadeOut(withDuration: 2))
         splashLogo.run(SKAction.fadeOut(withDuration: 2))
+        playerCreationIsActive = false
+        superHero.run(SKAction.play())
     }
 
 }

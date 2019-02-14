@@ -16,6 +16,8 @@ class Characters: NSObject {
     var playersLeft = 100
     var playerNumber = 0
     
+
+    
     var broadcastLineOne = ""
     var broadcastLineTwo = ""
     var broadcastLineThree = ""

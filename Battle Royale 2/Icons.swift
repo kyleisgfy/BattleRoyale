@@ -65,7 +65,6 @@ var characterButtons = [SKSpriteNode?](repeating: nil, count: 6)
 var typeButtons = [SKSpriteNode?](repeating: nil, count: 6)
 var subListButtons = [SKSpriteNode?](repeating: nil, count: 6)
 
-var createPlayerButton = SKShapeNode(rectOf: CGSize(width: 200, height: 50))
 var startGameButton = SKShapeNode(rectOf: CGSize(width: 200, height: 50))
 
 var safeZone = SKSpriteNode()
@@ -75,7 +74,10 @@ let eventRadius = CGFloat(359)
 
 var splashBackground = SKSpriteNode()
 var splashLogo = SKSpriteNode()
-var splashText = SKSpriteNode()
+
+var splashBackground2 = SKSpriteNode()
+var splashLogo2 = SKSpriteNode()
+var splashText2 = SKSpriteNode()
 
 var background = SKSpriteNode()
 var background2 = SKSpriteNode()
@@ -345,12 +347,7 @@ func createIcons() {
     splashLogo.zPosition = 7
     splashLogo.position.x = 0
     splashLogo.position.y = 0
-    
-    createPlayerButton.fillColor = .blue
-    createPlayerButton.strokeColor = .clear
-    createPlayerButton.zPosition = 8
-    createPlayerButton.position.x = 0
-    createPlayerButton.position.y = -200
+    splashLogo.alpha = 0.2
     
     startGameButton.fillColor = .blue
     startGameButton.strokeColor = .clear
@@ -378,29 +375,30 @@ func createIcons2() {
     
     cropNode2.maskNode = safeZone2
     
-    splashBackground = SKSpriteNode(imageNamed: "splashBackground")
-    splashBackground.position = CGPoint.zero
-    splashBackground.size.width = 1242
-    splashBackground.size.height = 720
-    splashBackground.zPosition = 6
-    splashBackground.position.x = 0
-    splashBackground.position.y = 0
+    splashBackground2 = SKSpriteNode(imageNamed: "splashBackground")
+    splashBackground2.position = CGPoint.zero
+    splashBackground2.size.width = 1242
+    splashBackground2.size.height = 720
+    splashBackground2.zPosition = 6
+    splashBackground2.position.x = 0
+    splashBackground2.position.y = 0
     
-    splashLogo = SKSpriteNode(imageNamed: "splashLogo")
-    splashLogo.position = CGPoint.zero
-    splashLogo.size.width = 655
-    splashLogo.size.height = 655
-    splashLogo.zPosition = 7
-    splashLogo.position.x = 0
-    splashLogo.position.y = 0
+    splashLogo2 = SKSpriteNode(imageNamed: "splashLogo")
+    splashLogo2.position = CGPoint.zero
+    splashLogo2.size.width = 655
+    splashLogo2.size.height = 655
+    splashLogo2.zPosition = 7
+    splashLogo2.position.x = 0
+    splashLogo2.position.y = 0
+    splashLogo2.alpha = 0.2
     
-    splashText = SKSpriteNode(imageNamed: "splashText")
-    splashText.position = CGPoint.zero
-    splashText.size.width = 926
-    splashText.size.height = 242
-    splashText.zPosition = 8
-    splashText.position.x = 0
-    splashText.position.y = 0
+    splashText2 = SKSpriteNode(imageNamed: "splashText")
+    splashText2.position = CGPoint.zero
+    splashText2.size.width = 926
+    splashText2.size.height = 242
+    splashText2.zPosition = 8
+    splashText2.position.x = 0
+    splashText2.position.y = 0
     
     background2 = SKSpriteNode(imageNamed: "backgroundImage")
     background2.position = CGPoint.zero

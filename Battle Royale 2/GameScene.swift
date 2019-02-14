@@ -653,6 +653,12 @@ class GameScene: SKScene {
         
         if textNodeTab.contains(event.location(in: self)) {
             moveButtonTab()
+            if playerCreationIsActive == false {
+                textBackgroundNode.zPosition = 3
+                textNodeTab.zPosition = 3
+                textBackgroundBorderNode.zPosition = 3
+                textNodeTabBorder.zPosition = 3
+            }
         }
         
         if clickZoneNode.contains(event.location(in: self)) {
@@ -1136,6 +1142,14 @@ class GameScene: SKScene {
         }
     }
     
+    func normalizeButtonTab() {
+        textBackgroundNode.run(SKAction.scale(to: CGSize(width: 210, height: 420), duration: 0.5))
+        textBackgroundNode.run(SKAction.moveTo(y: 115, duration: 0.5))
+        textBackgroundBorderNode.run(SKAction.scale(to: CGSize(width: 215, height: 430), duration: 0.5))
+        textBackgroundBorderNode.run(SKAction.moveTo(y: 115, duration: 0.5))
+    }
+    
+    
     func shrinkButtonTab() {
         textBackgroundNode.size.height = textBackgroundNode.size.height - 200
         textBackgroundNode.position.y = textBackgroundNode.position.y + 100
@@ -1465,10 +1479,7 @@ class GameScene: SKScene {
         startGameLabel.removeFromParent()
         moveButtonTab()
         killCharacterButtons()
-        textBackgroundNode.zPosition = 3
-        textNodeTab.zPosition = 3
-        textBackgroundBorderNode.zPosition = 3
-        textNodeTabBorder.zPosition = 3
+        normalizeButtonTab()
         
     }
     

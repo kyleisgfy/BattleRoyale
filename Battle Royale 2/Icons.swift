@@ -92,7 +92,7 @@ let textBackgroundNode = SKSpriteNode()
 var textBackgroundBorderNode = SKSpriteNode()
 let textNodeTab = SKSpriteNode()
 var textNodeTabBorder = SKSpriteNode()
-let buttonLabelBackgroundSize = CGSize(width: 210, height: 420)
+let buttonLabelBackgroundSize = CGSize(width: 210, height: 210)
 var textTabOpen = true
 
 func createCharacterButtons() {
@@ -148,7 +148,7 @@ func setTextBackground() {
     textBackgroundNode.alpha = 0.3
     textBackgroundNode.zPosition = 8
     textBackgroundNode.color = .white
-    textBackgroundNode.position = CGPoint(x: -516, y: 115)
+    textBackgroundNode.position = CGPoint(x: -516, y: 220)
     
     textNodeTab.size = CGSize(width: 30, height: 100)
     textNodeTab.alpha = 0.3

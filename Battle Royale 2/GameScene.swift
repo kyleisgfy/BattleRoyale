@@ -199,6 +199,8 @@ class GameScene: SKScene {
         pauseGame()
         inicializeLabels()
         
+        hideButtons(array: typeButtons as! Array<SKSpriteNode>)
+        
          self.lastUpdateTime = 0
         }
     
@@ -630,7 +632,7 @@ class GameScene: SKScene {
     }
     
     func startGameButtonSelection(location: CGPoint) {
-        if startGameButton.contains(location) {
+        if startGameButton.contains(location) && playerCreationIsActive == true {
             createPlayerEnd()
         }
         
@@ -1151,17 +1153,21 @@ class GameScene: SKScene {
     
     
     func shrinkButtonTab() {
-        textBackgroundNode.size.height = textBackgroundNode.size.height - 200
-        textBackgroundNode.position.y = textBackgroundNode.position.y + 100
-        textBackgroundBorderNode.size.height = textBackgroundBorderNode.size.height - 200
-        textBackgroundBorderNode.position.y = textBackgroundBorderNode.position.y + 100
+        if textBackgroundNode.size.height > 500 {
+            textBackgroundNode.size.height = textBackgroundNode.size.height - 200
+            textBackgroundNode.position.y = textBackgroundNode.position.y + 100
+            textBackgroundBorderNode.size.height = textBackgroundBorderNode.size.height - 200
+            textBackgroundBorderNode.position.y = textBackgroundBorderNode.position.y + 100
+        }
     }
     
     func growButtonTab() {
-        textBackgroundNode.size.height = textBackgroundNode.size.height + 200
-        textBackgroundNode.position.y = textBackgroundNode.position.y - 100
-        textBackgroundBorderNode.size.height = textBackgroundBorderNode.size.height + 200
-        textBackgroundBorderNode.position.y = textBackgroundBorderNode.position.y - 100
+        if textBackgroundNode.size.height < 500 {
+            textBackgroundNode.size.height = textBackgroundNode.size.height + 200
+            textBackgroundNode.position.y = textBackgroundNode.position.y - 100
+            textBackgroundBorderNode.size.height = textBackgroundBorderNode.size.height + 200
+            textBackgroundBorderNode.position.y = textBackgroundBorderNode.position.y - 100
+        }
     }
     
     
@@ -1480,13 +1486,11 @@ class GameScene: SKScene {
         moveButtonTab()
         killCharacterButtons()
         normalizeButtonTab()
+        showButtons(array: typeButtons as! Array<SKSpriteNode>)
         
     }
     
     func killCharacterButtons() {
-//        characterButtons[0]!.color = .black
-//        buttons.characterExists[0] = false
-//        char.characterListPlain[0] = ""
         for i in 0...5 {
             if char.characterListPlain[i] == "\r" || char.characterListPlain[i] == "" {
                 buttons.characterExists[i] = false

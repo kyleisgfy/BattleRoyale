@@ -65,7 +65,7 @@ var characterButtons = [SKSpriteNode?](repeating: nil, count: 6)
 var typeButtons = [SKSpriteNode?](repeating: nil, count: 6)
 var subListButtons = [SKSpriteNode?](repeating: nil, count: 6)
 
-var startGameButton = SKShapeNode(rectOf: CGSize(width: 200, height: 50))
+var startGameButton = SKShapeNode(rectOf: CGSize(width: 350, height: 50))
 
 var safeZone = SKSpriteNode()
 var safeZone2 = SKSpriteNode()
@@ -353,7 +353,7 @@ func createIcons() {
     startGameButton.strokeColor = .clear
     startGameButton.zPosition = 8
     startGameButton.position.x = 0
-    startGameButton.position.y = -300
+    startGameButton.position.y = 17
     
     
 }

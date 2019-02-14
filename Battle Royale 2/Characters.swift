@@ -25,12 +25,12 @@ class Characters: NSObject {
     var broadcastLineFive = ""
     
     var characterListPlain = [
-        "Alaqua",
-        "Tokobette",
-        "Auran",
-        "Zinnakahn",
-        "Meta",
-        "Snara Narke"
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
     ]
     
     let officeGroup = [

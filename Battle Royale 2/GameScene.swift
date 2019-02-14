@@ -101,6 +101,7 @@ class GameScene: SKScene {
     
     var playerCreationIsActive = true
     var editingCharacterNames = false
+    var startGameLabel = SKLabelNode()
     
     
     
@@ -167,6 +168,7 @@ class GameScene: SKScene {
         self.addChild(splashLogo)
         
         self.addChild(startGameButton)
+        self.addChild(startGameLabel)
         
         
         
@@ -196,8 +198,6 @@ class GameScene: SKScene {
         runPhase()
         pauseGame()
         inicializeLabels()
-        
-        moveButtonTab()
         
          self.lastUpdateTime = 0
         }
@@ -296,10 +296,11 @@ class GameScene: SKScene {
             alequaLabel = alequa
             print ("Alequa Label inicialized")
 //            alequaLabel.text = "Alequa"
-            alequaLabel.text = ""
+            alequaLabel.text = "Player One"
             alequaLabel.position.x = (characterButtons[0]!.position.x + 20)
             alequaLabel.position.y = (characterButtons[0]!.position.y - 10)
             alequaLabel.zPosition = 9
+            alequaLabel.fontColor = .lightGray
         } else {
             print ("Alequa label Failed")
         }
@@ -308,10 +309,11 @@ class GameScene: SKScene {
             tokobetteLabel = tokobette
             print ("Tokobette Label inicialized")
 //            tokobetteLabel.text = "Tokobette"
-            tokobetteLabel.text = ""
+            tokobetteLabel.text = "Player Two"
             tokobetteLabel.position.x = (characterButtons[1]!.position.x + 20)
             tokobetteLabel.position.y = (characterButtons[1]!.position.y - 10)
             tokobetteLabel.zPosition = 9
+            tokobetteLabel.fontColor = .lightGray
         } else {
             print ("Tokobette label Failed")
         }
@@ -320,10 +322,11 @@ class GameScene: SKScene {
             auranLabel = auran
             print ("auran Label inicialized")
 //            auranLabel.text = "Auran"
-            auranLabel.text = ""
+            auranLabel.text = "Player Three"
             auranLabel.position.x = (characterButtons[2]!.position.x + 20)
             auranLabel.position.y = (characterButtons[2]!.position.y - 10)
             auranLabel.zPosition = 9
+            auranLabel.fontColor = .lightGray
         } else {
             print ("Auran label Failed")
         }
@@ -332,10 +335,11 @@ class GameScene: SKScene {
             zinnekahnLabel = zinnekahn
             print ("Zinnekahn Label inicialized")
 //            zinnekahnLabel.text = "Zinnekahn"
-            zinnekahnLabel.text = ""
+            zinnekahnLabel.text = "Player Four"
             zinnekahnLabel.position.x = (characterButtons[3]!.position.x + 20)
             zinnekahnLabel.position.y = (characterButtons[3]!.position.y - 10)
             zinnekahnLabel.zPosition = 9
+            zinnekahnLabel.fontColor = .lightGray
         } else {
             print ("Zinnekahn label Failed")
         }
@@ -344,10 +348,11 @@ class GameScene: SKScene {
             metaLabel = meta
             print ("Meta Label inicialized")
 //            metaLabel.text = "Meta"
-            metaLabel.text = ""
+            metaLabel.text = "Player Five"
             metaLabel.position.x = (characterButtons[4]!.position.x + 20)
             metaLabel.position.y = (characterButtons[4]!.position.y - 10)
             metaLabel.zPosition = 9
+            metaLabel.fontColor = .lightGray
         } else {
             print ("Meta label Failed")
         }
@@ -356,10 +361,11 @@ class GameScene: SKScene {
             snaraNarkeLabel = snaraNarke
             print ("Snara Narke Label inicialized")
 //            snaraNarkeLabel.text = "Snara Narke"
-            snaraNarkeLabel.text = ""
+            snaraNarkeLabel.text = "Player Six"
             snaraNarkeLabel.position.x = (characterButtons[5]!.position.x + 20)
             snaraNarkeLabel.position.y = (characterButtons[5]!.position.y - 10)
             snaraNarkeLabel.zPosition = 9
+            snaraNarkeLabel.fontColor = .lightGray
         } else {
             print ("Snara Narke label Failed")
         }
@@ -483,6 +489,14 @@ class GameScene: SKScene {
         } else {
             print ("Sub 6 label Failed")
         }
+        
+        startGameLabel.text = "Click To Start Game"
+        startGameLabel.position.x = 0
+        startGameLabel.position.y = 0
+        startGameLabel.zPosition = 10
+        startGameLabel.fontColor = .white
+        startGameLabel.fontSize = 35
+        
     }
     
 //****************************************************************************************
@@ -501,14 +515,16 @@ class GameScene: SKScene {
     func characterButtonSelection(location: CGPoint) {
         var i = 0
         while i < 6 {
-            if characterButtons[i]!.contains(location) {
+            if characterButtons[i]!.contains(location) && buttons.characterExists[i] == true {
                 
                 if buttons.characterButtonActive[i] == true {
                     characterButtons[i]!.color = .gray
                     buttons.characterButtonActive[i] = false
                 } else if buttons.characterButtonActive[i] == false {
-                    for index in characterButtons {
-                        index!.color = .gray
+                    for i in 0...5 {
+                        if buttons.characterExists[i] == true {
+                            characterButtons[i]!.color = .gray
+                        }
                     }
                     for index in 0...5 {
                         buttons.characterButtonActive[index] = false
@@ -615,8 +631,7 @@ class GameScene: SKScene {
     
     func startGameButtonSelection(location: CGPoint) {
         if startGameButton.contains(location) {
-            animateStart()
-            startGameButton.removeFromParent()
+            createPlayerEnd()
         }
         
     }
@@ -630,6 +645,7 @@ class GameScene: SKScene {
         
         startGameButtonSelection(location: event.location(in: self))
         if playerCreationIsActive == false {
+            characterButtonSelection(location: event.location(in: self))
             typeButtonSelection(location: event.location(in: self))
             subListButtonSelection(location: event.location(in: self))
         }
@@ -672,7 +688,7 @@ class GameScene: SKScene {
         if editingCharacterNames == true {
             if keycode == 36 {
                 characterButtons[buttons.editCharacter]!.color = .gray
-                createPlayerEnd()
+                editPlayerEnd()
             }
             char.characterListPlain[buttons.editCharacter] = char.characterListPlain[buttons.editCharacter] + (event.characters!)
             updatePlayerButtonText()
@@ -1090,19 +1106,6 @@ class GameScene: SKScene {
         introSound.run(SKAction.changeVolume(to: introVolume, duration: 0))
     }
     
-    func resetAllButtons() {
-        var i = 0
-        while i < 6 {
-            characterButtons[i]!.color = .gray
-            buttons.characterButtonActive[i] = false
-            typeButtons[i]!.color = .gray
-            buttons.typeListButtonActive[i] = false
-            subListButtons[i]!.color = .gray
-            buttons.subListButtonActive[i] = false
-            i += 1
-        }
-    }
-    
     func resetCharacterButtons() {
         var i = 0
         while i < 6 {
@@ -1423,7 +1426,7 @@ class GameScene: SKScene {
         
     }
     
-    func createPlayerEnd() {
+    func editPlayerEnd() {
         updatePlayerButtonText()
         editingCharacterNames = false
     }
@@ -1432,26 +1435,56 @@ class GameScene: SKScene {
         switch buttons.editCharacter {
         case 0:
             alequaLabel.text = char.characterListPlain[buttons.editCharacter]
+            alequaLabel.fontColor = .white
         case 1:
             tokobetteLabel.text = char.characterListPlain[buttons.editCharacter]
+            tokobetteLabel.fontColor = .white
         case 2:
             auranLabel.text = char.characterListPlain[buttons.editCharacter]
+            auranLabel.fontColor = .white
         case 3:
             zinnekahnLabel.text = char.characterListPlain[buttons.editCharacter]
+            zinnekahnLabel.fontColor = .white
         case 4:
             metaLabel.text = char.characterListPlain[buttons.editCharacter]
+            metaLabel.fontColor = .white
         case 5:
             snaraNarkeLabel.text = char.characterListPlain[buttons.editCharacter]
+            snaraNarkeLabel.fontColor = .white
         default:
             print ("error")
         }
     }
     
-    func animateStart() {
+    func createPlayerEnd() {
         splashBackground.run(SKAction.fadeOut(withDuration: 2))
         splashLogo.run(SKAction.fadeOut(withDuration: 2))
         playerCreationIsActive = false
         superHero.run(SKAction.play())
+        startGameButton.removeFromParent()
+        startGameLabel.removeFromParent()
+        moveButtonTab()
+        killCharacterButtons()
+        textBackgroundNode.zPosition = 3
+        textNodeTab.zPosition = 3
+        textBackgroundBorderNode.zPosition = 3
+        textNodeTabBorder.zPosition = 3
+        
+    }
+    
+    func killCharacterButtons() {
+//        characterButtons[0]!.color = .black
+//        buttons.characterExists[0] = false
+//        char.characterListPlain[0] = ""
+        for i in 0...5 {
+            if char.characterListPlain[i] == "\r" || char.characterListPlain[i] == "" {
+                buttons.characterExists[i] = false
+            }
+            if buttons.characterExists[i] == false {
+                characterButtons[i]!.color = .black
+                
+            }
+        }
     }
 
 }

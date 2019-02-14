@@ -15,6 +15,7 @@ class buttonsClass: NSObject {
     var editCharacter = 0
     
     var characterButtonActive = [false, false, false, false, false, false]
+    var characterExists = [true, true, true, true, true, true]
     var typeListButtonActive = [false, false, false, false, false, false]
     var subListButtonActive = [false, false, false, false, false, false]
     var typeListButtonsDead = [false, false, false, false, false, false]

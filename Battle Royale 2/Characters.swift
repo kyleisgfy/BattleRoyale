@@ -14,6 +14,7 @@ var char: Characters = Characters ()
 class Characters: NSObject {
    
     var playersLeft = 100
+    var playerNumber = 0
     
     var broadcastLineOne = ""
     var broadcastLineTwo = ""
@@ -21,7 +22,7 @@ class Characters: NSObject {
     var broadcastLineFour = ""
     var broadcastLineFive = ""
     
-    let characterListPlain = [
+    var characterListPlain = [
         "Alaqua",
         "Tokobette",
         "Auran",

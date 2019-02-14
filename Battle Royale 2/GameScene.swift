@@ -20,7 +20,7 @@ class GameScene: SKScene {
     var currentSize = CGFloat(0)
     var nextSize = CGFloat(0)
     
-    var timeModifier = 30
+    var timeModifier = 300
     var freeTime = 3
     var restrictInTime = 1
     var restrictTime = 2
@@ -99,7 +99,15 @@ class GameScene: SKScene {
     let restrictInSound = SKAudioNode(fileNamed: "darkContinent.mp3")
     let restrictSound = SKAudioNode(fileNamed: "fieldOfHeroes.mp3")
     
+    var playerCreationIsActive = false
+    var newPlayer = ""
+    var newPlayerLabel = SKLabelNode()
+//    var createPlayerLabel = [SKLabelNode?](repeating: nil, count: 6)
+    
+    
+    
     override func sceneDidLoad() {
+        
         freeTime = (3 * timeModifier)
         restrictInTime = (1 * timeModifier)
         restrictTime = (2 * timeModifier)
@@ -116,6 +124,7 @@ class GameScene: SKScene {
             self.addChild(characterButtons[i]!)
             self.addChild(typeButtons[i]!)
             self.addChild(subListButtons[i]!)
+            
             i += 1
         }
         
@@ -155,6 +164,14 @@ class GameScene: SKScene {
         
 
         self.addChild(cropNode)
+        
+        self.addChild(splashBackground)
+        self.addChild(splashLogo)
+        
+        self.addChild(createPlayerButton)
+        self.addChild(newPlayerLabel)
+        
+        
         
         poisonGas = SKEmitterNode(fileNamed: "MyParticle1")!
         poisonGas.position = CGPoint(x: 0, y: 0)
@@ -457,6 +474,22 @@ class GameScene: SKScene {
             print ("Sub 6 label Failed")
         }
         
+        newPlayerLabel.position.x = 0
+        newPlayerLabel.position.y = 0
+        newPlayerLabel.zPosition = 10
+        newPlayerLabel.fontColor = .black
+        
+//        for i in 0...5 {
+//            self.addChild(createPlayerLabel[i]!)
+//            createPlayerLabel[i]!.zPosition = 10
+//            createPlayerLabel[i]!.position.x = 0
+//            createPlayerLabel[i]!.position.y = CGFloat(300 - (char.playerNumber * 50))
+//            createPlayerLabel[i]!.fontColor = .black
+//            createPlayerLabel[i]!.text = ""
+//        }
+        
+
+        
     }
     
 //****************************************************************************************
@@ -574,9 +607,21 @@ class GameScene: SKScene {
         }
     }
     
+    func createPlayerButtonSelection(location: CGPoint) {
+        if createPlayerButton.contains(location) {
+            playerCreationIsActive = true
+//            createPlayerLabel.append(newPlayerLabel)
+            char.playerNumber += 1
+            createPlayerButton.fillColor = .clear
+
+            
+        }
+    }
+    
     override func mouseDown(with event: NSEvent) {
         self.touchDown(atPoint: event.location(in: self))
         
+        createPlayerButtonSelection(location: event.location(in: self))
         characterButtonSelection(location: event.location(in: self))
         typeButtonSelection(location: event.location(in: self))
         subListButtonSelection(location: event.location(in: self))
@@ -615,6 +660,15 @@ class GameScene: SKScene {
     
     override func keyDown(with event: NSEvent) {
         let keycode = event.keyCode
+        if playerCreationIsActive == true {
+            if keycode == 36 {
+                createPlayerEnd()
+            }
+            newPlayer = newPlayer + (event.characters!)
+            print (newPlayer)
+            newPlayerLabel.text = newPlayer
+            
+        }
         let move = CGFloat(28.9)
         switch keycode {
             
@@ -1363,5 +1417,23 @@ class GameScene: SKScene {
         
     }
     
+    func createPlayerStart() {
+//        char.playerNumber += 1
+        playerCreationIsActive = true
+        
+        
+    }
+    
+    func createPlayerEnd() {
+        let i = (char.playerNumber - 1)
+        char.characterListPlain[i] = newPlayer
+        newPlayer = ""
+        playerCreationIsActive = false
+//        print (char.characterListPlain[i])
+        newPlayerLabel.removeAllChildren()
+        createPlayerButton.fillColor = .gray
+        
+
+    }
 
 }

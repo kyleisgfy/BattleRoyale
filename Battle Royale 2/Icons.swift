@@ -65,6 +65,8 @@ var characterButtons = [SKSpriteNode?](repeating: nil, count: 6)
 var typeButtons = [SKSpriteNode?](repeating: nil, count: 6)
 var subListButtons = [SKSpriteNode?](repeating: nil, count: 6)
 
+var createPlayerButton = SKShapeNode(rectOf: CGSize(width: 200, height: 50))
+
 var safeZone = SKSpriteNode()
 var safeZone2 = SKSpriteNode()
 
@@ -326,6 +328,30 @@ func createIcons() {
     eventBarTwelve.fillColor = .red
     eventBarTwelve.zPosition = 3
     eventBarTwelve.position = CGPoint(x:(CGFloat(eventBarEleven.position.x) + doubleEvent) , y: barY)
+    
+    splashBackground = SKSpriteNode(imageNamed: "splashBackground")
+    splashBackground.position = CGPoint.zero
+    splashBackground.size.width = 1242
+    splashBackground.size.height = 720
+    splashBackground.zPosition = 6
+    splashBackground.position.x = 0
+    splashBackground.position.y = 0
+    
+    splashLogo = SKSpriteNode(imageNamed: "splashLogo")
+    splashLogo.position = CGPoint.zero
+    splashLogo.size.width = 655
+    splashLogo.size.height = 655
+    splashLogo.zPosition = 7
+    splashLogo.position.x = 0
+    splashLogo.position.y = 0
+    
+    createPlayerButton.fillColor = .gray
+    createPlayerButton.strokeColor = .clear
+    createPlayerButton.zPosition = 10
+    createPlayerButton.position.x = 0
+    createPlayerButton.position.y = -200
+    
+    
 }
 
 func createIcons2() {

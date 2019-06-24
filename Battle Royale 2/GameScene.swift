@@ -101,6 +101,8 @@ class GameScene: SKScene {
     
     var playerCreationIsActive = true
     var editingCharacterNames = false
+    var playerCharacterNumber = 0
+    
     var startGameLabel = SKLabelNode()
     
     
@@ -696,6 +698,7 @@ class GameScene: SKScene {
         if editingCharacterNames == true {
             if keycode == 36 {
                 characterButtons[buttons.editCharacter]!.color = .gray
+                buttons.playerExists[buttons.editCharacter] = true
                 editPlayerEnd()
             }
             char.characterListPlain[buttons.editCharacter] = char.characterListPlain[buttons.editCharacter] + (event.characters!)
@@ -1480,6 +1483,8 @@ class GameScene: SKScene {
         splashBackground.run(SKAction.fadeOut(withDuration: 2))
         splashLogo.run(SKAction.fadeOut(withDuration: 2))
         playerCreationIsActive = false
+        setNumberOfPlayers()
+        print (playerCharacterNumber)
         superHero.run(SKAction.play())
         startGameButton.removeFromParent()
         startGameLabel.removeFromParent()
@@ -1498,6 +1503,14 @@ class GameScene: SKScene {
             if buttons.characterExists[i] == false {
                 characterButtons[i]!.color = .black
                 
+            }
+        }
+    }
+    
+    func setNumberOfPlayers() {
+        for i in 0...5 {
+            if buttons.playerExists[i] == true {
+                playerCharacterNumber += 1
             }
         }
     }

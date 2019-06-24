@@ -208,6 +208,15 @@ class Characters: NSObject {
         "Buddy_Elf",//88
         "Carl_Friedricksen",//89
         "McLovin'",//90
+        "Tim_Apple",//91
+        "WilliamZabka",//92
+        "AbeLincolin",//93
+        "Thanos",//94
+        "AnakinSkywalker",//95
+        "PlayerOne",//96
+        "Sauron",//97
+        "Golum",//98
+        "Houdini"//99
     ]
 }
 

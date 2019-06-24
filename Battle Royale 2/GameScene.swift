@@ -2,7 +2,7 @@
 //  GameScene.swift
 //  Battle Royale 2
 //
-//  Created by Kyle Schneider on 11/30/18.
+//  Created by Kyle Schneider
 //  Copyright © 2018 Kyle Schneider›‹. All rights reserved.
 //
 
@@ -1184,7 +1184,7 @@ class GameScene: SKScene {
     }
     
     func killRando() {
-        if char.playersLeft > 11 && phaseNumber != 0 {
+        if char.playersLeft > (playerCharacterNumber * 2) && phaseNumber != 0 {
             let roll = Int.random(in: 0...15)
             if roll <= 2 {
                 char.playersLeft -= 1
@@ -1207,7 +1207,7 @@ class GameScene: SKScene {
     }
 
     func forceKillRando() {
-        if char.playersLeft > 11 {
+        if char.playersLeft > (playerCharacterNumber * 2) {
             char.playersLeft -= 1
             updatePlayersLeft()
             randomBroadcast()
@@ -1217,8 +1217,8 @@ class GameScene: SKScene {
     }
     
     func characterKillRando(character: String) {
-        if char.playersLeft > 11 {
-            let roll = Int.random(in: 0...(char.playersLeft-11))
+        if char.playersLeft > (playerCharacterNumber * 2) {
+            let roll = Int.random(in: 0...(char.playersLeft-(playerCharacterNumber * 2)))
             updateBroadcast()
             broadcastLineOneLabel.text = ("\(character) killed \(char.NPCList[roll])")
             char.broadcastLineOne = "\(broadcastLineOneLabel.text ?? "")"
@@ -1229,8 +1229,8 @@ class GameScene: SKScene {
     }
     
     func randomBroadcast() {
-        let roll = Int.random(in: 0...(char.playersLeft-11))
-        var roll2 = Int.random(in: 0...(char.playersLeft-11))
+        let roll = Int.random(in: 0...(char.playersLeft-(playerCharacterNumber * 2)))
+        var roll2 = Int.random(in: 0...(char.playersLeft-(playerCharacterNumber * 2)))
         let roll3 = Int.random(in: 0...24)
         if (roll == roll2) && (roll != 99) {
             roll2 += 1
@@ -1244,7 +1244,7 @@ class GameScene: SKScene {
     }
     
     func villainKillsBroadcast() {
-        let roll = Int.random(in: 0...(char.playersLeft-11))
+        let roll = Int.random(in: 0...(char.playersLeft-(playerCharacterNumber * 2)))
         let roll2 = Int.random(in: 0...23)
         updateBroadcast()
         broadcastLineOneLabel.text = "Evil Rick \(char.killList[roll2]) \(char.NPCList[roll])"

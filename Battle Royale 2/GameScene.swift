@@ -26,6 +26,7 @@ class GameScene: SKScene {
     var restrictTime = 2
     
     var chance = 2
+    let deathRates = [1, 2, 4, 8]
     
     let alarmSoundVolume = Float(0.3)
     let bombSoundVolume = Float(0.5)
@@ -71,6 +72,12 @@ class GameScene: SKScene {
     var sub4Label:SKLabelNode = SKLabelNode()
     var sub5Label:SKLabelNode = SKLabelNode()
     var sub6Label:SKLabelNode = SKLabelNode()
+    
+    var deathRateLabel:SKLabelNode = SKLabelNode()
+    var death1Label:SKLabelNode = SKLabelNode()
+    var death2Label:SKLabelNode = SKLabelNode()
+    var death3Label:SKLabelNode = SKLabelNode()
+    var death4Label:SKLabelNode = SKLabelNode()
     
     var eventLocation = CGPoint(x: 0, y: 0)
     var nextEventLocation = CGPoint(x: 0, y: 0)
@@ -125,8 +132,11 @@ class GameScene: SKScene {
             self.addChild(characterButtons[i]!)
             self.addChild(typeButtons[i]!)
             self.addChild(subListButtons[i]!)
-            
             i += 1
+        }
+        
+        for i in 0...3 {
+            self.addChild(deathRateButtons[i]!)
         }
         
         self.addChild(clickZoneNode)
@@ -172,6 +182,7 @@ class GameScene: SKScene {
         self.addChild(startGameButton)
         self.addChild(startGameLabel)
         
+        self.addChild(deathRateBoarder)
         
         
         poisonGas = SKEmitterNode(fileNamed: "MyParticle1")!
@@ -494,6 +505,46 @@ class GameScene: SKScene {
             print ("Sub 6 label Failed")
         }
         
+        if let deathRate:SKLabelNode = self.childNode(withName: "deathRate") as? SKLabelNode {
+            deathRateLabel = deathRate
+            deathRateLabel.zPosition = 10
+            print ("deathRateLabel inicialized")
+        } else {
+            print ("deathRateLabel Failed")
+        }
+        
+        if let death1:SKLabelNode = self.childNode(withName: "death1") as? SKLabelNode {
+            death1Label = death1
+            death1Label.zPosition = 10
+            print ("death1Label inicialized")
+        } else {
+            print ("death1Label Failed")
+        }
+        
+        if let death2:SKLabelNode = self.childNode(withName: "death2") as? SKLabelNode {
+            death2Label = death2
+            death2Label.zPosition = 10
+            print ("death2Label inicialized")
+        } else {
+            print ("death2Label Failed")
+        }
+        
+        if let death3:SKLabelNode = self.childNode(withName: "death3") as? SKLabelNode {
+            death3Label = death3
+            death3Label.zPosition = 10
+            print ("death3Label inicialized")
+        } else {
+            print ("death3Label Failed")
+        }
+        
+        if let death4:SKLabelNode = self.childNode(withName: "death4") as? SKLabelNode {
+            death4Label = death4
+            death4Label.zPosition = 10
+            print ("death4Label inicialized")
+        } else {
+            print ("death4Label Failed")
+        }
+        
         startGameLabel.text = "Click To Start Game"
         startGameLabel.position.x = 0
         startGameLabel.position.y = 0
@@ -514,6 +565,20 @@ class GameScene: SKScene {
     }
     
     func touchUp(atPoint pos : CGPoint) {
+    }
+    
+    func deathRateSelection(location: CGPoint) {
+        for i in 0...3 {
+            if deathRateButtons[i]!.contains(location) {
+                for x in 0...3 {
+                    deathRateButtons[x]!.color = .clear
+                    buttons.deathRateButtonActive[x] = false
+                }
+                deathRateButtons[i]!.color = .blue
+                buttons.deathRateButtonActive[i] = true
+            }
+        }
+        setRateOfDeath()
     }
     
     func characterButtonSelection(location: CGPoint) {
@@ -642,6 +707,8 @@ class GameScene: SKScene {
     
     override func mouseDown(with event: NSEvent) {
         self.touchDown(atPoint: event.location(in: self))
+        
+        deathRateSelection(location: event.location(in: self))
         
         if playerCreationIsActive == true && editingCharacterNames == false {
             characterEditSelection(location: event.location(in: self))
@@ -1514,5 +1581,16 @@ class GameScene: SKScene {
             }
         }
     }
+    
+    func setRateOfDeath() {
+        for i in 0...3 {
+            if buttons.deathRateButtonActive[i] == true {
+                chance = deathRates[i]
+            }
+        }
+        print (chance)
+    }
+    
+    
 
 }

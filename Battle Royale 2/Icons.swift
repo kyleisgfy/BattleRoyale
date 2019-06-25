@@ -65,6 +65,8 @@ var characterButtons = [SKSpriteNode?](repeating: nil, count: 6)
 var typeButtons = [SKSpriteNode?](repeating: nil, count: 6)
 var subListButtons = [SKSpriteNode?](repeating: nil, count: 6)
 
+var deathRateButtons = [SKSpriteNode?](repeating: nil, count: 4)
+
 var startGameButton = SKShapeNode(rectOf: CGSize(width: 350, height: 50))
 
 var safeZone = SKSpriteNode()
@@ -94,6 +96,23 @@ let textNodeTab = SKSpriteNode()
 var textNodeTabBorder = SKSpriteNode()
 let buttonLabelBackgroundSize = CGSize(width: 210, height: 210)
 var textTabOpen = true
+
+let deathRateBoarder = SKSpriteNode()
+
+func createDeathRateButtons() {
+    var i = 0
+    var xLocation = -275
+    while i < 4 {
+        deathRateButtons[i] = SKSpriteNode()
+        deathRateButtons[i]!.color = .black
+        deathRateButtons[i]!.alpha = 0.4
+        deathRateButtons[i]!.zPosition = 9
+        deathRateButtons[i]!.size = CGSize(width: 45, height: 25)
+        deathRateButtons[i]!.position = CGPoint(x: xLocation, y: 295)
+        xLocation += 50
+        i += 1
+    }
+}
 
 func createCharacterButtons() {
     var i = 0
@@ -172,12 +191,19 @@ func setTextBackground() {
     textNodeTabBorder.alpha = 0.9
     textNodeTabBorder.zPosition = 8
     
+    deathRateBoarder.size = CGSize(width: 200, height: 50)
+    deathRateBoarder.alpha = 0.7
+    deathRateBoarder.zPosition = 8
+    deathRateBoarder.color = .black
+    deathRateBoarder.position = CGPoint(x: -200, y: 305)
+    
 }
 
 func createIcons() {
     createCharacterButtons()
     createTypeButtons()
     createSubListButtons()
+    createDeathRateButtons()
     
     cropNode.addChild(cropImage)
     cropNode.position = CGPoint(x: 0, y: 0)
